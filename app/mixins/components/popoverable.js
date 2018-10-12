@@ -21,6 +21,6 @@ export default Mixin.create({
       }
 
       $this.popover(popoverOptions);
-    })
+    });
   }
 });

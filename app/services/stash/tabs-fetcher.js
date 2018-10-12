@@ -5,13 +5,13 @@ import PRIVATE_API from 'poe-world/constants/private-api';
 import rgbToHexColor from 'poe-world/utilities/rgbToHexColor';
 
 export default Service.extend({
-  electronRequest: service('electron/request'),
-  authenticationSetting: service('settings/authentication-setting'),
-  leagueSetting: service('settings/league-setting'),
+  electronRequest: service('-electron/request'),
+  authenticationSetting: service('authentication/setting'),
+  activeLeagueSetting: service('active-league/setting'),
   globalState: service('global-state'),
 
   fetch() {
-    const leagueId = this.leagueSetting.league.id;
+    const leagueId = this.activeLeagueSetting.league.id;
     const account = this.authenticationSetting.account;
 
     if (!this.globalState.isElectron || !account) return Promise.reject(null);

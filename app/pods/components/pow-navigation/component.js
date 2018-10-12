@@ -6,7 +6,7 @@ export default Component.extend({
   classNames: ['navbar', 'fixed-top', 'navbar-dark', 'bg-dark', 'navbar-expand-md'],
   tagName: 'nav',
 
-  leagueSetting: service('settings/league-setting'),
+  activeLeagueSetting: service('active-league/setting'),
 
-  leagueName: readOnly('leagueSetting.league.name')
+  leagueName: readOnly('activeLeagueSetting.league.name')
 });

@@ -14,13 +14,13 @@ import FRAME_TYPES from 'poe-world/constants/frame-types';
 const MAXIMUM_SOCKETS_COUNT = 6;
 
 export default Service.extend({
-  electronRequest: service('electron/request'),
-  authenticationSetting: service('settings/authentication-setting'),
-  leagueSetting: service('settings/league-setting'),
+  electronRequest: service('-electron/request'),
+  authenticationSetting: service('authentication/setting'),
+  activeLeagueSetting: service('active-league/setting'),
   globalState: service('global-state'),
 
   fetchFromStashIndex(stashIndex) {
-    const leagueId = this.leagueSetting.league.id;
+    const leagueId = this.activeLeagueSetting.league.id;
     const account = this.authenticationSetting.account;
 
     if (!this.globalState.isElectron || !account) return Promise.reject(null);

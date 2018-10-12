@@ -3,7 +3,7 @@ import STORAGE_KEYS from 'poe-world/constants/storage-keys';
 
 export default Service.extend({
   storage: service('storage'),
-  leaguesFetcher: service('fetchers/leagues-fetcher'),
+  leaguesFetcher: service('leagues/fetcher'),
 
   league: null,
 

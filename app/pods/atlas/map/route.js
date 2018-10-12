@@ -3,8 +3,8 @@ import {inject as service} from '@ember/service';
 import {on} from '@ember/object/evented';
 
 export default Route.extend({
-  mapsFetcher: service('fetchers/maps-fetcher'),
-  atlasReframer: service('reframers/atlas-reframer'),
+  mapsFetcher: service('maps/fetcher'),
+  atlasReframer: service('atlas/reframer'),
 
   model(params) {
     return this.mapsFetcher.fetchMap(params.slug);

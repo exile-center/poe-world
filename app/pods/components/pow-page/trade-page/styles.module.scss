@@ -1,0 +1,84 @@
+$trade-header-height: 150px;
+
+.header {
+  height: $trade-header-height;
+}
+
+.body {
+  height: calc(100vh - #{$trade-header-height + $navigation-height});
+}
+
+.trade-url {
+  position: relative;
+  align-self: flex-end;
+  padding: 5px 35px 5px 15px;
+  background-color: $dark;
+  border-top-right-radius: 10px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 13px;
+    right: -31px;
+    transform: rotate(45deg);
+    width: 65px;
+    height: 43px;
+    background-color: $dark;
+    border-top-left-radius: 10px;
+  }
+}
+
+.trade-url-prefix {
+  opacity: 0.5;
+}
+
+.trade-url-slug {
+  &::before {
+    content: '/';
+    opacity: 0.5;
+  }
+}
+
+.trade-container {
+  height: 100%;
+}
+
+.filters-list {
+  overflow-y: scroll;
+}
+
+.filters-item {
+  border-bottom: 1px solid $darker;
+  transition: padding ease 200ms;
+  cursor: pointer;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    background-color: rgba($darker, 0.3);
+  }
+}
+
+.notes {
+  overflow-y: auto;
+  height: 100%;
+  padding-left: 30px;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.notes-field {
+  textarea {
+    padding: 5px;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+}
+
+.notes-icon {
+  position: absolute;
+  top: 3px;
+  left: 0;
+}

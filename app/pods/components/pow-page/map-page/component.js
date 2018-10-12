@@ -5,7 +5,7 @@ export default Component.extend({
   localClassNames: 'map-page',
 
   router: service('router'),
-  atlasReframer: service('reframers/atlas-reframer'),
+  atlasReframer: service('atlas/reframer'),
 
   map: null,
 

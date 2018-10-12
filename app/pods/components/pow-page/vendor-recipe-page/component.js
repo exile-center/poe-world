@@ -14,13 +14,14 @@ const RECIPE_POLLING_INTERVAL = 60000; // 60 seconds
 
 export default Component.extend(StashTabsLoadable, {
   toaster: service('toaster'),
-  stashTabsFetcher: service('fetchers/stash-tabs-fetcher'),
-  stashItemsFetcher: service('fetchers/stash-items-fetcher'),
-  vendorRecipeSetting: service('settings/vendor-recipe-setting'),
-  chromaticRecipeBuilder: service('builders/chromatic-recipe-builder'),
-  jewellerRecipeBuilder: service('builders/jeweller-recipe-builder'),
-  divineRecipeBuilder: service('builders/divine-recipe-builder'),
-  chaosRecipeBuilder: service('builders/chaos-recipe-builder'),
+  stashTabsFetcher: service('stash/tabs-fetcher'),
+  stashItemsFetcher: service('stash/items-fetcher'),
+  vendorRecipeSetting: service('vendor-recipe/setting'),
+
+  vendorRecipeChromaticBuilder: service('vendor-recipe/chromatic-builder'),
+  vendorRecipeJewellerBuilder: service('vendor-recipe/jeweller-builder'),
+  vendorRecipeDivineBuilder: service('vendor-recipe/divine-builder'),
+  vendorRecipeChaosBuilder: service('vendor-recipe/chaos-builder'),
 
   hasVendorRecipeStashes: false,
 
@@ -29,10 +30,11 @@ export default Component.extend(StashTabsLoadable, {
   divineImageUrl: CURRENCIES.divine.imageUrl,
   chaosImageUrl: CURRENCIES.chaos.imageUrl,
   regalImageUrl: CURRENCIES.regal.imageUrl,
-  chromaticRecipe: null,
-  jewellerRecipe: null,
-  divineRecipe: null,
-  chaosRecipe: null,
+
+  chromatic: null,
+  jeweller: null,
+  divine: null,
+  chaos: null,
 
   vendorRecipeLoadTask: task(function *() {
     const stashIds = this.vendorRecipeSetting.stashIds;
@@ -42,10 +44,10 @@ export default Component.extend(StashTabsLoadable, {
 
     this.setProperties({
       hasVendorRecipeStashes,
-      chromaticRecipe: this.chromaticRecipeBuilder.build(stashItems),
-      jewellerRecipe: this.jewellerRecipeBuilder.build(stashItems),
-      divineRecipe: this.divineRecipeBuilder.build(stashItems),
-      chaosRecipe: this.chaosRecipeBuilder.build(stashItems)
+      chromatic: this.vendorRecipeChromaticBuilder.build(stashItems),
+      jeweller: this.vendorRecipeJewellerBuilder.build(stashItems),
+      divine: this.vendorRecipeDivineBuilder.build(stashItems),
+      chaos: this.vendorRecipeChaosBuilder.build(stashItems)
     });
   }).drop(),
 

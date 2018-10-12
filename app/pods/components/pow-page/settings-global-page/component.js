@@ -7,12 +7,12 @@ import {readOnly} from '@ember/object/computed';
 const TEST_AUTHENTICATION_DEBOUNCE = 1000; // 1 second
 
 export default Component.extend({
-  leaguesFetcher: service('fetchers/leagues-fetcher'),
-  leagueSetting: service('settings/league-setting'),
-  authenticationSetting: service('settings/authentication-setting'),
-  authenticationStateFetcher: service('fetchers/authentication-state-fetcher'),
+  leaguesFetcher: service('leagues/fetcher'),
+  activeLeagueSetting: service('active-league/setting'),
+  authenticationSetting: service('authentication/setting'),
+  authenticationStateFetcher: service('authentication/state-fetcher'),
 
-  currentLeagueSlug: readOnly('leagueSetting.league.slug'),
+  currentLeagueSlug: readOnly('activeLeagueSetting.league.slug'),
   currentPoesessid: readOnly('authenticationSetting.poesessid'),
   currentAccount: readOnly('authenticationSetting.account'),
 
@@ -44,7 +44,7 @@ export default Component.extend({
   },
 
   applyLeague(league) {
-    this.leagueSetting.apply(league);
+    this.activeLeagueSetting.apply(league);
   },
 
   applyPoesessid(poesessid) {

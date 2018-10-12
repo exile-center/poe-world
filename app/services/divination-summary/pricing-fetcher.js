@@ -5,8 +5,8 @@ import POE_NINJA from 'poe-world/constants/poe-ninja';
 import slugify from 'poe-world/utilities/slugify';
 
 export default Service.extend({
-  electronRequest: service('electron/request'),
-  leagueSetting: service('settings/league-setting'),
+  electronRequest: service('-electron/request'),
+  activeLeagueSetting: service('active-league/setting'),
 
   _divinationPricingPromise: null,
   _pricingDate: null,
@@ -41,7 +41,7 @@ export default Service.extend({
 
   _buildDivinationPricingUrlFor(pricingDate) {
     const params = [
-      `league=${this.leagueSetting.league.name}`,
+      `league=${this.activeLeagueSetting.league.name}`,
       `type=${POE_NINJA.ITEM_TYPE_DIVINATION}`,
       `date=${pricingDate}`
     ];

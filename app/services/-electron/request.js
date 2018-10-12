@@ -10,7 +10,7 @@ const FORBIDDEN_STATUS_CODE = 403;
 export default Service.extend({
   i18n: service('i18n'),
   toaster: service('toaster'),
-  authenticationSetting: service('settings/authentication-setting'),
+  authenticationSetting: service('authentication/setting'),
 
   fetch(url, params = {}) {
     return this._fetch('GET', url, params);

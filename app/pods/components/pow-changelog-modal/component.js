@@ -10,7 +10,7 @@ const CHANGELOG_MODAL_DELAY = 1500;
 
 export default Component.extend({
   storage: service('storage'),
-  releasesFetcher: service('fetchers/releases-fetcher'),
+  releasesFetcher: service('releases/fetcher'),
 
   changelogMarkdown: null,
   isOpened: false,

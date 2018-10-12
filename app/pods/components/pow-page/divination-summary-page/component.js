@@ -11,9 +11,9 @@ const SUMMARY_POLLING_INTERVAL = 300000; // 5 minutes
 
 export default Component.extend(StashTabsLoadable, {
   toaster: service('toaster'),
-  divinationSummaryPricingFetcher: service('fetchers/divination-summary-pricing-fetcher'),
-  divinationSummarySetting: service('settings/divination-summary-setting'),
-  divinationSummaryBuilder: service('builders/divination-summary-builder'),
+  divinationSummaryPricingFetcher: service('divination-summary/pricing-fetcher'),
+  divinationSummarySetting: service('divination-summary/setting'),
+  divinationSummaryBuilder: service('divination-summary/builder'),
 
   hasDivinationSummaryStashes: false,
 

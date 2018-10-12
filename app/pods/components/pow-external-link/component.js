@@ -3,7 +3,7 @@ import {inject as service} from '@ember/service';
 
 export default Component.extend({
   globalState: service('global-state'),
-  electronUrlOpener: service('electron/url-opener'),
+  electronUrlOpener: service('-electron/url-opener'),
 
   localClassNames: 'external-link',
   attributeBindings: ['href'],

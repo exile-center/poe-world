@@ -1,12 +1,28 @@
 <div class="form-group">
-  <label for={{id}}>{{label}}</label>
+  {{#if label}}
+    <label for={{id}}>{{label}}</label>
+  {{/if}}
 
-  <input
-    type="text"
-    id={{id}}
-    class="form-control"
-    value={{value}}
-    oninput={{action inputChange}}/>
+  {{#unless isTextarea}}
+    <input
+      type={{type}}
+      id={{id}}
+      placeholder={{placeholder}}
+      class="form-control"
+      value={{value}}
+      oninput={{action inputChange}}
+    />
+  {{else}}
+    <textarea
+      id={{id}}
+      placeholder={{placeholder}}
+      class="form-control"
+      local-class="textarea"
+      value={{value}}
+      rows={{rows}}
+      oninput={{action inputChange}}
+    ></textarea>
+  {{/unless}}
 
   {{yield}}
 </div>

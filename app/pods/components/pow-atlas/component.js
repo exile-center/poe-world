@@ -6,8 +6,8 @@ export default Component.extend({
   localClassNames: 'atlas',
 
   router: service('router'),
-  mapsFetcher: service('fetchers/maps-fetcher'),
-  atlasReframer: service('reframers/atlas-reframer'),
+  mapsFetcher: service('maps/fetcher'),
+  atlasReframer: service('atlas/reframer'),
 
   currentMap: null,
 

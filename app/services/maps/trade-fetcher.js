@@ -37,10 +37,10 @@ const UNIQUE_QUERY = {
 
 export default Service.extend({
   request: service('request'),
-  leagueSetting: service('settings/league-setting'),
+  activeLeagueSetting: service('active-league/setting'),
 
   fetchFromMap(map) {
-    const leagueId = this.leagueSetting.league.id;
+    const leagueId = this.activeLeagueSetting.league.id;
 
     return this.request.fetch(`${TRADE_API.BASE_URL}/search/${leagueId}?source=${this._queryParamFor(map)}`).then(({result: tradeMapIds, total}) => {
       if (!tradeMapIds.length) return {maps: [], tradeMapIds: [], total};

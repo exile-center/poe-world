@@ -2,7 +2,7 @@ import Service, {inject as service} from '@ember/service';
 
 export default Service.extend({
   storage: service('storage'),
-  leagueSetting: service('settings/league-setting'),
+  activeLeagueSetting: service('active-league/setting'),
 
   storageKey: null,
   stashIds: [],
@@ -10,7 +10,7 @@ export default Service.extend({
   applyStashIds(stashIds) {
     this.set('stashIds', stashIds);
     this.storage.setValue(this.storageKey, stashIds, {
-      leagueSlug: this.leagueSetting.league.slug
+      leagueSlug: this.activeLeagueSetting.league.slug
     });
   },
 
@@ -19,7 +19,7 @@ export default Service.extend({
 
     this.set('stashIds', this.storage.getValue(this.storageKey, {
       defaultValue: [],
-      leagueSlug: this.leagueSetting.league.slug
+      leagueSlug: this.activeLeagueSetting.league.slug
     }));
   }
 });
