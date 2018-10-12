@@ -30,6 +30,8 @@ Router.map(function() {
     this.route('divination-summary');
   });
 
+  this.route('trade');
+
   this.route('settings', function() {
     this.route('global', {path: '/'});
     this.route('stash-tabs');

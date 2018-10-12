@@ -27,7 +27,7 @@ export default {
     navigation: {
       atlas: "Your atlas",
       stash: "Your stash",
-      vendor_recipe: "Vendor recipe",
+      trade: "Trade",
       settings: "Settings"
     },
     settings_navigation: {
@@ -138,6 +138,17 @@ export default {
         stash_type: "Stash type",
         vendor_recipe: "Vendor recipe",
         divination_summary: "Divination cards summary"
+      },
+      trade_page: {
+        label_placeholder: "Label",
+        notes_placeholder: "Notes",
+        cancel: "Cancel",
+        save: "Save",
+        edit: "Edit",
+        update: "Update",
+        revert: "Revert",
+        create: "New trade query",
+        updated_at: "Updated {{timeAgo}}"
       }
     }
   },

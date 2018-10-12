@@ -1,0 +1,140 @@
+<div local-class="header" class="row w-100">
+  <div class="col-9">
+    <div class="d-flex flex-column bg-darker h-100 pt-2">
+      <div class="row flex-grow-1">
+        <div class="col-7">
+          <div class="pl-2">
+            {{#if isEditing}}
+              {{pow-input-field
+                placeholder=(t "components.page.trade_page.label_placeholder")
+                value=stagedTrade.label
+                onChange=(action (mut stagedTrade.label))}}
+            {{else}}
+              <h2 class="mb-0">
+                {{currentTrade.label}}
+              </h2>
+            {{/if}}
+          </div>
+        </div>
+
+        <div class="col-5">
+          <div class="pr-2 h-100">
+            {{#if isEditing}}
+              {{pow-input-field
+                local-class="notes-field"
+                type="textarea"
+                rows=5
+                placeholder=(t "components.page.trade_page.notes_placeholder")
+                value=stagedTrade.notes
+                onChange=(action (mut stagedTrade.notes))}}
+            {{else}}
+              <div class="position-relative h-100">
+                <div local-class="notes">
+                  {{fa-icon 'file-alt' size="2x" local-class="notes-icon"}}
+                  {{textarea-value currentTrade.notes}}
+                </div>
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between flex-shrink-0">
+        <div class="d-flex">
+          <div local-class="trade-url" class="mr-2">
+            <span local-class="trade-url-prefix">
+              {{tradeBaseUrl}}
+            </span>
+
+            {{#if currentTradeSlug}}
+              <span local-class="trade-url-slug" class="{{if isTradeSlugDirty "text-warning"}}">
+                {{currentTradeSlug}}
+              </span>
+            {{/if}}
+          </div>
+
+          {{#if isTradeSlugDirty}}
+            <div class="ml-3">
+              <button type="button" class="btn btn-sm btn-secondary" {{action updateTradeSlug}}>
+                {{fa-icon "save"}}
+                {{t "components.page.trade_page.update"}}
+              </button>
+
+              <button type="button" class="btn btn-sm btn-outline-secondary" {{action revertTradeSlug}}>
+                {{fa-icon "undo"}}
+                {{t "components.page.trade_page.revert"}}
+              </button>
+            </div>
+          {{/if}}
+        </div>
+
+        <div class="mr-2 mb-1">
+          {{#if isEditing}}
+            <button type="button" class="btn btn-sm btn-outline-primary" {{action cancel}}>
+              {{fa-icon "undo"}}
+              {{t "components.page.trade_page.cancel"}}
+            </button>
+
+            <button type="button" class="btn btn-sm btn-primary" {{action save}}>
+              {{fa-icon "save"}}
+              {{t "components.page.trade_page.save"}}
+            </button>
+          {{else}}
+            <button type="button" class="btn btn-sm btn-primary" {{action edit}}>
+              {{fa-icon "edit"}}
+              {{t "components.page.trade_page.edit"}}
+            </button>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-3 pl-0">
+    <h1>PLACEHOLDER</h1>
+  </div>
+</div>
+
+<div local-class="body" class="row w-100">
+  <div class="col-9">
+    <div local-class="trade-container">
+      {{electron-webview
+        url=currentTradeUrl
+        offset=tradeWebsiteOffset
+        onUrlChange=(action tradeUrlUpdate)
+      }}
+    </div>
+  </div>
+
+  <div local-class="filters-list" class="col-3 px-0">
+    <div class="mb-2">
+      <button type="button" class="btn btn-primary btn-block btn-lg" {{action create}}>
+        {{fa-icon "plus" class="mr-1"}}
+        {{t "components.page.trade_page.create"}}
+      </button>
+    </div>
+
+    <ul class="list-unstyled">
+      {{#each trades as |trade|}}
+        <li
+          local-class="filters-item"
+          class="{{if (eq trade.id currentTrade.id) "pl-3" "pl-2"}} py-2 pr-2"
+          {{action view trade}}
+        >
+          <h5 class="mb-0">
+            {{trade.label}}
+          </h5>
+
+          <small>
+            {{t "components.page.trade_page.updated_at" timeAgo=(moment-from-now trade.updatedAt)}}
+          </small>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+
+
+
+
+
