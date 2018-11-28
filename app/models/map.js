@@ -25,7 +25,7 @@ export default class Map extends EmberObject {
   isTradable = true;
   pantheon = null;
 
-  @equal('type')
+  @equal('type', UNIQUE_RARITY)
   isUnique;
 
   @computed('tier')

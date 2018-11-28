@@ -8,13 +8,14 @@ import $ from 'jquery';
 
 // Constants
 const PANZOOM_EVENT_DEBOUNCE = 50;
+const PANZOOM_ZOOM_SPEED = 0.05;
 
 export default class Component extends Component {
   onPanzoom = () => {};
   onPanzoomInitialize = () => {};
   minZoom = 1;
   maxZoom = 1;
-  zoomSpeed = 0.05;
+  zoomSpeed = PANZOOM_ZOOM_SPEED;
   bounds = true;
   autocenter = false;
   smoothScroll = false;

@@ -7,10 +7,11 @@ import uuid from 'poe-world/utilities/uuid';
 
 // Constants
 const TEXTAREA_TYPE = 'textarea';
+const DEFAULT_TEXTAREA_ROWS = 5;
 
 export default class Component extends Component {
   type = 'text';
-  rows = 5;
+  rows = DEFAULT_TEXTAREA_ROWS;
   label = null;
   placeholder = null;
   helper = null;
@@ -18,7 +19,7 @@ export default class Component extends Component {
   onChange = () => {};
   id = null;
 
-  @equal('type')
+  @equal('type', TEXTAREA_TYPE)
   isTextarea;
 
   willInsertElement() {
