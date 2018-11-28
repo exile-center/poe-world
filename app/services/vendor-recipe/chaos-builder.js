@@ -1,3 +1,4 @@
+// Vendor
 import Service from '@ember/service';
 
 // Constants
@@ -9,7 +10,7 @@ const ONE_HANDED_REGEXP = /(one|claw|shield|wand|dagger)/i;
 const TWO_HANDED_REGEXP = /(two|staff)/i;
 const WARNING_QUANTITY_TRESHOLD = 5;
 
-export default Service.extend({
+export default class ChaosBuilder extends Service {
   initializeDataStructure() {
     return {
       helmet: {
@@ -80,7 +81,7 @@ export default Service.extend({
         recipeCount: 0
       }
     };
-  },
+  }
 
   build(stashItems) {
     const dataStructure = this.initializeDataStructure();
@@ -168,4 +169,4 @@ export default Service.extend({
 
     return dataStructure;
   }
-});
+}

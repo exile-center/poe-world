@@ -1,17 +1,22 @@
+// Vendor
+import {attribute, tagName} from '@ember-decorators/component';
 import Component from '@ember/component';
-import {inject as service} from '@ember/service';
+import {service} from '@ember-decorators/service';
 
-export default Component.extend({
-  globalState: service('global-state'),
-  electronUrlOpener: service('-electron/url-opener'),
+@tagName('a')
+export default class Component extends Component {
+  @service('global-state')
+  globalState;
 
-  localClassNames: 'external-link',
-  attributeBindings: ['href'],
+  @service('-electron/url-opener')
+  electronUrlOpener;
 
-  tagName: 'a',
-  href: '#',
+  localClassNames = 'external-link';
 
-  url: '',
+  @attribute
+  href = '#';
+
+  url = '';
 
   click(event) {
     event.preventDefault();
@@ -21,4 +26,4 @@ export default Component.extend({
 
     electronUrlOpener.open(url);
   }
-});
+}

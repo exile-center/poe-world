@@ -1,10 +1,17 @@
-import Service, {inject as service} from '@ember/service';
+// Vendor
+import Service from '@ember/service';
+import {service} from '@ember-decorators/service';
 import PRIVATE_API from 'poe-world/constants/private-api';
 
-export default Service.extend({
-  electronRequest: service('-electron/request'),
-  authenticationSetting: service('authentication/setting'),
-  activeLeagueSetting: service('active-league/setting'),
+export default class StateFetcher extends Service {
+  @service('-electron/request')
+  electronRequest;
+
+  @service('authentication/setting')
+  authenticationSetting;
+
+  @service('active-league/setting')
+  activeLeagueSetting;
 
   fetch() {
     const leagueId = this.activeLeagueSetting.league.id;
@@ -17,4 +24,4 @@ export default Service.extend({
       }
     );
   }
-});
+}

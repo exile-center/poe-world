@@ -1,12 +1,19 @@
-import Service, {inject as service} from '@ember/service';
+// Vendor
+import Service from '@ember/service';
+import {service} from '@ember-decorators/service';
 import StashTab from 'poe-world/models/stash-tab';
 import PRIVATE_API from 'poe-world/constants/private-api';
 import rgbToHexColor from 'poe-world/utilities/rgb-to-hex-color';
 
-export default Service.extend({
-  electronRequest: service('-electron/request'),
-  authenticationSetting: service('authentication/setting'),
-  activeLeagueSetting: service('active-league/setting'),
+export default class TabsFetcher extends Service {
+  @service('-electron/request')
+  electronRequest;
+
+  @service('authentication/setting')
+  authenticationSetting;
+
+  @service('active-league/setting')
+  activeLeagueSetting;
 
   fetch() {
     const leagueId = this.activeLeagueSetting.league.id;
@@ -28,4 +35,4 @@ export default Service.extend({
         );
       });
   }
-});
+}

@@ -1,5 +1,6 @@
 // Vendor
-import Service, {inject as service} from '@ember/service';
+import Service from '@ember/service';
+import {service} from '@ember-decorators/service';
 
 // Constants
 import STORAGE_KEYS from 'poe-world/constants/storage-keys';
@@ -7,8 +8,9 @@ import STORAGE_KEYS from 'poe-world/constants/storage-keys';
 // Models
 import Trade from 'poe-world/models/trade';
 
-export default Service.extend({
-  storage: service('storage'),
+export default class Fetcher extends Service {
+  @service('storage')
+  storage;
 
   fetchAll() {
     const rawTrades = this.storage.getValue(STORAGE_KEYS.TRADE, {
@@ -17,4 +19,4 @@ export default Service.extend({
 
     return rawTrades.map(rawTrade => Trade.create(rawTrade));
   }
-});
+}

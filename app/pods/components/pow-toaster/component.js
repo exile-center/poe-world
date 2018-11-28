@@ -1,11 +1,14 @@
+// Vendor
 import Component from '@ember/component';
-import {inject as service} from '@ember/service';
-import {readOnly} from '@ember/object/computed';
+import {service} from '@ember-decorators/service';
+import {reads} from '@ember-decorators/object/computed';
 
-export default Component.extend({
-  localClassNames: 'toaster',
+export default class Component extends Component {
+  localClassNames = 'toaster';
 
-  toaster: service('toaster'),
+  @service('toaster')
+  toaster;
 
-  toasts: readOnly('toaster.toasts')
-});
+  @reads('toaster.toasts')
+  toasts;
+}

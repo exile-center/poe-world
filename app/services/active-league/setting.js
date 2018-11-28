@@ -1,16 +1,21 @@
-import Service, {inject as service} from '@ember/service';
+// Vendor
+import Service from '@ember/service';
+import {service} from '@ember-decorators/service';
 import STORAGE_KEYS from 'poe-world/constants/storage-keys';
 
-export default Service.extend({
-  storage: service('storage'),
-  leaguesFetcher: service('leagues/fetcher'),
+export default class Setting extends Service {
+  @service('storage')
+  storage;
 
-  league: null,
+  @service('leagues/fetcher')
+  leaguesFetcher;
+
+  league = null;
 
   apply(league) {
     this.storage.setValue(STORAGE_KEYS.LEAGUE, league.slug);
     return this.set('league', league);
-  },
+  }
 
   initializeFrom(leagues) {
     const currentLeague = this._getCurrentLeagueFrom(leagues);
@@ -19,7 +24,7 @@ export default Service.extend({
     if (currentLeague) return this.set('league', currentLeague);
 
     return this.apply(defaultLeague);
-  },
+  }
 
   _getCurrentLeagueFrom(leagues) {
     const currentLeagueSlug = this.storage.getValue(STORAGE_KEYS.LEAGUE);
@@ -27,7 +32,7 @@ export default Service.extend({
     if (!currentLeagueSlug) return null;
 
     return leagues.find(league => league.slug === currentLeagueSlug);
-  },
+  }
 
   _getDefaultLeagueFrom(leagues) {
     const applicableLeagues = leagues.filter(league => !/(hardcode|standard)/i.test(league.id));
@@ -38,4 +43,4 @@ export default Service.extend({
 
     return standardLeague || null;
   }
-});
+}

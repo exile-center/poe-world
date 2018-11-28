@@ -1,5 +1,6 @@
 // Vendor
-import Service, {inject as service} from '@ember/service';
+import Service from '@ember/service';
+import {service} from '@ember-decorators/service';
 import ENV from 'poe-world/config/environment';
 import GITHUB_API from 'poe-world/constants/github-api';
 
@@ -8,8 +9,9 @@ const {
   APP: {GITHUB_HANDLE}
 } = ENV;
 
-export default Service.extend({
-  request: service('request'),
+export default class Fetcher extends Service {
+  @service('request')
+  request;
 
   fetchLatest() {
     return this.request.fetch(`${GITHUB_API.BASE_URL}/repos/${GITHUB_HANDLE}/releases/latest`).then(rawRelease => ({
@@ -17,4 +19,4 @@ export default Service.extend({
       githubReleaseUrl: rawRelease.html_url
     }));
   }
-});
+}

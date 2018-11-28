@@ -1,9 +1,9 @@
 // Vendor
 import Component from '@ember/component';
 
-export default Component.extend({
-  placement: 'auto',
-  title: '',
+export default class Component extends Component {
+  placement = 'auto';
+  title = '';
 
   didInsertElement() {
     this.$().tooltip({
@@ -11,4 +11,4 @@ export default Component.extend({
       title: this.title.toString()
     });
   }
-});
+}

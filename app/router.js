@@ -1,3 +1,4 @@
+// Vendor
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
@@ -7,10 +8,10 @@ const {
   APP: {DEBUG}
 } = config;
 
-const Router = EmberRouter.extend({
-  location: locationType,
-  rootURL
-});
+class Router extends EmberRouter {
+  location = locationType;
+  rootURL = rootURL;
+}
 
 /* eslint-disable max-nested-callbacks */
 Router.map(function() {

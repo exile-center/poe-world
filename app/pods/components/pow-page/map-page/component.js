@@ -1,16 +1,20 @@
+// Vendor
 import Component from '@ember/component';
-import {inject as service} from '@ember/service';
+import {service} from '@ember-decorators/service';
 
-export default Component.extend({
-  localClassNames: 'map-page',
+export default class Component extends Component {
+  localClassNames = 'map-page';
 
-  router: service('router'),
-  atlasReframer: service('atlas/reframer'),
+  @service('router')
+  router;
 
-  map: null,
+  @service('atlas/reframer')
+  atlasReframer;
+
+  map = null;
 
   back() {
     this.atlasReframer.resetMapZoom();
     this.router.transitionTo('atlas');
   }
-});
+}

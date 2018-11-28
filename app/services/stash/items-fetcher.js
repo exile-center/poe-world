@@ -1,5 +1,6 @@
 // Vendor
-import Service, {inject as service} from '@ember/service';
+import Service from '@ember/service';
+import {service} from '@ember-decorators/service';
 import StashItem from 'poe-world/models/stash-item';
 
 // Utilities
@@ -12,10 +13,15 @@ import FRAME_TYPES from 'poe-world/constants/frame-types';
 // Constants
 const MAXIMUM_SOCKETS_COUNT = 6;
 
-export default Service.extend({
-  electronRequest: service('-electron/request'),
-  authenticationSetting: service('authentication/setting'),
-  activeLeagueSetting: service('active-league/setting'),
+export default class ItemsFetcher extends Service {
+  @service('-electron/request')
+  electronRequest;
+
+  @service('authentication/setting')
+  authenticationSetting;
+
+  @service('active-league/setting')
+  activeLeagueSetting;
 
   fetchFromStashIndex(stashIndex) {
     const leagueId = this.activeLeagueSetting.league.id;
@@ -28,7 +34,7 @@ export default Service.extend({
         }/get-stash-items?accountName=${account}&league=${leagueId}&tabIndex=${stashIndex}`
       )
       .then(({items: rawStashItems}) => this._buildStashItems(rawStashItems));
-  },
+  }
 
   _buildStashItems(rawStashItems) {
     return rawStashItems.map(rawStashItem => {
@@ -51,7 +57,7 @@ export default Service.extend({
         explicitMods: this._parseMods(rawStashItem.explicitMods)
       });
     });
-  },
+  }
 
   _getSocketGroupsFor(rawStashItem) {
     if (!rawStashItem.sockets) return [];
@@ -62,7 +68,7 @@ export default Service.extend({
     }, Array(MAXIMUM_SOCKETS_COUNT).fill(''));
 
     return allSocketGroups.filter(socketGroup => socketGroup.length > 0);
-  },
+  }
 
   _getTypesFrom(rawStashItem) {
     const topCategories = Object.keys(rawStashItem.category);
@@ -72,11 +78,11 @@ export default Service.extend({
     if (subCategories.length === 0) return [topCategories[0], []];
 
     return [topCategories[0], subCategories];
-  },
+  }
 
   _parseMods(rawMods) {
     if (!rawMods) return [];
 
     return rawMods.reduce((mods, rawMod) => mods.concat(rawMod.split('\n')), []);
   }
-});
+}

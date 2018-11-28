@@ -1,12 +1,13 @@
+// Vendor
 import Service from '@ember/service';
 
-export default Service.extend({
+export default class ChromaticBuilder extends Service {
   initializeDataStructure() {
     return {
       itemCount: 0,
       recipeCount: 0
     };
-  },
+  }
 
   build(stashItems) {
     const dataStructure = this.initializeDataStructure();
@@ -27,4 +28,4 @@ export default Service.extend({
 
     return dataStructure;
   }
-});
+}

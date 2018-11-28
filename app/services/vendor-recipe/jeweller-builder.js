@@ -1,16 +1,17 @@
+// Vendor
 import Service from '@ember/service';
 
 // Constants
 const JEWELLER_SOCKETS_COUNT = 6;
 const JEWELLER_RECIPE_RATIO = 7;
 
-export default Service.extend({
+export default class JewellerBuilder extends Service {
   initializeDataStructure() {
     return {
       itemCount: 0,
       recipeCount: 0
     };
-  },
+  }
 
   build(stashItems) {
     const dataStructure = this.initializeDataStructure();
@@ -23,4 +24,4 @@ export default Service.extend({
 
     return dataStructure;
   }
-});
+}

@@ -1,3 +1,4 @@
+// Vendor
 import Service from '@ember/service';
 import {Promise} from 'rsvp';
 import fetch from 'fetch';
@@ -5,10 +6,10 @@ import fetch from 'fetch';
 // Constants
 const MIN_ERROR_STATUS = 400;
 
-export default Service.extend({
+export default class Request extends Service {
   fetch(url, params = {}) {
     return this._fetch('GET', url, params);
-  },
+  }
 
   _fetch(method, url, params = {}) {
     const fetchParams = {
@@ -24,4 +25,4 @@ export default Service.extend({
       });
     });
   }
-});
+}

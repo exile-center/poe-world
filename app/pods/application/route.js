@@ -1,14 +1,20 @@
+// Vendor
 import Route from '@ember/routing/route';
-import {inject as service} from '@ember/service';
+import {service} from '@ember-decorators/service';
 
-export default Route.extend({
-  leaguesFetcher: service('leagues/fetcher'),
-  authenticationStateFetcher: service('authentication/state-fetcher'),
-  activeLeagueSetting: service('active-league/setting'),
+export default class Route extends Route {
+  @service('leagues/fetcher')
+  leaguesFetcher;
+
+  @service('authentication/state-fetcher')
+  authenticationStateFetcher;
+
+  @service('active-league/setting')
+  activeLeagueSetting;
 
   model() {
     return this.leaguesFetcher.fetch();
-  },
+  }
 
   afterModel(leagues) {
     this.activeLeagueSetting.initializeFrom(leagues);
@@ -17,4 +23,4 @@ export default Route.extend({
     // service will set the `globalState.isAuthenticated` by itself
     this.authenticationStateFetcher.fetch();
   }
-});
+}

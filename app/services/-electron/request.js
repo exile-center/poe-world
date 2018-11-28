@@ -1,4 +1,6 @@
-import Service, {inject as service} from '@ember/service';
+// Vendor
+import Service from '@ember/service';
+import {service} from '@ember-decorators/service';
 import {Promise} from 'rsvp';
 import uuid from 'poe-world/utilities/uuid';
 
@@ -7,15 +9,22 @@ const IPC_CHANNEL = 'REQUEST';
 const FORBIDDEN_STATUS_CODE = 403;
 const NOT_FOUND_STATUS_CODE = 404;
 
-export default Service.extend({
-  i18n: service('i18n'),
-  toaster: service('toaster'),
-  globalState: service('global-state'),
-  authenticationSetting: service('authentication/setting'),
+export default class Request extends Service {
+  @service('i18n')
+  i18n;
+
+  @service('toaster')
+  toaster;
+
+  @service('global-state')
+  globalState;
+
+  @service('authentication/setting')
+  authenticationSetting;
 
   fetch(url, params = {}) {
     return this._fetch('GET', url, params);
-  },
+  }
 
   privateFetch(url, params = {}) {
     const poesessid = this.authenticationSetting.poesessid;
@@ -29,7 +38,7 @@ export default Service.extend({
       poesessid,
       ...params
     });
-  },
+  }
 
   _fetch(method, url, params = {}) {
     const {ipcRenderer} = requireNode('electron');
@@ -68,4 +77,4 @@ export default Service.extend({
       });
     });
   }
-});
+}

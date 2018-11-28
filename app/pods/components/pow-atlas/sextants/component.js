@@ -1,8 +1,10 @@
+// Vendor
 import Component from '@ember/component';
-import {inject as service} from '@ember/service';
+import {service} from '@ember-decorators/service';
 
-export default Component.extend({
-  mapsFetcher: service('maps/fetcher'),
+export default class Component extends Component {
+  @service('maps/fetcher')
+  mapsFetcher;
 
-  map: null
-});
+  map = null;
+}

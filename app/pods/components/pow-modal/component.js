@@ -1,20 +1,25 @@
+// Vendor
 import Component from '@ember/component';
-import {equal} from '@ember/object/computed';
-import {observer} from '@ember/object';
+import {equal} from '@ember-decorators/object/computed';
+import {observes} from '@ember-decorators/object';
 
-export default Component.extend({
-  title: '',
-  isOpened: false,
-  onClose: () => {},
-  size: null,
+export default class Component extends Component {
+  title = '';
+  isOpened = false;
+  onClose = () => {};
+  size = null;
 
-  isLarge: equal('size', 'large'),
-  isSmall: equal('size', 'small'),
+  @equal('size', 'large')
+  isLarge;
 
-  openedStateObserver: observer('isOpened', function() {
+  @equal('size', 'small')
+  isSmall;
+
+  @observes('isOpened')
+  openedStateObserver() {
     if (this.isOpened) return this.$('[data-toggle="modal"]').modal('show');
     return this.$('[data-toggle="modal"]').modal('hide');
-  }),
+  }
 
   didInsertElement() {
     this.$('[data-toggle="modal"]')
@@ -26,4 +31,4 @@ export default Component.extend({
       })
       .on('hidden.bs.modal', () => this.onClose());
   }
-});
+}

@@ -1,27 +1,32 @@
+// Vendor
 import Route from '@ember/routing/route';
-import {inject as service} from '@ember/service';
-import {on} from '@ember/object/evented';
+import {service} from '@ember-decorators/service';
+import {on} from '@ember-decorators/object/evented';
 
-export default Route.extend({
-  mapsFetcher: service('maps/fetcher'),
-  atlasReframer: service('atlas/reframer'),
+export default class Route extends Route {
+  @service('maps/fetcher')
+  mapsFetcher;
+
+  @service('atlas/reframer')
+  atlasReframer;
 
   model(params) {
     return this.mapsFetcher.fetchMap(params.slug);
-  },
+  }
 
   afterModel(map) {
     if (!map) return null;
 
     this._setAtlasCurrentMap(map);
     this.atlasReframer.reframeFor(map);
-  },
+  }
 
-  currentMapClear: on('deactivate', function() {
+  @on('deactivate')
+  currentMapClear() {
     this._setAtlasCurrentMap(null);
-  }),
+  }
 
   _setAtlasCurrentMap(map) {
     this.controllerFor('atlas').set('currentMap', map);
   }
-});
+}

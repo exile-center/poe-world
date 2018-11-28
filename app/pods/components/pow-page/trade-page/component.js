@@ -1,8 +1,8 @@
 // Vendor
 import Component from '@ember/component';
-import {inject as service} from '@ember/service';
-import {computed} from '@ember/object';
-import {bool} from '@ember/object/computed';
+import {service} from '@ember-decorators/service';
+import {computed} from '@ember-decorators/object';
+import {bool} from '@ember-decorators/object/computed';
 
 // Constants
 import TRADE from 'poe-world/constants/trade';
@@ -11,43 +11,56 @@ const TRADE_WEBSITE_OFFSET = 192;
 // Models
 import Trade from 'poe-world/models/trade';
 
-export default Component.extend({
-  activeLeagueSetting: service('active-league/setting'),
-  tradeFetcher: service('trade/fetcher'),
-  tradeFilterer: service('trade/filterer'),
-  tradePersister: service('trade/persister'),
-  tradeDestroyer: service('trade/destroyer'),
+export default class Component extends Component {
+  @service('active-league/setting')
+  activeLeagueSetting;
 
-  tradeWebsiteOffset: TRADE_WEBSITE_OFFSET,
+  @service('trade/fetcher')
+  tradeFetcher;
 
-  currentTradeSlug: '',
-  currentTrade: null,
-  stagedTrade: null,
-  trades: null,
-  searchValue: '',
+  @service('trade/filterer')
+  tradeFilterer;
 
-  isEditing: bool('stagedTrade'),
+  @service('trade/persister')
+  tradePersister;
 
-  isTradeSlugDirty: computed('currentTradeSlug', 'currentTrade', 'currentTrade.slug', function() {
+  @service('trade/destroyer')
+  tradeDestroyer;
+
+  tradeWebsiteOffset = TRADE_WEBSITE_OFFSET;
+  currentTradeSlug = '';
+  currentTrade = null;
+  stagedTrade = null;
+  trades = null;
+  searchValue = '';
+
+  @bool('stagedTrade')
+  isEditing;
+
+  @computed('currentTradeSlug', 'currentTrade', 'currentTrade.slug')
+  get isTradeSlugDirty() {
     if (!this.currentTrade) return false;
 
     return this.currentTradeSlug !== this.currentTrade.slug;
-  }),
+  }
 
-  tradeBaseUrl: computed('activeLeagueSetting.league.id', function() {
+  @computed('activeLeagueSetting.league.id')
+  get tradeBaseUrl() {
     const activeLeagueId = this.activeLeagueSetting.league.id;
     return `${TRADE.BASE_URL}/${activeLeagueId}`;
-  }),
+  }
 
-  currentTradeUrl: computed('tradeBaseUrl', 'currentTradeSlug', function() {
+  @computed('tradeBaseUrl', 'currentTradeSlug')
+  get currentTradeUrl() {
     return `${this.tradeBaseUrl}/${this.currentTradeSlug}`;
-  }),
+  }
 
-  filteredTrades: computed('trades', 'searchValue', function() {
+  @computed('trades', 'searchValue')
+  get filteredTrades() {
     if (!this.searchValue) return this.trades;
 
     return this.tradeFilterer.filter(this.trades, this.searchValue);
-  }),
+  }
 
   willInsertElement() {
     this._refreshTrades();
@@ -55,32 +68,32 @@ export default Component.extend({
     if (!this.trades.length) return this.create();
 
     this._makeFirstTradeActive();
-  },
+  }
 
   tradeUrlUpdate(newTradeUrl) {
     const matchedSlug = newTradeUrl.match(/trade\/\w+\/\w+\/(\w+)$/);
     if (!matchedSlug) return;
 
     this.set('currentTradeSlug', matchedSlug[1]);
-  },
+  }
 
   view(trade) {
     this.setProperties({
       currentTrade: trade,
       currentTradeSlug: trade.slug
     });
-  },
+  }
 
   edit() {
     this.set('stagedTrade', this.currentTrade.clone());
-  },
+  }
 
   delete() {
     if (!this.tradeDestroyer.destroy(this.currentTrade)) return;
 
     this._refreshTrades();
     this._makeFirstTradeActive();
-  },
+  }
 
   duplicate() {
     const duplicatedTrade = this.tradePersister.persist(
@@ -96,7 +109,7 @@ export default Component.extend({
       currentTradeSlug: duplicatedTrade.slug,
       stagedTrade: null
     });
-  },
+  }
 
   save() {
     this.stagedTrade.updateProperties({
@@ -111,14 +124,14 @@ export default Component.extend({
       currentTradeSlug: savedTrade.slug,
       stagedTrade: null
     });
-  },
+  }
 
   cancel() {
     this.setProperties({
       stagedTrade: null,
       currentTradeSlug: this.currentTrade.slug
     });
-  },
+  }
 
   create() {
     this.setProperties({
@@ -126,24 +139,24 @@ export default Component.extend({
       stagedTrade: Trade.create(),
       currentTradeSlug: ''
     });
-  },
+  }
 
   updateTradeSlug() {
     this.currentTrade.updateProperties({slug: this.currentTradeSlug});
     this.tradePersister.persist(this.currentTrade);
 
     this._refreshTrades();
-  },
+  }
 
   revertTradeSlug() {
     this.set('currentTradeSlug', this.currentTrade.slug);
-  },
+  }
 
   _refreshTrades() {
     const trades = this.tradeFetcher.fetchAll();
 
     this.set('trades', trades);
-  },
+  }
 
   _makeFirstTradeActive() {
     const currentTrade = this.trades[0];
@@ -152,4 +165,4 @@ export default Component.extend({
       currentTradeSlug: currentTrade.slug
     });
   }
-});
+}

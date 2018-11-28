@@ -1,11 +1,14 @@
-import Service, {inject as service} from '@ember/service';
+// Vendor
+import Service from '@ember/service';
+import {service} from '@ember-decorators/service';
 import League from 'poe-world/models/league';
 import RESOURCES from 'poe-world/constants/resources';
 
-export default Service.extend({
-  request: service('request'),
+export default class Fetcher extends Service {
+  @service('request')
+  request;
 
-  _leaguesPromise: null,
+  _leaguesPromise = null;
 
   fetch() {
     if (this._leaguesPromise) return this._leaguesPromise;
@@ -17,4 +20,4 @@ export default Service.extend({
     this.set('_leaguesPromise', leaguesPromise);
     return leaguesPromise;
   }
-});
+}

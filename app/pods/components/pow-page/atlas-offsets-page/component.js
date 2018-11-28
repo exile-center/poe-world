@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
+// Vendor
 import Component from '@ember/component';
 import MAPS from 'poe-world/constants/maps';
 
-export default Component.extend({
-  localClassNames: 'atlas-offset-page',
-
-  offsetData: null,
-  mapsToConfigure: null,
+export default class Component extends Component {
+  localClassNames = 'atlas-offset-page';
+  offsetData = null;
+  mapsToConfigure = null;
 
   willInsertElement() {
     this.offsetData = {};
@@ -16,7 +16,7 @@ export default Component.extend({
     });
 
     this._promptForNextMap();
-  },
+  }
 
   contextMenu(event) {
     const {offsetX, offsetY} = event;
@@ -33,15 +33,15 @@ export default Component.extend({
     if (this.mapsToConfigure.length) return this._promptForNextMap();
 
     this._promptData();
-  },
+  }
 
   _promptForNextMap() {
     console.log(`Right click on the middle of "${this.mapsToConfigure[0]}".`);
-  },
+  }
 
   _promptData() {
     console.log('Run "npm run compile-maps" with the following parameter:');
     console.log(`'${JSON.stringify(this.offsetData)}'`);
   }
-});
+}
 /* eslint-enable no-console */

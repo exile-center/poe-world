@@ -1,7 +1,8 @@
+// Vendor
 import EmberObject from '@ember/object';
 
-export default EmberObject.extend({
-  name: null,
-  chaosValue: null,
-  exaltedValue: null
-});
+export default class Pricing extends EmberObject {
+  name = null;
+  chaosValue = null;
+  exaltedValue = null;
+}

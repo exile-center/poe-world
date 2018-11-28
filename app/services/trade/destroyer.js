@@ -1,11 +1,13 @@
 // Vendor
-import Service, {inject as service} from '@ember/service';
+import Service from '@ember/service';
+import {service} from '@ember-decorators/service';
 
 // Constants
 import STORAGE_KEYS from 'poe-world/constants/storage-keys';
 
-export default Service.extend({
-  storage: service('storage'),
+export default class Destroyer extends Service {
+  @service('storage')
+  storage;
 
   destroy(trade) {
     if (!trade.id) return false;
@@ -21,4 +23,4 @@ export default Service.extend({
     this.storage.setValue(STORAGE_KEYS.TRADE, updatedTrades);
     return true;
   }
-});
+}

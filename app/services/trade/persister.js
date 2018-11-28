@@ -1,5 +1,6 @@
 // Vendor
-import Service, {inject as service} from '@ember/service';
+import Service from '@ember/service';
+import {service} from '@ember-decorators/service';
 
 // Utilities
 import uuid from 'poe-world/utilities/uuid';
@@ -7,8 +8,9 @@ import uuid from 'poe-world/utilities/uuid';
 // Constants
 import STORAGE_KEYS from 'poe-world/constants/storage-keys';
 
-export default Service.extend({
-  storage: service('storage'),
+export default class Persister extends Service {
+  @service('storage')
+  storage;
 
   persist(trade) {
     if (!trade.id) trade.set('id', uuid());
@@ -28,4 +30,4 @@ export default Service.extend({
 
     return trade;
   }
-});
+}

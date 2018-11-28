@@ -1,8 +1,8 @@
 // Vendor
 import Component from '@ember/component';
 
-export default Component.extend({
-  title: null,
+export default class Component extends Component {
+  title = null;
 
   didInsertElement() {
     const $popoverContent = this.$('[data-popover-content]');
@@ -17,4 +17,4 @@ export default Component.extend({
       content
     });
   }
-});
+}

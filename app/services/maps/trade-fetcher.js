@@ -1,4 +1,6 @@
-import Service, {inject as service} from '@ember/service';
+// Vendor
+import Service from '@ember/service';
+import {service} from '@ember-decorators/service';
 import TradeMap from 'poe-world/models/trade-map';
 import TRADE_API from 'poe-world/constants/trade-api';
 import FRAME_TYPES from 'poe-world/constants/frame-types';
@@ -35,9 +37,12 @@ const UNIQUE_QUERY = {
   }
 };
 
-export default Service.extend({
-  request: service('request'),
-  activeLeagueSetting: service('active-league/setting'),
+export default class TradeFetcher extends Service {
+  @service('request')
+  request;
+
+  @service('active-league/setting')
+  activeLeagueSetting;
 
   fetchFromMap(map) {
     const leagueId = this.activeLeagueSetting.league.id;
@@ -55,7 +60,7 @@ export default Service.extend({
           total
         }));
       });
-  },
+  }
 
   fetchFromIds(tradeMapIds) {
     const tradeMapIdsParam = tradeMapIds.splice(0, TRADE_API.BATCH_SIZE).join(',');
@@ -64,14 +69,14 @@ export default Service.extend({
       tradeMaps: this._buildMaps(mapResults),
       tradeMapIds
     }));
-  },
+  }
 
   _queryParamFor(map) {
     const {isUnique, tradeName} = map;
 
     if (isUnique) return JSON.stringify(UNIQUE_QUERY).replace('__MAP_NAME__', tradeName);
     return JSON.stringify(NORMAL_QUERY).replace('__MAP_NAME__', tradeName);
-  },
+  }
 
   /* eslint-disable complexity */
   _buildMaps(mapResults) {
@@ -100,4 +105,4 @@ export default Service.extend({
     });
   }
   /* eslint-enable complexity */
-});
+}

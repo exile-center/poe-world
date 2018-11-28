@@ -1,5 +1,6 @@
+// Vendor
 import Component from '@ember/component';
 
-export default Component.extend({
-  tradeMaps: null
-});
+export default class Component extends Component {
+  tradeMaps = null;
+}

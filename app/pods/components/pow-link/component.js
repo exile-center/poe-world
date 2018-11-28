@@ -1,5 +1,6 @@
+// Vendor
 import LinkComponent from '@ember/routing/link-component';
 
-export default LinkComponent.extend({
-  activeClass: 'active'
-});
+export default class Component extends LinkComponent {
+  activeClass = 'active';
+}

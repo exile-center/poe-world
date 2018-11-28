@@ -1,14 +1,21 @@
+// Vendor
+import {classNames, tagName} from '@ember-decorators/component';
 import Component from '@ember/component';
-import {inject as service} from '@ember/service';
-import {readOnly} from '@ember/object/computed';
+import {service} from '@ember-decorators/service';
+import {reads} from '@ember-decorators/object/computed';
 
-export default Component.extend({
-  classNames: ['navbar', 'fixed-top', 'navbar-dark', 'bg-dark', 'navbar-expand-md'],
-  tagName: 'nav',
+@classNames('navbar', 'fixed-top', 'navbar-dark', 'bg-dark', 'navbar-expand-md')
+@tagName('nav')
+export default class Component extends Component {
+  @service('active-league/setting')
+  activeLeagueSetting;
 
-  activeLeagueSetting: service('active-league/setting'),
-  globalState: service('global-state'),
+  @service('global-state')
+  globalState;
 
-  leagueName: readOnly('activeLeagueSetting.league.name'),
-  isAuthenticated: readOnly('globalState.isAuthenticated')
-});
+  @reads('activeLeagueSetting.league.name')
+  leagueName;
+
+  @reads('globalState.isAuthenticated')
+  isAuthenticated;
+}

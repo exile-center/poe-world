@@ -1,11 +1,14 @@
-import Service, {inject as service} from '@ember/service';
+// Vendor
+import Service from '@ember/service';
+import {service} from '@ember-decorators/service';
 import Map from 'poe-world/models/map';
 import RESOURCES from 'poe-world/constants/resources';
 
-export default Service.extend({
-  request: service('request'),
+export default class Fetcher extends Service {
+  @service('request')
+  request;
 
-  _mapsPromise: null,
+  _mapsPromise = null;
 
   fetch() {
     if (this._mapsPromise) return this._mapsPromise;
@@ -16,11 +19,11 @@ export default Service.extend({
 
     this.set('_mapsPromise', mapsPromise);
     return mapsPromise;
-  },
+  }
 
   fetchMap(mapId) {
     return this.fetch().then(maps => maps.find(map => map.id === mapId));
-  },
+  }
 
   _processRawMaps(rawMaps) {
     const mapHash = rawMaps.reduce((mapHash, rawMap) => {
@@ -33,4 +36,4 @@ export default Service.extend({
 
     return maps;
   }
-});
+}

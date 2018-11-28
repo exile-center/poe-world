@@ -1,21 +1,26 @@
-import Service, {inject as service} from '@ember/service';
+// Vendor
+import Service from '@ember/service';
+import {service} from '@ember-decorators/service';
 
-export default Service.extend({
-  storage: service('storage'),
-  activeLeagueSetting: service('active-league/setting'),
+export default class BaseStashSetting extends Service {
+  @service('storage')
+  storage;
 
-  storageKey: null,
-  stashIds: null,
+  @service('active-league/setting')
+  activeLeagueSetting;
+
+  storageKey = null;
+  stashIds = null;
 
   applyStashIds(stashIds) {
     this.set('stashIds', stashIds);
     this.storage.setValue(this.storageKey, stashIds, {
       leagueSlug: this.activeLeagueSetting.league.slug
     });
-  },
+  }
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     this.set(
       'stashIds',
@@ -25,4 +30,4 @@ export default Service.extend({
       })
     );
   }
-});
+}

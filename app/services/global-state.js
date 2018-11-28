@@ -1,19 +1,22 @@
 // Vendor
-import Service, {inject as service} from '@ember/service';
-import {not} from '@ember/object/computed';
+import Service from '@ember/service';
+import {service} from '@ember-decorators/service';
+import {not} from '@ember-decorators/object/computed';
 
-export default Service.extend({
-  authenticationSetting: service('authentication/setting'),
+export default class GlobalState extends Service {
+  @service('authentication/setting')
+  authenticationSetting;
 
-  isDesktop: null,
-  isAuthenticated: null,
+  isDesktop = null;
+  isAuthenticated = null;
 
-  isWeb: not('isDesktop'),
+  @not('isDesktop')
+  isWeb;
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     this.set('isDesktop', window.ELECTRON);
     this.set('isAuthenticated', Boolean(this.authenticationSetting.poesessid));
   }
-});
+}

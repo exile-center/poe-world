@@ -1,15 +1,16 @@
+// Vendor
 import Component from '@ember/component';
 
-export default Component.extend({
-  isCopied: false,
-  value: null,
-  onClick: () => {},
+export default class Component extends Component {
+  isCopied = false;
+  value = null;
+  onClick = () => {};
 
   copy() {
     this._copyToClipboard();
     this.onClick();
     this.set('isCopied', true);
-  },
+  }
 
   /* eslint-disable no-alert */
   _copyToClipboard() {
@@ -21,4 +22,4 @@ export default Component.extend({
     }
   }
   /* eslint-enable no-alert */
-});
+}

@@ -4,7 +4,7 @@ import Service from '@ember/service';
 // Constants
 const DIVINATION_CARD_TOP_CATEGORY = 'cards';
 
-export default Service.extend({
+export default class Builder extends Service {
   build(stashItems, divinationPricingMap) {
     const divinationStashItemsMap = stashItems.reduce((divinationStashItemsMap, stashItem) => {
       if (stashItem.topCategory !== DIVINATION_CARD_TOP_CATEGORY) return divinationStashItemsMap;
@@ -41,4 +41,4 @@ export default Service.extend({
       })
       .sort((itemA, itemB) => itemB.chaosTotalValue - itemA.chaosTotalValue);
   }
-});
+}
