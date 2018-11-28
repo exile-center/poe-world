@@ -1,7 +1,8 @@
 // Vendor
 import Component from '@ember/component';
-import {inject as service} from '@ember/service';
-import {task, timeout} from 'ember-concurrency';
+import {service} from '@ember-decorators/service';
+import {dropTask} from 'ember-concurrency-decorators';
+import {timeout} from 'ember-concurrency';
 
 // Mixins
 import StashTabsLoadable from 'poe-world/mixins/components/stash-tabs-loadable';
@@ -9,17 +10,24 @@ import StashTabsLoadable from 'poe-world/mixins/components/stash-tabs-loadable';
 // Constants
 const SUMMARY_POLLING_INTERVAL = 300000; // 5 minutes
 
-export default Component.extend(StashTabsLoadable, {
-  toaster: service('toaster'),
-  divinationSummaryPricingFetcher: service('divination-summary/pricing-fetcher'),
-  divinationSummarySetting: service('divination-summary/setting'),
-  divinationSummaryBuilder: service('divination-summary/builder'),
+export default class Component extends Component.extend(StashTabsLoadable) {
+  @service('toaster')
+  toaster;
 
-  hasDivinationSummaryStashes: false,
+  @service('divination-summary/pricing-fetcher')
+  divinationSummaryPricingFetcher;
 
-  divinationSummary: null,
+  @service('divination-summary/setting')
+  divinationSummarySetting;
 
-  divinationSummaryLoadTask: task(function*() {
+  @service('divination-summary/builder')
+  divinationSummaryBuilder;
+
+  hasDivinationSummaryStashes = false;
+  divinationSummary = null;
+
+  @dropTask
+  divinationSummaryLoadTask = function*() {
     const stashIds = this.divinationSummarySetting.stashIds;
     const hasDivinationSummaryStashes = stashIds.length > 0;
 
@@ -30,9 +38,10 @@ export default Component.extend(StashTabsLoadable, {
       hasDivinationSummaryStashes,
       divinationSummary: this.divinationSummaryBuilder.build(stashItems, divinationPricingMap)
     });
-  }).drop(),
+  };
 
-  divinationSummaryPollingTask: task(function*() {
+  @dropTask
+  divinationSummaryPollingTask = function*() {
     while (true) {
       yield timeout(SUMMARY_POLLING_INTERVAL);
 
@@ -42,14 +51,15 @@ export default Component.extend(StashTabsLoadable, {
         // Prevent an API glitch from stopping the poll
       }
     }
-  }).drop(),
+  };
 
-  divinationSummaryInitialLoadTask: task(function*() {
+  @dropTask
+  divinationSummaryInitialLoadTask = function*() {
     yield this.divinationSummaryLoadTask.perform();
-  }).drop(),
+  };
 
   willInsertElement() {
     this.divinationSummaryInitialLoadTask.perform();
     this.divinationSummaryPollingTask.perform();
   }
-});
+}

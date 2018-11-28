@@ -1,15 +1,17 @@
+// Vendor
 import EmberObject from '@ember/object';
-import {computed} from '@ember/object';
+import {computed} from '@ember-decorators/object';
 
-export default EmberObject.extend({
-  id: null,
-  name: null,
+export default class League extends EmberObject {
+  id = null;
+  name = null;
 
-  slug: computed(function() {
+  @computed('id')
+  get slug() {
     let slug = this.id.toLowerCase();
     slug = slug.replace(/[^a-z ]/g, '');
     slug = slug.replace(/ /g, '-');
 
     return slug;
-  })
-});
+  }
+}

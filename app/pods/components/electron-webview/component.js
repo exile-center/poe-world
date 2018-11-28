@@ -1,18 +1,19 @@
 // Vendor
 import Component from '@ember/component';
-import {task, timeout} from 'ember-concurrency';
+import {restartableTask} from 'ember-concurrency-decorators';
+import {timeout} from 'ember-concurrency';
 
 // Constants
 const SCROLL_TIMEOUT = 1000;
 
-export default Component.extend({
-  localClassNames: 'electron-webview',
+export default class Component extends Component {
+  localClassNames = 'electron-webview';
+  url = '';
+  offset = 0;
+  onUrlChange = () => {};
 
-  url: '',
-  offset: 0,
-  onUrlChange: () => {},
-
-  didNavigateTask: task(function*(url) {
+  @restartableTask
+  didNavigateTask = function*(url) {
     this.onUrlChange(url);
 
     if (!this.offset) return;
@@ -20,7 +21,7 @@ export default Component.extend({
 
     const webview = this.$('webview')[0];
     webview.executeJavaScript(`window.scroll({top: ${this.offset}, left: 0, behavior: 'smooth'});`);
-  }).restartable(),
+  };
 
   didInsertElement() {
     const webview = this.$('webview')[0];
@@ -28,4 +29,4 @@ export default Component.extend({
     webview.addEventListener('did-navigate', ({url}) => this.didNavigateTask.perform(url));
     webview.addEventListener('did-navigate-in-page', ({url}) => this.didNavigateTask.perform(url));
   }
-});
+}

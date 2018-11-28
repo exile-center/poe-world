@@ -1,6 +1,7 @@
 // Vendor
 import Component from '@ember/component';
-import {task, timeout} from 'ember-concurrency';
+import {restartableTask} from 'ember-concurrency-decorators';
+import {timeout} from 'ember-concurrency';
 import $ from 'jquery';
 
 /* global panzoom */
@@ -8,21 +9,22 @@ import $ from 'jquery';
 // Constants
 const PANZOOM_EVENT_DEBOUNCE = 50;
 
-export default Component.extend({
-  onPanzoom: () => {},
-  onPanzoomInitialize: () => {},
-  minZoom: 1,
-  maxZoom: 1,
-  zoomSpeed: 0.05,
-  bounds: true,
-  autocenter: false,
-  smoothScroll: false,
+export default class Component extends Component {
+  onPanzoom = () => {};
+  onPanzoomInitialize = () => {};
+  minZoom = 1;
+  maxZoom = 1;
+  zoomSpeed = 0.05;
+  bounds = true;
+  autocenter = false;
+  smoothScroll = false;
 
-  triggerPanzoomEventTask: task(function*() {
+  @restartableTask
+  triggerPanzoomEventTask = function*() {
     this.onPanzoom(this._getPanzoomState());
     yield timeout(PANZOOM_EVENT_DEBOUNCE);
     this.onPanzoom(this._getPanzoomState());
-  }).restartable(),
+  };
 
   didInsertElement() {
     const $container = this.$();
@@ -40,7 +42,7 @@ export default Component.extend({
 
     this._panzoomRef = panzoomRef;
     this.onPanzoomInitialize(panzoomRef);
-  },
+  }
 
   _getPanzoomState() {
     const {x, y, scale} = this._panzoomRef.getTransform();
@@ -51,4 +53,4 @@ export default Component.extend({
       panLeft: x
     };
   }
-});
+}

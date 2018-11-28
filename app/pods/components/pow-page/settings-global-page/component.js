@@ -1,60 +1,83 @@
+// Vendor
 import Component from '@ember/component';
-import {inject as service} from '@ember/service';
-import {task, timeout} from 'ember-concurrency';
-import {readOnly} from '@ember/object/computed';
+import {service} from '@ember-decorators/service';
+import {dropTask, restartableTask} from 'ember-concurrency-decorators';
+import {timeout} from 'ember-concurrency';
+import {reads} from '@ember-decorators/object/computed';
 
 // Constants
 const TEST_AUTHENTICATION_DEBOUNCE = 1000; // 1 second
 
-export default Component.extend({
-  electronDevTools: service('-electron/dev-tools'),
-  globalState: service('global-state'),
-  leaguesFetcher: service('leagues/fetcher'),
-  activeLeagueSetting: service('active-league/setting'),
-  authenticationSetting: service('authentication/setting'),
-  authenticationStateFetcher: service('authentication/state-fetcher'),
+export default class Component extends Component {
+  @service('-electron/dev-tools')
+  electronDevTools;
 
-  currentLeagueSlug: readOnly('activeLeagueSetting.league.slug'),
-  currentPoesessid: readOnly('authenticationSetting.poesessid'),
-  currentAccount: readOnly('authenticationSetting.account'),
-  isAuthenticated: readOnly('globalState.isAuthenticated'),
+  @service('global-state')
+  globalState;
 
-  leagues: null,
+  @service('leagues/fetcher')
+  leaguesFetcher;
 
-  leaguesLoadTask: task(function*() {
+  @service('active-league/setting')
+  activeLeagueSetting;
+
+  @service('authentication/setting')
+  authenticationSetting;
+
+  @service('authentication/state-fetcher')
+  authenticationStateFetcher;
+
+  @reads('activeLeagueSetting.league.slug')
+  currentLeagueSlug;
+
+  @reads('authenticationSetting.poesessid')
+  currentPoesessid;
+
+  @reads('authenticationSetting.account')
+  currentAccount;
+
+  @reads('globalState.isAuthenticated')
+  isAuthenticated;
+
+  leagues = null;
+
+  @dropTask
+  leaguesLoadTask = function*() {
     const leagues = yield this.leaguesFetcher.fetch();
     this.set('leagues', leagues);
-  }).drop(),
+  };
 
-  debouncedTestAuthenticationTask: task(function*() {
+  @restartableTask
+  debouncedTestAuthenticationTask = function*() {
     yield timeout(TEST_AUTHENTICATION_DEBOUNCE);
     yield this.testAuthenticationTask.perform();
-  }).restartable(),
+  };
 
-  testAuthenticationTask: task(function*() {
+  @dropTask
+  testAuthenticationTask = function*() {
     yield this.authenticationStateFetcher.fetch();
-  }).drop(),
+  };
 
   willInsertElement() {
     this.leaguesLoadTask.perform();
     this.testAuthenticationTask.perform();
-  },
+  }
 
   applyLeague(league) {
     this.activeLeagueSetting.apply(league);
-  },
+  }
 
   applyPoesessid(poesessid) {
     this.authenticationSetting.applyPoesessid(poesessid);
     this.debouncedTestAuthenticationTask.perform();
-  },
+  }
 
   applyAccount(account) {
     this.authenticationSetting.applyAccount(account);
     this.debouncedTestAuthenticationTask.perform();
-  },
+  }
 
   openDevTools() {
     this.electronDevTools.open();
   }
-});
+}
