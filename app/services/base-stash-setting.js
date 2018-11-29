@@ -9,7 +9,10 @@ export default class BaseStashSetting extends Service {
   @service('active-league/setting')
   activeLeagueSetting;
 
-  storageKey = null;
+  get storageKey() {
+    return null;
+  }
+
   stashIds = null;
 
   applyStashIds(stashIds) {
@@ -19,8 +22,12 @@ export default class BaseStashSetting extends Service {
     });
   }
 
-  init() {
-    super.init(...arguments);
+  constructor() {
+    super(...arguments);
+
+    if (!this.storageKey) {
+      throw `get storageKey() must be implemented on the setting service.`
+    }
 
     this.set(
       'stashIds',

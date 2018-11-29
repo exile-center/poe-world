@@ -2,6 +2,8 @@
 import Component from '@ember/component';
 import {task, timeout} from 'ember-concurrency';
 import $ from 'jquery';
+import {argument} from '@ember-decorators/argument';
+import {type, optional} from '@ember-decorators/argument/type';
 
 /* global panzoom */
 
@@ -10,11 +12,27 @@ const PANZOOM_EVENT_DEBOUNCE = 50;
 const PANZOOM_ZOOM_SPEED = 0.05;
 
 export default class PanzoomContainer extends Component {
+  @argument
+  @type(Function)
   onPanzoom = () => {};
+
+  @argument
+  @type(Function)
   onPanzoomInitialize = () => {};
+
+  @argument
+  @type(optional('number'))
   minZoom = 1;
+
+  @argument
+  @type(optional('number'))
   maxZoom = 1;
+
+  @argument
+  @type(optional('number'))
   zoomSpeed = PANZOOM_ZOOM_SPEED;
+
+
   bounds = true;
   autocenter = false;
   smoothScroll = false;

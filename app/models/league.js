@@ -6,6 +6,11 @@ export default class League extends EmberObject {
   id = null;
   name = null;
 
+  constructor(props) {
+    super(props);
+    this.setProperties(props);
+  }
+
   @computed('id')
   get slug() {
     if (!this.id) return '';

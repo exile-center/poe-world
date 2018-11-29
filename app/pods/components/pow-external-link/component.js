@@ -2,6 +2,8 @@
 import {attribute, tagName} from '@ember-decorators/component';
 import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
+import {argument} from '@ember-decorators/argument';
+import {type} from '@ember-decorators/argument/type';
 
 @tagName('a')
 export default class ExternalLink extends Component {
@@ -11,12 +13,12 @@ export default class ExternalLink extends Component {
   @service('-electron/url-opener')
   electronUrlOpener;
 
-  localClassNames = 'external-link';
+  @argument
+  @type('string')
+  url = '';
 
   @attribute
   href = '#';
-
-  url = '';
 
   click(event) {
     event.preventDefault();

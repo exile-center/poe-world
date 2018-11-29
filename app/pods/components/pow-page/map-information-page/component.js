@@ -1,6 +1,8 @@
 // Vendor
 import Component from '@ember/component';
 import {computed} from '@ember-decorators/object';
+import {argument} from '@ember-decorators/argument';
+import {type} from '@ember-decorators/argument/type';
 
 const LAYOUT_RATINGS_KEY = {
   A: 'components.page.map_information_page.layout_rating_A',
@@ -9,6 +11,8 @@ const LAYOUT_RATINGS_KEY = {
 };
 
 export default class PageMapInformation extends Component {
+  @argument
+  @type('object')
   map = null;
 
   @computed('map.layoutRating')

@@ -3,12 +3,17 @@ import {A} from '@ember/array';
 import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
 import {task} from 'ember-concurrency';
+import {argument} from '@ember-decorators/argument';
+import {type} from '@ember-decorators/argument/type';
 
 export default class PageMapTrade extends Component {
   @service('maps/trade-fetcher')
   mapsTradeFetcher;
 
+  @argument
+  @type('object')
   map = null;
+
   tradeMapIds = null;
   tradeMaps = A([]);
   isMapsInitiallyLoaded = false;

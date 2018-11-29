@@ -10,13 +10,13 @@ export default class GlobalState extends Service {
   isDesktop = null;
   isAuthenticated = null;
 
-  @not('isDesktop')
-  isWeb;
-
-  init() {
-    super.init(...arguments);
+  constructor() {
+    super(...arguments);
 
     this.set('isDesktop', window.ELECTRON);
     this.set('isAuthenticated', Boolean(this.authenticationSetting.poesessid));
   }
+
+  @not('isDesktop')
+  isWeb;
 }

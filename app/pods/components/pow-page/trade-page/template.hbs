@@ -120,13 +120,12 @@
       </div>
     </div>
 
-    <div local-class="browser-container">
-      {{electron-webview
-        url=currentTradeUrl
-        offset=tradeWebsiteOffset
-        onUrlChange=(action tradeUrlUpdate)
-      }}
-    </div>
+    {{electron-webview
+      local-class="browser-container"
+      url=currentTradeUrl
+      offset=tradeWebsiteOffset
+      onUrlChange=(action tradeUrlUpdate)
+    }}
   </div>
 
   <div local-class="sidebar" class="w-25 p-2">

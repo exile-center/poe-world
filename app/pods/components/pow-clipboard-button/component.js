@@ -1,10 +1,18 @@
 // Vendor
 import Component from '@ember/component';
+import {argument} from '@ember-decorators/argument';
+import {type, optional} from '@ember-decorators/argument/type';
 
 export default class ClipboardButton extends Component {
-  isCopied = false;
+  @argument
+  @type('string')
   value = null;
+
+  @argument
+  @type(optional(Function))
   onClick = () => {};
+
+  isCopied = false;
 
   copy() {
     this._copyToClipboard();

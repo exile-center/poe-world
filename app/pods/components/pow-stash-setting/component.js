@@ -3,10 +3,18 @@ import Component from '@ember/component';
 import {computed} from '@ember-decorators/object';
 import {getOwner} from '@ember/application';
 import toggleArray from 'poe-world/utilities/toggle-array';
+import {argument} from '@ember-decorators/argument';
+import {type} from '@ember-decorators/argument/type';
 
 export default class StashSetting extends Component {
+  @argument
+  @type('object')
   stash = null;
+
+  @argument
+  @type('object')
   stashFeature = null;
+
   isIncluded = false;
 
   @computed('stash.type')

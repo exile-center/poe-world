@@ -1,5 +1,7 @@
-{{#each toasts as |toast|}}
-  <div local-class="toast {{unless toast.isVisible "toast-out"}}" class="alert alert-{{toast.type}}">
-    {{toast.message}}
-  </div>
-{{/each}}
+<div local-class="toaster">
+  {{#each toasts as |toast|}}
+    <div local-class="toast {{unless toast.isVisible "toast-out"}}" class="alert alert-{{toast.type}}">
+      {{toast.message}}
+    </div>
+  {{/each}}
+</div>

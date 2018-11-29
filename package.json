@@ -24,7 +24,8 @@
     "prettier-check": "prettier -l ember-cli-build.js testem.js '{app,tests,config}/**/*.{js,scss}'"
   },
   "devDependencies": {
-    "@ember-decorators/babel-transforms": "^3.1.2",
+    "@ember-decorators/argument": "0.8.21",
+    "@ember-decorators/babel-transforms": "2.1.2",
     "@ember/jquery": "0.5.2",
     "@ember/optional-features": "0.6.3",
     "@fortawesome/ember-fontawesome": "0.1.0-8",

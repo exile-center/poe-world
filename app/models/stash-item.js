@@ -17,6 +17,11 @@ export default class StashItem extends EmberObject {
   maxStackSize = null;
   explicitMods = null;
 
+  constructor(props) {
+    super(props);
+    this.setProperties(props);
+  }
+
   @computed('subCategories')
   get defaultCategory() {
     if (this.subCategories.length > 0) return this.subCategories[0];

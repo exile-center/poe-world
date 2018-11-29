@@ -1,15 +1,24 @@
 // Vendor
 import Component from '@ember/component';
 import {task, timeout} from 'ember-concurrency';
+import {argument} from '@ember-decorators/argument';
+import {type, optional} from '@ember-decorators/argument/type';
 
 // Constants
 const SCROLL_TIMEOUT = 1000;
 
 export default class ElectronWebview extends Component {
-  localClassNames = 'electron-webview';
-  url = '';
+  @argument
+  @type('string')
+  url;
+
+  @argument
+  @type(optional('number'))
   offset = 0;
-  onUrlChange = () => {};
+
+  @argument
+  @type(Function)
+  onUrlChange;
 
   didNavigateTask = task(function*(url) {
     this.onUrlChange(url);

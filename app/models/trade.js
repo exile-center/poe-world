@@ -11,8 +11,12 @@ export default class Trade extends EmberObject {
   tags = null;
   updatedAt = null;
 
-  init() {
-    this.set('tags', A(this.tags));
+  constructor(props) {
+    super(props);
+    this.setProperties({
+      ...props,
+      tags: A(props.tags)
+    });
   }
 
   updateProperties(properties) {

@@ -1,26 +1,28 @@
-<div local-class="wrapper">
-  {{#pow-panzoom-container
-    local-class="panzoom-container"
-    minZoom=0.5
-    maxZoom=1
-    zoomSpeed=0.075
-    onPanzoom=(action panzoom)
-    onPanzoomInitialize=(action panzoomInitialize)
-  }}
-    <div local-class="map-background"></div>
+<div local-class="atlas">
+  <div local-class="wrapper">
+    {{#pow-panzoom-container
+      local-class="panzoom-container"
+      minZoom=0.5
+      maxZoom=1
+      zoomSpeed=0.075
+      onPanzoom=(action panzoom)
+      onPanzoomInitialize=(action panzoomInitialize)
+    }}
+      <div local-class="map-background"></div>
 
-    {{#if maps}}
-      {{pow-atlas/maps
-        currentMap=currentMap
-        maps=maps
-        onMapClick=(action mapClick)
-      }}
-    {{/if}}
+      {{#if maps}}
+        {{pow-atlas/maps
+          currentMap=currentMap
+          maps=maps
+          onMapClick=(action mapClick)
+        }}
+      {{/if}}
 
-    {{#if currentMap}}
-      {{pow-atlas/sextants
-        map=currentMap
-      }}
-    {{/if}}
-  {{/pow-panzoom-container}}
+      {{#if currentMap}}
+        {{pow-atlas/sextants
+          map=currentMap
+        }}
+      {{/if}}
+    {{/pow-panzoom-container}}
+  </div>
 </div>

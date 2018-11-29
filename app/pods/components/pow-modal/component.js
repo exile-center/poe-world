@@ -2,11 +2,24 @@
 import Component from '@ember/component';
 import {equal} from '@ember-decorators/object/computed';
 import {observes} from '@ember-decorators/object';
+import {argument} from '@ember-decorators/argument';
+import {type, optional, unionOf} from '@ember-decorators/argument/type';
 
 export default class Modal extends Component {
-  title = '';
+  @argument
+  @type(unionOf('object', 'string'))
+  title;
+
+  @argument
+  @type('boolean')
   isOpened = false;
-  onClose = () => {};
+
+  @argument
+  @type(Function)
+  onClose;
+
+  @argument
+  @type(optional('string'))
   size = null;
 
   @equal('size', 'large')

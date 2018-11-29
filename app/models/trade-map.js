@@ -7,7 +7,6 @@ export default class TradeMap extends EmberObject {
 
   // Map attributes
   rarity = null;
-
   corrupted = null;
   identified = null;
   verified = null;
@@ -18,12 +17,16 @@ export default class TradeMap extends EmberObject {
 
   // Listing information
   indexedAt = null;
-
   whisper = null;
   account = null;
   priceAmount = null;
   priceCurrencyId = null;
   isAfk = false;
+
+  constructor(props) {
+    super(props);
+    this.setProperties(props);
+  }
 
   @not('identified')
   isUnidentified;

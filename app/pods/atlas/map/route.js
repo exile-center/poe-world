@@ -1,7 +1,7 @@
 // Vendor
 import Route from '@ember/routing/route';
 import {service} from '@ember-decorators/service';
-import {on} from '@ember-decorators/object/evented';
+import {action} from '@ember-decorators/object';
 
 export default class Map extends Route {
   @service('maps/fetcher')
@@ -21,8 +21,8 @@ export default class Map extends Route {
     this.atlasReframer.reframeFor(map);
   }
 
-  @on('deactivate')
-  currentMapClear() {
+  @action
+  deactivate() {
     this._setAtlasCurrentMap(null);
   }
 

@@ -7,4 +7,9 @@ export default class StashTab extends EmberObject {
   type = null;
   index = null;
   color = null;
+
+  constructor(props) {
+    super(props);
+    this.setProperties(props);
+  }
 }

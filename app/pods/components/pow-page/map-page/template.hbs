@@ -1,47 +1,49 @@
-<div class="bg-darker">
-  <div class="p-3">
-    <div class="d-flex justify-content-between align-items-center">
-      <button class="btn btn-light d-block h-75" {{action back}}>
-        {{fa-icon "times"}}
-      </button>
+<div local-class="map-page">
+  <div class="bg-darker">
+    <div class="p-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-light d-block h-75" {{action back}}>
+          {{fa-icon "times"}}
+        </button>
 
-      <div class="d-flex align-items-center">
-        <h1>{{map.name}}</h1>
-        <img src={{map.imageUrl}} local-class="header-map-icon" class="ml-2" alt="">
+        <div class="d-flex align-items-center">
+          <h1>{{map.name}}</h1>
+          <img src={{map.imageUrl}} local-class="header-map-icon" class="ml-2" alt="">
+        </div>
+      </div>
+
+      <div class="row mt-2 mb-1">
+        <div local-class="header-stat" class="col text-center bg-dark py-2 mx-1">
+          {{t "components.page.map_page.tier"}}
+          <span local-class="header-tier header-tier-{{map.tierColor}}" class="px-2 py-0 ml-2">
+            {{map.tier}}
+          </span>
+        </div>
+
+        <div local-class="header-stat" class="col text-center bg-dark py-2 mx-1">
+          {{t "components.page.map_page.area_level" level=map.areaLevel}}
+        </div>
       </div>
     </div>
 
-    <div class="row mt-2 mb-1">
-      <div local-class="header-stat" class="col text-center bg-dark py-2 mx-1">
-        {{t "components.page.map_page.tier"}}
-        <span local-class="header-tier header-tier-{{map.tierColor}}" class="px-2 py-0 ml-2">
-          {{map.tier}}
-        </span>
-      </div>
+    <ul class="nav nav-tabs px-3">
+      <li class="nav-item">
+        {{#pow-link "atlas.map.information" class="nav-link"}}
+          {{fa-icon "info" class="mr-1"}}
+          {{t "components.page.map_page.information"}}
+        {{/pow-link}}
+      </li>
 
-      <div local-class="header-stat" class="col text-center bg-dark py-2 mx-1">
-        {{t "components.page.map_page.area_level" level=map.areaLevel}}
-      </div>
-    </div>
+      <li class="nav-item">
+        {{#pow-link "atlas.map.trade" class="nav-link"}}
+          {{fa-icon "balance-scale" class="mr-1"}}
+          {{t "components.page.map_page.trade"}}
+        {{/pow-link}}
+      </li>
+    </ul>
   </div>
 
-  <ul class="nav nav-tabs px-3">
-    <li class="nav-item">
-      {{#pow-link "atlas.map.information" class="nav-link"}}
-        {{fa-icon "info" class="mr-1"}}
-        {{t "components.page.map_page.information"}}
-      {{/pow-link}}
-    </li>
-
-    <li class="nav-item">
-      {{#pow-link "atlas.map.trade" class="nav-link"}}
-        {{fa-icon "balance-scale" class="mr-1"}}
-        {{t "components.page.map_page.trade"}}
-      {{/pow-link}}
-    </li>
-  </ul>
-</div>
-
-<div local-class="yield-wrapper" class="px-3 py-2">
-  {{yield}}
+  <div local-class="yield-wrapper" class="px-3 py-2">
+    {{yield}}
+  </div>
 </div>

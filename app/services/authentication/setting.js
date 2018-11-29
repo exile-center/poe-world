@@ -20,8 +20,8 @@ export default class Setting extends Service {
     this.storage.setValue(STORAGE_KEYS.POESESSID, poesessid);
   }
 
-  init() {
-    super.init(...arguments);
+  constructor() {
+    super(...arguments);
 
     this.setProperties({
       poesessid: this.storage.getValue(STORAGE_KEYS.POESESSID, {defaultValue: ''}),

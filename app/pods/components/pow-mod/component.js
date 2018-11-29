@@ -2,12 +2,16 @@
 import {tagName} from '@ember-decorators/component';
 import Component from '@ember/component';
 import {computed} from '@ember-decorators/object';
+import {argument} from '@ember-decorators/argument';
+import {type} from '@ember-decorators/argument/type';
 
 // Constants
 const RARITY_REGEX = /\<(\w+)\>\{(.+)\}/; // <uniqueitem>{Sire of Shards}
 
 @tagName('')
 export default class Mod extends Component {
+  @argument
+  @type('string')
   mod = '';
 
   @computed('mod')
