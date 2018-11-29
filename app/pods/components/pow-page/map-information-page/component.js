@@ -8,7 +8,7 @@ const LAYOUT_RATINGS_KEY = {
   C: 'components.page.map_information_page.layout_rating_C'
 };
 
-export default class Component extends Component {
+export default class PageMapInformation extends Component {
   map = null;
 
   @computed('map.layoutRating')

@@ -4,7 +4,7 @@ import {computed} from '@ember-decorators/object';
 import {getOwner} from '@ember/application';
 import toggleArray from 'poe-world/utilities/toggle-array';
 
-export default class Component extends Component {
+export default class StashSetting extends Component {
   stash = null;
   stashFeature = null;
   isIncluded = false;

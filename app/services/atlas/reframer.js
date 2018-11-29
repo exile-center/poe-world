@@ -1,7 +1,6 @@
 // Vendor
 import Service from '@ember/service';
-import {restartableTask} from 'ember-concurrency-decorators';
-import {timeout} from 'ember-concurrency';
+import {task, timeout} from 'ember-concurrency';
 
 /* eslint-disable no-magic-numbers */
 // Constants
@@ -20,8 +19,7 @@ export default class Reframer extends Service {
   _mapToReframeOnInitialize = null;
   isReframing = false;
 
-  @restartableTask
-  mapReframingTask = function*(map) {
+  mapReframingTask = task(function*(map) {
     this.set('isReframing', true);
 
     const viewportCenterX = (window.innerWidth - SIDE_PANEL_WIDTH) / 2;
@@ -45,10 +43,9 @@ export default class Reframer extends Service {
     }
 
     this.set('isReframing', false);
-  };
+  }).restartable();
 
-  @restartableTask
-  resetZoomTask = function*() {
+  resetZoomTask = task(function*() {
     const {scale: zoom} = this._panzoomRef.getTransform();
     this.set('isReframing', true);
 
@@ -57,10 +54,9 @@ export default class Reframer extends Service {
     yield timeout(ZOOM_DURATION);
 
     this.set('isReframing', false);
-  };
+  }).restartable();
 
-  @restartableTask
-  initializeFrameTask = function*(initialMap) {
+  initializeFrameTask = task(function*(initialMap) {
     const viewportCenterX = window.innerWidth / 2;
     const viewportCenterY = window.innerHeight / 2;
 
@@ -72,24 +68,24 @@ export default class Reframer extends Service {
 
     yield timeout(ZOOM_DURATION);
 
-    yield this.mapReframingTask.perform(initialMap);
-  };
+    yield this.get('mapReframingTask').perform(initialMap);
+  }).restartable();
 
   initialize(panzoomRef) {
     this._panzoomRef = panzoomRef;
 
-    this.initializeFrameTask.perform(this._mapToReframeOnInitialize);
+    this.get('initializeFrameTask').perform(this._mapToReframeOnInitialize);
   }
 
   reframeFor(map) {
     if (!this._panzoomRef) return (this._mapToReframeOnInitialize = map);
 
-    this.mapReframingTask.perform(map);
+    this.get('mapReframingTask').perform(map);
   }
 
   resetMapZoom() {
     if (!this._panzoomRef) return;
 
-    this.resetZoomTask.perform();
+    this.get('resetZoomTask').perform();
   }
 }

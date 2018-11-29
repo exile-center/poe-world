@@ -7,7 +7,7 @@ import {computed} from '@ember-decorators/object';
 const RARITY_REGEX = /\<(\w+)\>\{(.+)\}/; // <uniqueitem>{Sire of Shards}
 
 @tagName('')
-export default class Component extends Component {
+export default class Mod extends Component {
   mod = '';
 
   @computed('mod')

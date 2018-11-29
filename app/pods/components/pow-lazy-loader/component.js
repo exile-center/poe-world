@@ -2,10 +2,10 @@
 import Component from '@ember/component';
 import InViewportMixin from 'ember-in-viewport';
 
-export default class Component extends Component.extend(InViewportMixin) {
+export default class LazyLoader extends Component.extend(InViewportMixin) {
   lazyLoadableTask = null;
 
   didEnterViewport() {
-    this.lazyLoadableTask.perform();
+    this.get('lazyLoadableTask').perform();
   }
 }

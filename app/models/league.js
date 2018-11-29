@@ -8,6 +8,8 @@ export default class League extends EmberObject {
 
   @computed('id')
   get slug() {
+    if (!this.id) return '';
+
     let slug = this.id.toLowerCase();
     slug = slug.replace(/[^a-z ]/g, '');
     slug = slug.replace(/ /g, '-');

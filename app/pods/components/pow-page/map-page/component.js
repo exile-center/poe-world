@@ -2,7 +2,7 @@
 import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
 
-export default class Component extends Component {
+export default class PageMap extends Component {
   localClassNames = 'map-page';
 
   @service('router')

@@ -3,7 +3,7 @@ import Component from '@ember/component';
 import {equal} from '@ember-decorators/object/computed';
 import {observes} from '@ember-decorators/object';
 
-export default class Component extends Component {
+export default class Modal extends Component {
   title = '';
   isOpened = false;
   onClose = () => {};

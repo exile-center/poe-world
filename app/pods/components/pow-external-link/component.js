@@ -4,7 +4,7 @@ import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
 
 @tagName('a')
-export default class Component extends Component {
+export default class ExternalLink extends Component {
   @service('global-state')
   globalState;
 

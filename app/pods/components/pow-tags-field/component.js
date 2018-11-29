@@ -9,7 +9,7 @@ import KEY_CODES from 'poe-world/constants/key-codes';
 import uuid from 'poe-world/utilities/uuid';
 
 @tagName('')
-export default class Component extends Component {
+export default class TagsField extends Component {
   label = null;
   placeholder = null;
   tags = null;

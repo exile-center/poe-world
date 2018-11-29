@@ -1,9 +1,9 @@
 // Vendor
 import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
-import {dropTask} from 'ember-concurrency-decorators';
+import {task} from 'ember-concurrency';
 
-export default class Component extends Component {
+export default class Atlas extends Component {
   localClassNames = 'atlas';
 
   @service('router')
@@ -21,14 +21,13 @@ export default class Component extends Component {
   panTop = 0;
   panLeft = 0;
 
-  @dropTask
-  mapsLoadTask = function*() {
+  mapsLoadTask = task(function*() {
     const maps = yield this.mapsFetcher.fetch();
     this.set('maps', maps);
-  };
+  }).drop();
 
   willInsertElement() {
-    this.mapsLoadTask.perform();
+    this.get('mapsLoadTask').perform();
   }
 
   mapClick(map) {

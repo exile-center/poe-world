@@ -5,7 +5,7 @@ import {or} from '@ember-decorators/object/computed';
 
 @classNames('list-group-item')
 @tagName('li')
-export default class Component extends Component {
+export default class TradeMapListItem extends Component {
   tradeMap = null;
 
   @or('tradeMap.itemQuantity', 'tradeMap.itemRarity', 'tradeMap.monsterPackSize', 'tradeMap.corrupted')

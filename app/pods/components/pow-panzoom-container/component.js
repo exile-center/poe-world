@@ -1,7 +1,6 @@
 // Vendor
 import Component from '@ember/component';
-import {restartableTask} from 'ember-concurrency-decorators';
-import {timeout} from 'ember-concurrency';
+import {task, timeout} from 'ember-concurrency';
 import $ from 'jquery';
 
 /* global panzoom */
@@ -10,7 +9,7 @@ import $ from 'jquery';
 const PANZOOM_EVENT_DEBOUNCE = 50;
 const PANZOOM_ZOOM_SPEED = 0.05;
 
-export default class Component extends Component {
+export default class PanzoomContainer extends Component {
   onPanzoom = () => {};
   onPanzoomInitialize = () => {};
   minZoom = 1;
@@ -20,12 +19,11 @@ export default class Component extends Component {
   autocenter = false;
   smoothScroll = false;
 
-  @restartableTask
-  triggerPanzoomEventTask = function*() {
+  triggerPanzoomEventTask = task(function*() {
     this.onPanzoom(this._getPanzoomState());
     yield timeout(PANZOOM_EVENT_DEBOUNCE);
     this.onPanzoom(this._getPanzoomState());
-  };
+  }).restartable();
 
   didInsertElement() {
     const $container = this.$();
@@ -35,7 +33,7 @@ export default class Component extends Component {
     );
 
     $container.on('pan panstart panend zoom', () => {
-      this.triggerPanzoomEventTask.perform();
+      this.get('triggerPanzoomEventTask').perform();
 
       // Make sure we hide active popover to avoid having them floating around
       $('[data-toggle="popover"]').popover('hide');

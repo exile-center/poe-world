@@ -7,7 +7,7 @@ const YELLOW_TIER_MIN_TIER = 6;
 const RED_TIER_MIN_TIER = 11;
 const UNIQUE_RARITY = 'unique';
 
-export default class Map extends EmberObject {
+export default class AtlasMap extends EmberObject {
   id = null;
   name = null;
   wikiUrl = null;
@@ -24,6 +24,11 @@ export default class Map extends EmberObject {
   sextants = null;
   isTradable = true;
   pantheon = null;
+
+  constructor(props) {
+    super(props);
+    this.setProperties(props);
+  }
 
   @equal('type', UNIQUE_RARITY)
   isUnique;

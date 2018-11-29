@@ -6,7 +6,7 @@ import {reads} from '@ember-decorators/object/computed';
 
 @classNames('navbar', 'fixed-top', 'navbar-dark', 'bg-dark', 'navbar-expand-md')
 @tagName('nav')
-export default class Component extends Component {
+export default class Navigation extends Component {
   @service('active-league/setting')
   activeLeagueSetting;
 

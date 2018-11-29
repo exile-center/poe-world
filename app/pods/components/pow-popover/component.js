@@ -1,7 +1,7 @@
 // Vendor
 import Component from '@ember/component';
 
-export default class Component extends Component {
+export default class Popover extends Component {
   title = null;
 
   didInsertElement() {

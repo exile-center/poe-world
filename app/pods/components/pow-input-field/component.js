@@ -9,7 +9,7 @@ import uuid from 'poe-world/utilities/uuid';
 const TEXTAREA_TYPE = 'textarea';
 const DEFAULT_TEXTAREA_ROWS = 5;
 
-export default class Component extends Component {
+export default class InputField extends Component {
   type = 'text';
   rows = DEFAULT_TEXTAREA_ROWS;
   label = null;

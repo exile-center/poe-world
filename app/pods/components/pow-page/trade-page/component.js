@@ -11,7 +11,7 @@ const TRADE_WEBSITE_OFFSET = 192;
 // Models
 import Trade from 'poe-world/models/trade';
 
-export default class Component extends Component {
+export default class PageTrade extends Component {
   @service('active-league/setting')
   activeLeagueSetting;
 

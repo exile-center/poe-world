@@ -5,7 +5,7 @@ import {computed} from '@ember-decorators/object';
 import CURRENCIES from 'poe-world/constants/currencies';
 
 @tagName('')
-export default class Component extends Component {
+export default class Price extends Component {
   amount = null;
   currencyId = null;
 

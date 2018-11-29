@@ -1,8 +1,7 @@
 // Vendor
 import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
-import {dropTask} from 'ember-concurrency-decorators';
-import {timeout} from 'ember-concurrency';
+import {task, timeout} from 'ember-concurrency';
 import ENV from 'poe-world/config/environment';
 import STORAGE_KEYS from 'poe-world/constants/storage-keys';
 
@@ -12,15 +11,14 @@ const {
 } = ENV;
 const CHANGELOG_MODAL_DELAY = 1500;
 
-export default class Component extends Component {
+export default class ChangelogModal extends Component {
   @service('storage')
   storage;
 
   changelogMarkdown = null;
   isOpened = false;
 
-  @dropTask
-  verifyVersionsTask = function*() {
+  verifyVersionsTask = task(function*() {
     const lastSessionVersion = this.storage.getValue(STORAGE_KEYS.LAST_SESSION_VERSION, {defaultValue: '0.0.0'});
 
     if (!CHANGELOG) return;
@@ -32,7 +30,7 @@ export default class Component extends Component {
       changelogMarkdown: CHANGELOG,
       isOpened: true
     });
-  };
+  }).drop();
 
   onClose() {
     this.storage.setValue(STORAGE_KEYS.LAST_SESSION_VERSION, CURRENT_VERSION);
@@ -41,6 +39,6 @@ export default class Component extends Component {
   }
 
   willInsertElement() {
-    this.verifyVersionsTask.perform();
+    this.get('verifyVersionsTask').perform();
   }
 }

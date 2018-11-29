@@ -2,7 +2,7 @@
 import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
 
-export default class Component extends Component {
+export default class AtlasSextants extends Component {
   @service('maps/fetcher')
   mapsFetcher;
 

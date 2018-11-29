@@ -1,8 +1,7 @@
 // Vendor
 import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
-import {timeout} from 'ember-concurrency';
-import {dropTask} from 'ember-concurrency-decorators';
+import {task, timeout} from 'ember-concurrency';
 
 // Mixins
 import StashTabsLoadable from 'poe-world/mixins/components/stash-tabs-loadable';
@@ -13,7 +12,7 @@ import CURRENCIES from 'poe-world/constants/currencies';
 // Constants
 const RECIPE_POLLING_INTERVAL = 60000; // 60 seconds
 
-export default class Component extends Component.extend(StashTabsLoadable) {
+export default class PageVendorRecipe extends Component.extend(StashTabsLoadable) {
   @service('toaster')
   toaster;
 
@@ -49,12 +48,11 @@ export default class Component extends Component.extend(StashTabsLoadable) {
   divine = null;
   chaos = null;
 
-  @dropTask
-  vendorRecipeLoadTask = function*() {
+  vendorRecipeLoadTask = task(function*() {
     const stashIds = this.vendorRecipeSetting.stashIds;
     const hasVendorRecipeStashes = stashIds.length > 0;
 
-    const stashItems = yield this.loadStashItemsTask.perform(stashIds);
+    const stashItems = yield this.get('loadStashItemsTask').perform(stashIds);
 
     this.setProperties({
       hasVendorRecipeStashes,
@@ -63,28 +61,26 @@ export default class Component extends Component.extend(StashTabsLoadable) {
       divine: this.vendorRecipeDivineBuilder.build(stashItems),
       chaos: this.vendorRecipeChaosBuilder.build(stashItems)
     });
-  };
+  }).drop();
 
-  @dropTask
-  vendorRecipePollingTask = function*() {
+  vendorRecipePollingTask = task(function*() {
     while (true) {
       yield timeout(RECIPE_POLLING_INTERVAL);
 
       try {
-        yield this.vendorRecipeLoadTask.perform();
+        yield this.get('vendorRecipeLoadTask').perform();
       } catch (_error) {
         // Prevent an API glitch from stopping the poll
       }
     }
-  };
+  }).drop();
 
-  @dropTask
-  vendorRecipeInitialLoadTask = function*() {
-    yield this.vendorRecipeLoadTask.perform();
-  };
+  vendorRecipeInitialLoadTask = task(function*() {
+    yield this.get('vendorRecipeLoadTask').perform();
+  }).drop();
 
   willInsertElement() {
-    this.vendorRecipeInitialLoadTask.perform();
-    this.vendorRecipePollingTask.perform();
+    this.get('vendorRecipeInitialLoadTask').perform();
+    this.get('vendorRecipePollingTask').perform();
   }
 }

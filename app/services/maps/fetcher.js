@@ -1,7 +1,7 @@
 // Vendor
 import Service from '@ember/service';
 import {service} from '@ember-decorators/service';
-import Map from 'poe-world/models/map';
+import AtlasMap from 'poe-world/models/atlas-map';
 import RESOURCES from 'poe-world/constants/resources';
 
 export default class Fetcher extends Service {
@@ -27,7 +27,7 @@ export default class Fetcher extends Service {
 
   _processRawMaps(rawMaps) {
     const mapHash = rawMaps.reduce((mapHash, rawMap) => {
-      mapHash[rawMap.id] = Map.create(rawMap);
+      mapHash[rawMap.id] = AtlasMap.create(rawMap);
       return mapHash;
     }, {});
 

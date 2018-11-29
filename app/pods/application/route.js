@@ -2,7 +2,7 @@
 import Route from '@ember/routing/route';
 import {service} from '@ember-decorators/service';
 
-export default class Route extends Route {
+export default class Application extends Route {
   @service('leagues/fetcher')
   leaguesFetcher;
 

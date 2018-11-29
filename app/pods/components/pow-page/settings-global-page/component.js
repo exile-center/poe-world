@@ -1,14 +1,13 @@
 // Vendor
 import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
-import {dropTask, restartableTask} from 'ember-concurrency-decorators';
-import {timeout} from 'ember-concurrency';
+import {task, timeout} from 'ember-concurrency';
 import {reads} from '@ember-decorators/object/computed';
 
 // Constants
 const TEST_AUTHENTICATION_DEBOUNCE = 1000; // 1 second
 
-export default class Component extends Component {
+export default class PageSettingsGlobal extends Component {
   @service('-electron/dev-tools')
   electronDevTools;
 
@@ -41,26 +40,23 @@ export default class Component extends Component {
 
   leagues = null;
 
-  @dropTask
-  leaguesLoadTask = function*() {
+  leaguesLoadTask = task(function*() {
     const leagues = yield this.leaguesFetcher.fetch();
     this.set('leagues', leagues);
-  };
+  }).drop();
 
-  @restartableTask
-  debouncedTestAuthenticationTask = function*() {
+  debouncedTestAuthenticationTask = task(function*() {
     yield timeout(TEST_AUTHENTICATION_DEBOUNCE);
-    yield this.testAuthenticationTask.perform();
-  };
+    yield this.get('testAuthenticationTask').perform();
+  }).restartable();
 
-  @dropTask
-  testAuthenticationTask = function*() {
+  testAuthenticationTask = task(function*() {
     yield this.authenticationStateFetcher.fetch();
-  };
+  }).drop();
 
   willInsertElement() {
-    this.leaguesLoadTask.perform();
-    this.testAuthenticationTask.perform();
+    this.get('leaguesLoadTask').perform();
+    this.get('testAuthenticationTask').perform();
   }
 
   applyLeague(league) {
@@ -69,12 +65,12 @@ export default class Component extends Component {
 
   applyPoesessid(poesessid) {
     this.authenticationSetting.applyPoesessid(poesessid);
-    this.debouncedTestAuthenticationTask.perform();
+    this.get('debouncedTestAuthenticationTask').perform();
   }
 
   applyAccount(account) {
     this.authenticationSetting.applyAccount(account);
-    this.debouncedTestAuthenticationTask.perform();
+    this.get('debouncedTestAuthenticationTask').perform();
   }
 
   openDevTools() {

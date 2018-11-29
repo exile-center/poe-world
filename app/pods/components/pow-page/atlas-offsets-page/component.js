@@ -3,7 +3,7 @@
 import Component from '@ember/component';
 import MAPS from 'poe-world/constants/maps';
 
-export default class Component extends Component {
+export default class PageAtlasOffsets extends Component {
   localClassNames = 'atlas-offset-page';
   offsetData = null;
   mapsToConfigure = null;

@@ -3,7 +3,7 @@ import Route from '@ember/routing/route';
 import {service} from '@ember-decorators/service';
 import {on} from '@ember-decorators/object/evented';
 
-export default class Route extends Route {
+export default class Map extends Route {
   @service('maps/fetcher')
   mapsFetcher;
 

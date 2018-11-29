@@ -4,6 +4,6 @@ import Component from '@ember/component';
 import POE_NINJA from 'poe-world/constants/poe-ninja';
 
 @tagName('')
-export default class Component extends Component {
+export default class PoeNinjaCredit extends Component {
   websiteUrl = POE_NINJA;
 }

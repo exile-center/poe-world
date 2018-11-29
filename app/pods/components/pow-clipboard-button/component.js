@@ -1,7 +1,7 @@
 // Vendor
 import Component from '@ember/component';
 
-export default class Component extends Component {
+export default class ClipboardButton extends Component {
   isCopied = false;
   value = null;
   onClick = () => {};
