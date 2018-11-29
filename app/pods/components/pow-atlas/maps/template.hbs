@@ -1,38 +1,40 @@
-{{#each maps as |map|}}
-  <li
-    local-class="item"
-    style={{css-offset map.offsetLeft map.offsetTop}}
-    {{action onMapClick map on="click"}}
-  >
-    {{#pow-popover title=map.name class="w-100 h-100"}}
-      <img
-        local-class="item-map"
-        src={{map.imageUrl}}
-        alt={{map.name}}
-      >
+<ul class="list-unstyled">
+  {{#each maps as |map|}}
+    <li
+      local-class="item"
+      style={{css-offset map.offsetLeft map.offsetTop}}
+      {{action onMapClick map on="click"}}
+    >
+      {{#pow-popover title=map.name class="w-100 h-100"}}
+        <img
+          local-class="item-map"
+          src={{map.imageUrl}}
+          alt={{map.name}}
+        >
 
-      <div data-popover-content>
-        <p class="my-0">
-          {{t "components.atlas.popover_tier" tier=map.tier}}
-        </p>
-        <p class="mt-1 mb-0">
-          {{t "components.atlas.popover_area_level" areaLevel=map.areaLevel}}
-        </p>
-
-        {{#if map.pantheon}}
-          <p local-class="pantheon-color" class="mt-1 mb-0">
-            {{t "components.atlas.popover_pantheon" pantheon=map.pantheon}}
+        <div data-popover-content>
+          <p class="my-0">
+            {{t "components.atlas.popover_tier" tier=map.tier}}
           </p>
-        {{/if}}
-      </div>
-    {{/pow-popover}}
+          <p class="mt-1 mb-0">
+            {{t "components.atlas.popover_area_level" areaLevel=map.areaLevel}}
+          </p>
 
-    {{#if (eq currentMap map)}}
-      <div local-class="item-active"></div>
-    {{/if}}
+          {{#if map.pantheon}}
+            <p local-class="pantheon-color" class="mt-1 mb-0">
+              {{t "components.atlas.popover_pantheon" pantheon=map.pantheon}}
+            </p>
+          {{/if}}
+        </div>
+      {{/pow-popover}}
 
-    {{#if map.pantheon}}
-      <div local-class="item-pantheon"></div>
-    {{/if}}
-  </li>
-{{/each}}
+      {{#if (eq currentMap map)}}
+        <div local-class="item-active"></div>
+      {{/if}}
+
+      {{#if map.pantheon}}
+        <div local-class="item-pantheon"></div>
+      {{/if}}
+    </li>
+  {{/each}}
+</ul>
