@@ -39,7 +39,7 @@ export default class Toaster extends Service {
       duration: 5000,
       type,
       isVisible: true
-    })
+    });
 
     this.toasts.pushObject(newToast);
     this.get('toastExpiryTask').perform(newToast);

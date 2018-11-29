@@ -32,7 +32,6 @@ export default class PanzoomContainer extends Component {
   @type(optional('number'))
   zoomSpeed = PANZOOM_ZOOM_SPEED;
 
-
   bounds = true;
   autocenter = false;
   smoothScroll = false;

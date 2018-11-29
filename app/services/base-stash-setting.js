@@ -26,7 +26,7 @@ export default class BaseStashSetting extends Service {
     super(...arguments);
 
     if (!this.storageKey) {
-      throw `get storageKey() must be implemented on the setting service.`
+      throw new Error(`get storageKey() must be implemented on the setting service.`);
     }
 
     this.set(
