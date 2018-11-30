@@ -1,4 +1,7 @@
+/* eslint-env node */
 /* eslint-disable camelcase */
+
+'use strict';
 
 module.exports = {
   test_page: 'tests/index.html?hidepassed',
@@ -15,8 +18,7 @@ module.exports = {
         '--disable-dev-shm-usage',
         '--disable-software-rasterizer',
         '--mute-audio',
-        '--remote-debugging-port=0',
-        '--window-size=1440,900'
+        '--remote-debugging-port=9222'
       ].filter(Boolean)
     }
   }

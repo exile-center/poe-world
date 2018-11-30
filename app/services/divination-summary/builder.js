@@ -26,6 +26,8 @@ export default class Builder extends Service {
 
     return Object.values(divinationStashItemsMap)
       .map(stashItem => {
+        if (!divinationPricingMap[stashItem.cardSlug]) return null;
+
         const matchingPricing = divinationPricingMap[stashItem.cardSlug];
         const chaosValue = matchingPricing ? matchingPricing.chaosValue : 0;
         const exaltedValue = matchingPricing ? matchingPricing.exaltedValue : 0;
@@ -39,6 +41,7 @@ export default class Builder extends Service {
           exaltedTotalValue: exaltedValue * stashItem.quantity
         };
       })
+      .filter(Boolean)
       .sort((itemA, itemB) => itemB.chaosTotalValue - itemA.chaosTotalValue);
   }
 }
