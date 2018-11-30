@@ -36,6 +36,16 @@ describe('Unit | Services | Divination summary | Builder', () => {
       expect(doctorResult.exaltedValue).to.equal(1);
     });
 
+    it('should exclude items that are not cards', () => {
+      const results = service.build([
+        createStashItem({slug: 'doc', topCategory: 'belt'})
+      ], {
+        doc: createPricing({chaosValue: 2, exaltedValue: 1, slug: 'doc'}),
+      });
+
+      expect(results).to.have.lengthOf(0);
+    });
+
     it('should aggregate identical items', () => {
       const results = service.build([
         createStashItem({slug: 'doc', quantity: 10, maxStackSize: 2, topCategory: 'cards'}),
