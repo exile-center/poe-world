@@ -1,31 +1,25 @@
 // Vendor
 import Service from '@ember/service';
 
+// Constants
+const SIX_LINK_SOCKET_COUNT = 6;
+
 export default class ChromaticBuilder extends Service {
-  initializeDataStructure() {
-    return {
-      itemCount: 0,
-      recipeCount: 0
-    };
-  }
-
   build(stashItems) {
-    const dataStructure = this.initializeDataStructure();
-
-    stashItems.forEach(stashItem => {
-      const hasChromaticGroup = stashItem.socketGroups.some(socketGroup => {
-        if (socketGroup.indexOf('R') === -1) return false;
-        if (socketGroup.indexOf('G') === -1) return false;
-        if (socketGroup.indexOf('B') === -1) return false;
+    const itemCount = stashItems.filter(stashItem => {
+      return stashItem.socketGroups.some(socketGroup => {
+        if (!socketGroup.includes('R')) return false;
+        if (!socketGroup.includes('G')) return false;
+        if (!socketGroup.includes('B')) return false;
+        if (socketGroup.length === SIX_LINK_SOCKET_COUNT) return false;
 
         return true;
       });
+    }).length;
 
-      if (hasChromaticGroup) dataStructure.itemCount++;
-    });
-
-    dataStructure.recipeCount = dataStructure.itemCount;
-
-    return dataStructure;
+    return {
+      itemCount,
+      recipeCount: itemCount
+    };
   }
 }
