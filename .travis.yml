@@ -1,0 +1,23 @@
+---
+language: node_js
+node_js:
+  - 10.14.1
+
+sudo: false
+
+dist: trusty
+addons:
+  chrome: stable
+
+cache:
+  npm: true
+
+install:
+  - npm install -g npm@6.4.1
+  - npm install
+
+script:
+  - ./scripts/ci-check.sh
+
+notifications:
+  email: false

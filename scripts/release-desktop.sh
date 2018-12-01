@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 echo "Switching to the release branch..."
 current_branch=`git rev-parse --abbrev-ref HEAD`
