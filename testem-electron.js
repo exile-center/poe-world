@@ -2,6 +2,7 @@
 module.exports = {
   test_page: 'tests/index.html?hidepassed',
   disable_watching: true,
+  browser_start_timeout: 5000,
   launchers: {
     'Electron': require('ember-electron/lib/test-support/test-runner')
   },
