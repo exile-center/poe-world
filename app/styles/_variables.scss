@@ -84,6 +84,17 @@ $body-bg: $dark;
 $body-color: $white;
 
 //
+// Breakpoints
+//
+$grid-breakpoints: (
+  xs: 0,
+  sm: 1200px,
+  md: 1440px,
+  lg: 1600px,
+  xl: 1920px
+);
+
+//
 // Links
 //
 $link-color: $white;

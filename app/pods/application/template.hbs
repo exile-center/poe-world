@@ -1,10 +1,11 @@
 {{! template-lint-disable no-bare-strings no-implicit-this }}
 
-{{pow-navigation}}
-{{pow-toaster}}
-{{pow-changelog-modal}}
+{{#pow-responsive-container}}
+  {{pow-navigation}}
+  {{pow-toaster}}
+  {{pow-changelog-modal}}
 
-<div class="application-outlet">
-  {{outlet}}
-</div>
-
+  <div class="application-outlet">
+    {{outlet}}
+  </div>
+{{/pow-responsive-container}}

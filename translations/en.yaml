@@ -37,6 +37,9 @@ components:
     new_release_warning: The version {latestVersion} is now available. (Currently
       on {currentVersion})
     github_release: Changelog & download
+  responsive-container:
+    warning_one: PoeWorld is not meant to be responsive for the moment.
+    warning_two: Enlarge your window
   stash_setting:
     included: Included
     excluded: Excluded

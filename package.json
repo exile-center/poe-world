@@ -19,6 +19,7 @@
     "test-electron": "ember electron:test",
     "lint-scripts": "./node_modules/.bin/eslint ember-cli-build.js testem.js app/ tests/ config/",
     "lint-styles": "./node_modules/.bin/stylelint './app/**/*.scss'",
+    "lint-styles-fix": "./node_modules/.bin/stylelint './app/**/*.scss' --fix",
     "lint-templates": "./node_modules/.bin/ember-template-lint './app/**/*.hbs'",
     "prettier": "prettier --write ember-cli-build.js testem.js '{app,tests,config}/**/*.{js,scss}'",
     "prettier-check": "prettier -l ember-cli-build.js testem.js '{app,tests,config}/**/*.{js,scss}'"

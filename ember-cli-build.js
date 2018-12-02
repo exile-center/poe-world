@@ -42,7 +42,8 @@ module.exports = function(defaults) {
           'user-check',
           'user-slash',
           'cog',
-          'exclamation-circle'
+          'exclamation-circle',
+          'arrow-right'
         ],
         'free-brands-svg-icons': ['github', 'discord', 'reddit']
       }

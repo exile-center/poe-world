@@ -1,0 +1,25 @@
+<div class="d-none d-sm-block">
+  {{yield}}
+</div>
+
+<div local-class="alert-wrapper" class="position-relative d-flex d-sm-none flex-column justify-content-center align-items-center p-4">
+  <img
+    local-class="warning-icon"
+    class="mb-5"
+    src="/assets/images/logo-cry.svg"
+    alt=""
+  >
+
+  <p class="lead text-center">
+    {{t "components.responsive-container.warning_one"}}
+  </p>
+
+  <p local-class="lenny" class="lead text-center">
+    {{t "components.responsive-container.warning_two"}}
+  </p>
+
+  {{fa-icon "arrow-right" local-class="arrow arrow-top-left"}}
+  {{fa-icon "arrow-right" local-class="arrow arrow-top-right"}}
+  {{fa-icon "arrow-right" local-class="arrow arrow-bottom-left"}}
+  {{fa-icon "arrow-right" local-class="arrow arrow-bottom-right"}}
+</div>

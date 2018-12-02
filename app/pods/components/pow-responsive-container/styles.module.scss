@@ -1,0 +1,54 @@
+.alert-wrapper {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.warning-icon {
+  width: 60%;
+  max-width: 250px;
+  height: auto;
+}
+
+.lenny {
+  &::after {
+    content: '( ͡° ͜ʖ ͡°)';
+    margin-left: 8px;
+    white-space: nowrap;
+  }
+
+  &:hover {
+    &::after {
+      content: '( ͡~ ͜ʖ ͡°)';
+      margin-left: 5px;
+    }
+  }
+}
+
+.arrow {
+  position: absolute;
+  font-size: 60px;
+}
+
+.arrow-top-left {
+  top: 5px;
+  left: 5px;
+  transform: rotate(-135deg);
+}
+
+.arrow-top-right {
+  top: 5px;
+  right: 5px;
+  transform: rotate(-45deg);
+}
+
+.arrow-bottom-left {
+  bottom: 5px;
+  left: 5px;
+  transform: rotate(135deg);
+}
+
+.arrow-bottom-right {
+  right: 5px;
+  bottom: 5px;
+  transform: rotate(45deg);
+}
