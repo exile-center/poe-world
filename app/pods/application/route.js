@@ -3,6 +3,9 @@ import Route from '@ember/routing/route';
 import {service} from '@ember-decorators/service';
 
 export default class Application extends Route {
+  @service('intl')
+  intl;
+
   @service('leagues/fetcher')
   leaguesFetcher;
 
@@ -11,6 +14,10 @@ export default class Application extends Route {
 
   @service('active-league/setting')
   activeLeagueSetting;
+
+  beforeModel() {
+    this.intl.setLocale('en');
+  }
 
   model() {
     return this.leaguesFetcher.fetch();

@@ -11,8 +11,8 @@ const OUT_DELAY = 200;
 const DANGER_TYPE = 'danger';
 
 export default class Toaster extends Service {
-  @service('i18n')
-  i18n;
+  @service('intl')
+  intl
 
   toasts = A([]);
 
@@ -25,7 +25,7 @@ export default class Toaster extends Service {
   }).drop();
 
   toastUnexpectedError() {
-    return this.toastError(this.i18n.t('services.toaster.unexpected_error').string);
+    return this.toastError(this.intl.t('services.toaster.unexpected_error'));
   }
 
   toastError(message) {

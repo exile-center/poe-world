@@ -10,9 +10,6 @@ const FORBIDDEN_STATUS_CODE = 403;
 const NOT_FOUND_STATUS_CODE = 404;
 
 export default class Request extends Service {
-  @service('i18n')
-  i18n;
-
   @service('toaster')
   toaster;
 
