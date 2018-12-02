@@ -6,7 +6,16 @@ node_js:
 sudo: false
 
 dist: trusty
+
+env:
+  - CXX=g++-4.8
+
 addons:
+  sources:
+    - ubuntu-toolchain-r-test
+  packages:
+    - xvfb
+    - g++-4.8
   chrome: stable
 
 cache:
@@ -15,6 +24,8 @@ cache:
 install:
   - npm install -g npm@6.4.1
   - npm install
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
 
 script:
   - ./scripts/ci-check.sh
