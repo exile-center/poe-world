@@ -167,7 +167,7 @@
           </div>
 
           <small>
-            {{t "components.page.trade_page.updated_at" timeAgo=(moment-from-now trade.updatedAt)}}
+            {{t "components.page.trade_page.updated_at" timeAgo=(format-relative trade.updatedAt)}}
           </small>
         </li>
       {{/each}}

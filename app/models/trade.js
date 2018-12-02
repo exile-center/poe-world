@@ -1,7 +1,6 @@
 // Vendor
 import EmberObject from '@ember/object';
 import {A} from '@ember/array';
-import moment from 'moment';
 
 export default class Trade extends EmberObject {
   id = null;
@@ -20,9 +19,11 @@ export default class Trade extends EmberObject {
   }
 
   updateProperties(properties) {
+    const now = new Date();
+
     this.setProperties({
       ...properties,
-      updatedAt: moment().toISOString()
+      updatedAt: now.toISOString()
     });
   }
 

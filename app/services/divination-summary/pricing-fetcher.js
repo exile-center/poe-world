@@ -1,7 +1,6 @@
 // Vendor
 import Service from '@ember/service';
 import {service} from '@ember-decorators/service';
-import moment from 'moment';
 import Pricing from 'poe-world/models/pricing';
 import POE_NINJA from 'poe-world/constants/poe-ninja';
 import slugify from 'poe-world/utilities/slugify';
@@ -17,13 +16,11 @@ export default class PricingFetcher extends Service {
   _pricingDate = null;
 
   fetch() {
-    const currentPricingDate = moment().format('YYYY-MM-DD');
-
-    if (this._divinationPricingPromise && this._pricingDate === currentPricingDate) {
+    if (this._divinationPricingPromise && this._pricingDate === this._currentPricingDate) {
       return this._divinationPricingPromise;
     }
 
-    const poeNinjaDivinationUrl = this._buildDivinationPricingUrlFor(currentPricingDate);
+    const poeNinjaDivinationUrl = this._buildDivinationPricingUrlFor(this._currentPricingDate);
     const divinationPricingPromise = this.electronRequest.fetch(poeNinjaDivinationUrl).then(({lines}) => {
       return lines.reduce((divinationPricingMap, rawPricing) => {
         const slug = slugify(rawPricing.name);
@@ -40,10 +37,18 @@ export default class PricingFetcher extends Service {
 
     this.setProperties({
       _divinationPricingPromise: divinationPricingPromise,
-      _pricingDate: currentPricingDate
+      _pricingDate: this._currentPricingDate
     });
 
     return divinationPricingPromise;
+  }
+
+  get _currentPricingDate() {
+    const now = new Date();
+
+    return now
+      .toISOString()
+      .replace(/T.+$/, '');
   }
 
   _buildDivinationPricingUrlFor(pricingDate) {
