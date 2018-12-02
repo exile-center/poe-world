@@ -45,10 +45,7 @@ export default class PricingFetcher extends Service {
 
   get _currentPricingDate() {
     const now = new Date();
-
-    return now
-      .toISOString()
-      .replace(/T.+$/, '');
+    return now.toISOString().replace(/T.+$/, '');
   }
 
   _buildDivinationPricingUrlFor(pricingDate) {

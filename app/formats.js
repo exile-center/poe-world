@@ -1,7 +1,7 @@
 export default {
   date: {
     hhmmss: {
-      hour:   'numeric',
+      hour: 'numeric',
       minute: 'numeric',
       second: 'numeric'
     }

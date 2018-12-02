@@ -12,7 +12,7 @@ const DANGER_TYPE = 'danger';
 
 export default class Toaster extends Service {
   @service('intl')
-  intl
+  intl;
 
   toasts = A([]);
 
