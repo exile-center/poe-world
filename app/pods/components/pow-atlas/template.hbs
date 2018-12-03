@@ -16,7 +16,7 @@
         {{pow-atlas/maps
           currentMap=currentMap
           maps=maps
-          onMapClick=(action mapClick)
+          onMapClick=(action mapSelect)
         }}
       {{/if}}
 
@@ -27,4 +27,10 @@
       {{/if}}
     {{/pow-panzoom-container}}
   </div>
+
+  {{pow-atlas/searcher
+    maps=searchedMaps
+    onMapSearch=(action mapSearch)
+    onMapSelect=(action mapSelect)
+  }}
 </div>

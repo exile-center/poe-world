@@ -1,0 +1,15 @@
+<div local-class="wrapper">
+  {{pow-input-field
+    placeholder=(t "components.atlas.search_placeholder")
+    value=this.query
+    onChange=(action @onMapSearch)
+  }}
+
+  <ul class="list-unstyled">
+    {{#each @maps as |map|}}
+      <li {{action @onMapSelect map}}>
+        {{map.name}}
+      </li>
+    {{/each}}
+  </ul>
+</div>

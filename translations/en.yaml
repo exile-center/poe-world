@@ -3,6 +3,7 @@ components:
     popover_tier: 'Tier: {tier}'
     popover_area_level: 'Area Level: {areaLevel}'
     popover_pantheon: 'Pantheon: {pantheon}'
+    search_placeholder: Search…
   price:
     undefined: Undefined pricing
   map_trade_list:
