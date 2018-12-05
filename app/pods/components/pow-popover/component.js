@@ -14,7 +14,7 @@ export default class Popover extends Component {
   title = null;
 
   @attribute
-  popover = true
+  popover = true;
 
   triggerPopoverTask = task(function*() {
     this.$().popover('show');

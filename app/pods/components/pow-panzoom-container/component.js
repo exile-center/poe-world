@@ -48,9 +48,11 @@ export default class PanzoomContainer extends Component {
       this.getProperties('minZoom', 'maxZoom', 'zoomSpeed', 'bounds', 'smoothScroll', 'autocenter')
     );
 
-    ['pan', 'zoom'].forEach((event) => panzoomRef.on(event, () => {
-      this.get('triggerPanzoomEventTask').perform();
-    }));
+    ['pan', 'zoom'].forEach(event =>
+      panzoomRef.on(event, () => {
+        this.get('triggerPanzoomEventTask').perform();
+      })
+    );
 
     this._panzoomRef = panzoomRef;
     this.onPanzoomInitialize(panzoomRef);
