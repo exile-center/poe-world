@@ -2,7 +2,6 @@ import StashItem from 'poe-world/models/stash-item';
 
 export default props => {
   return StashItem.create({
-    defaultCategory: null,
     explicitMods: [],
     identified: true,
     imageUrl: 'https://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Laboratory.png',
