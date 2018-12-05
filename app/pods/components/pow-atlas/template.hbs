@@ -1,5 +1,3 @@
-{{! template-lint-disable no-bare-strings no-implicit-this }}
-
 <div local-class="atlas">
   <div local-class="wrapper">
     {{#pow-panzoom-container
@@ -7,22 +5,22 @@
       minZoom=0.5
       maxZoom=1
       zoomSpeed=0.075
-      onPanzoom=(action panzoom)
-      onPanzoomInitialize=(action panzoomInitialize)
+      onPanzoom=(action this.panzoom)
+      onPanzoomInitialize=(action this.panzoomInitialize)
     }}
       <div local-class="map-background"></div>
 
       {{#if maps}}
         {{pow-atlas/maps
-          currentMap=currentMap
-          maps=maps
-          onMapClick=(action mapClick)
+          currentMap=@currentMap
+          maps=this.maps
+          onMapClick=(action this.navigateToMap)
         }}
       {{/if}}
 
-      {{#if currentMap}}
+      {{#if @currentMap}}
         {{pow-atlas/sextants
-          map=currentMap
+          map=@currentMap
         }}
       {{/if}}
     {{/pow-panzoom-container}}

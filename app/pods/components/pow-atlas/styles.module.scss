@@ -24,3 +24,8 @@
 .map-background {
   background-image: url('/assets/images/atlas.jpg');
 }
+
+.panzoom-container {
+  // The atlas pan/zoom rely on a matrix transform
+  will-change: transform;
+}

@@ -4,9 +4,8 @@ import {service} from '@ember-decorators/service';
 import {task} from 'ember-concurrency';
 import {argument} from '@ember-decorators/argument';
 import {type, optional} from '@ember-decorators/argument/type';
-import {tagName} from '@ember-decorators/component';
+import {action} from '@ember-decorators/object';
 
-@tagName('')
 export default class Atlas extends Component {
   @service('router')
   router;
@@ -22,9 +21,6 @@ export default class Atlas extends Component {
   currentMap = null;
 
   maps = null;
-  zoom = 1;
-  panTop = 0;
-  panLeft = 0;
 
   mapsLoadTask = task(function*() {
     const maps = yield this.mapsFetcher.fetch();
@@ -35,14 +31,17 @@ export default class Atlas extends Component {
     this.get('mapsLoadTask').perform();
   }
 
-  mapClick(map) {
+  @action
+  navigateToMap(map) {
     this.router.transitionTo('atlas.map', map.id);
   }
 
-  panzoom(panzoomParams) {
-    this.setProperties(panzoomParams);
+  @action
+  panzoom() {
+    this.$('[popover]').popover('hide');
   }
 
+  @action
   panzoomInitialize(panzoomRef) {
     this.atlasReframer.initialize(panzoomRef);
   }
