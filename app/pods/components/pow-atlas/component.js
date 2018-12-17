@@ -5,7 +5,6 @@ import {task, timeout} from 'ember-concurrency';
 import {argument} from '@ember-decorators/argument';
 import {type, optional} from '@ember-decorators/argument/type';
 import {action} from '@ember-decorators/object';
-import {action} from '@ember-decorators/object';
 
 // Constants
 const SEARCH_DEBOUNCE = 500;
