@@ -1,7 +1,6 @@
 // Vendor
 import Component from '@ember/component';
 import {task, timeout} from 'ember-concurrency';
-import $ from 'jquery';
 import {argument} from '@ember-decorators/argument';
 import {type, optional} from '@ember-decorators/argument/type';
 
@@ -40,7 +39,7 @@ export default class PanzoomContainer extends Component {
     this.onPanzoom(this._getPanzoomState());
     yield timeout(PANZOOM_EVENT_DEBOUNCE);
     this.onPanzoom(this._getPanzoomState());
-  }).restartable();
+  }).drop();
 
   didInsertElement() {
     const $container = this.$();
@@ -49,12 +48,11 @@ export default class PanzoomContainer extends Component {
       this.getProperties('minZoom', 'maxZoom', 'zoomSpeed', 'bounds', 'smoothScroll', 'autocenter')
     );
 
-    $container.on('pan panstart panend zoom', () => {
-      this.get('triggerPanzoomEventTask').perform();
-
-      // Make sure we hide active popover to avoid having them floating around
-      $('[data-toggle="popover"]').popover('hide');
-    });
+    ['pan', 'zoom'].forEach(event =>
+      panzoomRef.on(event, () => {
+        this.get('triggerPanzoomEventTask').perform();
+      })
+    );
 
     this._panzoomRef = panzoomRef;
     this.onPanzoomInitialize(panzoomRef);

@@ -4,13 +4,12 @@ import {service} from '@ember-decorators/service';
 import {task, timeout} from 'ember-concurrency';
 import {argument} from '@ember-decorators/argument';
 import {type, optional} from '@ember-decorators/argument/type';
-import {tagName} from '@ember-decorators/component';
+import {action} from '@ember-decorators/object';
 import {action} from '@ember-decorators/object';
 
 // Constants
 const SEARCH_DEBOUNCE = 500;
 
-@tagName('')
 export default class Atlas extends Component {
   @service('router')
   router;
@@ -30,9 +29,6 @@ export default class Atlas extends Component {
 
   maps = null;
   searchedMaps = null;
-  zoom = 1;
-  panTop = 0;
-  panLeft = 0;
 
   mapsLoadTask = task(function*() {
     const maps = yield this.mapsFetcher.fetch();
@@ -58,10 +54,12 @@ export default class Atlas extends Component {
     this.get('mapsSearchTask').perform(query);
   }
 
-  panzoom(panzoomParams) {
-    this.setProperties(panzoomParams);
+  @action
+  panzoom() {
+    this.$('[popover]').popover('hide');
   }
 
+  @action
   panzoomInitialize(panzoomRef) {
     this.atlasReframer.initialize(panzoomRef);
   }

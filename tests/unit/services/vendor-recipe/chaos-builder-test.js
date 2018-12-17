@@ -18,11 +18,11 @@ describe('Unit | Services | Vendor recipe | Chaos builder', () => {
   describe('build', () => {
     it('should properly count helmets', () => {
       const {helmet} = service.build([
-        createStashItem({defaultCategory: 'helmet', itemLevel: 60, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'helmet', itemLevel: 75, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'helmet', itemLevel: 50, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'helmet', itemLevel: 75, identified: true, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'helmet', itemLevel: 75, identified: false, rarity: 'magic'})
+        createStashItem({subCategories: ['helmet'], itemLevel: 60, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['helmet'], itemLevel: 75, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['helmet'], itemLevel: 50, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['helmet'], itemLevel: 75, identified: true, rarity: 'rare'}),
+        createStashItem({subCategories: ['helmet'], itemLevel: 75, identified: false, rarity: 'magic'})
       ]);
 
       expect(helmet.itemChaosCount).to.equal(1);
@@ -32,11 +32,11 @@ describe('Unit | Services | Vendor recipe | Chaos builder', () => {
 
     it('should properly count boots', () => {
       const {boots} = service.build([
-        createStashItem({defaultCategory: 'boots', itemLevel: 60, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'boots', itemLevel: 75, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'boots', itemLevel: 50, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'boots', itemLevel: 75, identified: true, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'boots', itemLevel: 75, identified: false, rarity: 'magic'})
+        createStashItem({subCategories: ['boots'], itemLevel: 60, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['boots'], itemLevel: 75, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['boots'], itemLevel: 50, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['boots'], itemLevel: 75, identified: true, rarity: 'rare'}),
+        createStashItem({subCategories: ['boots'], itemLevel: 75, identified: false, rarity: 'magic'})
       ]);
 
       expect(boots.itemChaosCount).to.equal(1);
@@ -46,11 +46,11 @@ describe('Unit | Services | Vendor recipe | Chaos builder', () => {
 
     it('should properly count gloves', () => {
       const {gloves} = service.build([
-        createStashItem({defaultCategory: 'gloves', itemLevel: 60, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'gloves', itemLevel: 75, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'gloves', itemLevel: 50, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'gloves', itemLevel: 75, identified: true, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'gloves', itemLevel: 75, identified: false, rarity: 'magic'})
+        createStashItem({subCategories: ['gloves'], itemLevel: 60, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['gloves'], itemLevel: 75, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['gloves'], itemLevel: 50, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['gloves'], itemLevel: 75, identified: true, rarity: 'rare'}),
+        createStashItem({subCategories: ['gloves'], itemLevel: 75, identified: false, rarity: 'magic'})
       ]);
 
       expect(gloves.itemChaosCount).to.equal(1);
@@ -60,11 +60,11 @@ describe('Unit | Services | Vendor recipe | Chaos builder', () => {
 
     it('should properly count belts', () => {
       const {belt} = service.build([
-        createStashItem({defaultCategory: 'belt', itemLevel: 60, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'belt', itemLevel: 75, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'belt', itemLevel: 50, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'belt', itemLevel: 75, identified: true, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'belt', itemLevel: 75, identified: false, rarity: 'magic'})
+        createStashItem({subCategories: ['belt'], itemLevel: 60, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['belt'], itemLevel: 75, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['belt'], itemLevel: 50, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['belt'], itemLevel: 75, identified: true, rarity: 'rare'}),
+        createStashItem({subCategories: ['belt'], itemLevel: 75, identified: false, rarity: 'magic'})
       ]);
 
       expect(belt.itemChaosCount).to.equal(1);
@@ -74,11 +74,11 @@ describe('Unit | Services | Vendor recipe | Chaos builder', () => {
 
     it('should properly count chests', () => {
       const {chest} = service.build([
-        createStashItem({defaultCategory: 'chest', itemLevel: 60, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'chest', itemLevel: 75, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'chest', itemLevel: 50, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'chest', itemLevel: 75, identified: true, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'chest', itemLevel: 75, identified: false, rarity: 'magic'})
+        createStashItem({subCategories: ['chest'], itemLevel: 60, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['chest'], itemLevel: 75, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['chest'], itemLevel: 50, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['chest'], itemLevel: 75, identified: true, rarity: 'rare'}),
+        createStashItem({subCategories: ['chest'], itemLevel: 75, identified: false, rarity: 'magic'})
       ]);
 
       expect(chest.itemChaosCount).to.equal(1);
@@ -88,11 +88,11 @@ describe('Unit | Services | Vendor recipe | Chaos builder', () => {
 
     it('should properly count amulets', () => {
       const {amulet} = service.build([
-        createStashItem({defaultCategory: 'amulet', itemLevel: 60, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'amulet', itemLevel: 75, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'amulet', itemLevel: 50, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'amulet', itemLevel: 75, identified: true, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'amulet', itemLevel: 75, identified: false, rarity: 'magic'})
+        createStashItem({subCategories: ['amulet'], itemLevel: 60, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['amulet'], itemLevel: 75, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['amulet'], itemLevel: 50, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['amulet'], itemLevel: 75, identified: true, rarity: 'rare'}),
+        createStashItem({subCategories: ['amulet'], itemLevel: 75, identified: false, rarity: 'magic'})
       ]);
 
       expect(amulet.itemChaosCount).to.equal(1);
@@ -102,11 +102,11 @@ describe('Unit | Services | Vendor recipe | Chaos builder', () => {
 
     it('should properly count rings', () => {
       const {ring} = service.build([
-        createStashItem({defaultCategory: 'ring', itemLevel: 60, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'ring', itemLevel: 75, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'ring', itemLevel: 50, identified: false, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'ring', itemLevel: 75, identified: true, rarity: 'rare'}),
-        createStashItem({defaultCategory: 'ring', itemLevel: 75, identified: false, rarity: 'magic'})
+        createStashItem({subCategories: ['ring'], itemLevel: 60, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['ring'], itemLevel: 75, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['ring'], itemLevel: 50, identified: false, rarity: 'rare'}),
+        createStashItem({subCategories: ['ring'], itemLevel: 75, identified: true, rarity: 'rare'}),
+        createStashItem({subCategories: ['ring'], itemLevel: 75, identified: false, rarity: 'magic'})
       ]);
 
       expect(ring.itemChaosCount).to.equal(1);
@@ -117,42 +117,36 @@ describe('Unit | Services | Vendor recipe | Chaos builder', () => {
     it('should properly count weapons', () => {
       const {hands} = service.build([
         createStashItem({
-          defaultCategory: 'weapons',
           subCategories: ['staff'],
           itemLevel: 60,
           identified: false,
           rarity: 'rare'
         }),
         createStashItem({
-          defaultCategory: 'weapons',
           subCategories: ['claw'],
           itemLevel: 60,
           identified: false,
           rarity: 'rare'
         }),
         createStashItem({
-          defaultCategory: 'weapons',
           subCategories: ['wand'],
           itemLevel: 75,
           identified: false,
           rarity: 'rare'
         }),
         createStashItem({
-          defaultCategory: 'weapons',
           subCategories: ['dagger'],
           itemLevel: 50,
           identified: false,
           rarity: 'rare'
         }),
         createStashItem({
-          defaultCategory: 'weapons',
           subCategories: ['dagger'],
           itemLevel: 75,
           identified: true,
           rarity: 'rare'
         }),
         createStashItem({
-          defaultCategory: 'weapons',
           subCategories: ['dagger'],
           itemLevel: 75,
           identified: false,
@@ -173,31 +167,31 @@ describe('Unit | Services | Vendor recipe | Chaos builder', () => {
       };
 
       const chaosRecipe = service.build([
-        createStashItem({...chaosBaseItem, defaultCategory: 'helmet'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'boots'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'boots'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'gloves'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'gloves'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'belt'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'belt'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'chest'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'chest'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'ring'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'ring'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'ring'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'ring'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'amulet'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'amulet'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'amulet'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'amulet'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'amulet'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'amulet'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'amulet'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'amulet'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'amulet'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'amulet'}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'weapons', subCategories: ['staff']}),
-        createStashItem({...chaosBaseItem, defaultCategory: 'weapons', subCategories: ['staff']})
+        createStashItem({...chaosBaseItem, subCategories: ['helmet']}),
+        createStashItem({...chaosBaseItem, subCategories: ['boots']}),
+        createStashItem({...chaosBaseItem, subCategories: ['boots']}),
+        createStashItem({...chaosBaseItem, subCategories: ['gloves']}),
+        createStashItem({...chaosBaseItem, subCategories: ['gloves']}),
+        createStashItem({...chaosBaseItem, subCategories: ['belt']}),
+        createStashItem({...chaosBaseItem, subCategories: ['belt']}),
+        createStashItem({...chaosBaseItem, subCategories: ['chest']}),
+        createStashItem({...chaosBaseItem, subCategories: ['chest']}),
+        createStashItem({...chaosBaseItem, subCategories: ['ring']}),
+        createStashItem({...chaosBaseItem, subCategories: ['ring']}),
+        createStashItem({...chaosBaseItem, subCategories: ['ring']}),
+        createStashItem({...chaosBaseItem, subCategories: ['ring']}),
+        createStashItem({...chaosBaseItem, subCategories: ['amulet']}),
+        createStashItem({...chaosBaseItem, subCategories: ['amulet']}),
+        createStashItem({...chaosBaseItem, subCategories: ['amulet']}),
+        createStashItem({...chaosBaseItem, subCategories: ['amulet']}),
+        createStashItem({...chaosBaseItem, subCategories: ['amulet']}),
+        createStashItem({...chaosBaseItem, subCategories: ['amulet']}),
+        createStashItem({...chaosBaseItem, subCategories: ['amulet']}),
+        createStashItem({...chaosBaseItem, subCategories: ['amulet']}),
+        createStashItem({...chaosBaseItem, subCategories: ['amulet']}),
+        createStashItem({...chaosBaseItem, subCategories: ['amulet']}),
+        createStashItem({...chaosBaseItem, subCategories: ['staff']}),
+        createStashItem({...chaosBaseItem, subCategories: ['staff']})
       ]);
 
       expect(chaosRecipe.summary.recipeCount).to.equal(1);
