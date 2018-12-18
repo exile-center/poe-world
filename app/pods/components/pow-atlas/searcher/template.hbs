@@ -14,6 +14,7 @@
   {{#pow-popover title=(t "components.atlas.search_helper.title") local-class="helper"}}
     {{fa-icon "question-circle"}}
 
+    {{! template-lint-disable no-bare-strings }}
     <div popover-content>
       <div class="d-flex justify-content-between align-items-center mb-1">
         {{t "components.atlas.search_helper.name"}}
@@ -63,6 +64,7 @@
       <code class="d-block my-1">color=red; layout=A</code>
       <code class="d-block my-1">alvl>75; boss<3</code>
     </div>
+    {{! template-lint-enable no-bare-strings }}
   {{/pow-popover}}
 
   {{#if @maps}}
