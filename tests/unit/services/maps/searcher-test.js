@@ -23,7 +23,7 @@ describe('Unit | Services | Maps | Searcher', () => {
         areaLevel: 74,
         pantheon: null,
         layoutRating: 'A',
-        bossRating: '2',
+        bossRating: 2,
         drops: []
       }),
       createMap({
@@ -33,7 +33,7 @@ describe('Unit | Services | Maps | Searcher', () => {
         areaLevel: 60,
         pantheon: 'JohnCena',
         layoutRating: 'B',
-        bossRating: '4',
+        bossRating: 4,
         drops: []
       }),
       createMap({
@@ -43,7 +43,7 @@ describe('Unit | Services | Maps | Searcher', () => {
         areaLevel: 67,
         pantheon: null,
         layoutRating: 'C',
-        bossRating: '5',
+        bossRating: 5,
         drops: []
       }),
       createMap({
@@ -51,7 +51,7 @@ describe('Unit | Services | Maps | Searcher', () => {
         name: 'Yolo',
         tier: 5,
         layoutRating: 'B',
-        bossRating: '4',
+        bossRating: 4,
         drops: [{name: 'headhunter', wikiUrl: 'http://fakewiki.com/hh'}]
       })
     ];

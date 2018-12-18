@@ -38,25 +38,22 @@ export default class MapsSearcher extends Service {
   get _strategies() {
     return {
       name: (map, _, value) => substringSearch(map.name, value),
-      tier: (map, comparator, value) => this._simpleCompare(map.tier, value, comparator),
-      alvl: (map, comparator, value) => this._simpleCompare(map.areaLevel, value, comparator),
+      tier: (map, comparator, value) => this._simpleCompare(map.tier, parseInt(value, 10), comparator),
+      alvl: (map, comparator, value) => this._simpleCompare(map.areaLevel, parseInt(value, 10), comparator),
       pantheon: (map, _, value) => map.pantheon && substringSearch(map.pantheon, value),
       color: (map, _, value) => map.tierColor === value,
       layout: (map, comparator, value) => {
         return this._simpleCompare(value.toLowerCase(), map.layoutRating.toLowerCase(), comparator);
       },
-      boss: (map, comparator, value) => this._simpleCompare(map.bossRating, value, comparator),
+      boss: (map, comparator, value) => this._simpleCompare(map.bossRating, parseInt(value, 10), comparator),
       drop: (map, _, value) => map.drops.some(({name}) => substringSearch(name, value))
     };
   }
 
   _simpleCompare(valueA, valueB, comparator) {
-    const stringValueA = valueA.toString();
-    const stringValueB = valueB.toString();
-
-    if (comparator === '=') return stringValueA === stringValueB;
-    if (comparator === '>') return stringValueA > stringValueB;
-    if (comparator === '<') return stringValueA < stringValueB;
+    if (comparator === '=') return valueA === valueB;
+    if (comparator === '>') return valueA > valueB;
+    if (comparator === '<') return valueA < valueB;
 
     return false;
   }
