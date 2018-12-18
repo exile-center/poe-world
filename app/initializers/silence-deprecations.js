@@ -1,8 +1,6 @@
 import {registerDeprecationHandler} from '@ember/debug';
 
-const silencedDeprecationIds = [
-  'ember-meta.descriptor-on-object'
-];
+const silencedDeprecationIds = ['ember-meta.descriptor-on-object'];
 
 export const initialize = () => {
   registerDeprecationHandler((message, options, next) => {

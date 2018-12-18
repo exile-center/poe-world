@@ -1,6 +1,6 @@
 // Vendor
 import {argument} from '@ember-decorators/argument';
-import {type, arrayOf, optional} from '@ember-decorators/argument/type';
+import {type, optional} from '@ember-decorators/argument/type';
 import Component from '@ember/component';
 import {tagName} from '@ember-decorators/component';
 import {computed} from '@ember-decorators/object';
