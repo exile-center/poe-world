@@ -9,7 +9,12 @@
     onEscape=(action this.searchClear)
   }}
 
-  {{fa-icon "times" local-class="clear" click=(action this.searchClear)}}
+  {{fa-icon
+    "times"
+    class=(unless this.query "d-none")
+    local-class="clear"
+    click=(action this.searchClear)
+  }}
 
   {{#pow-popover title=(t "components.atlas.search_helper.title") local-class="helper"}}
     {{fa-icon "question-circle"}}
