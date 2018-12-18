@@ -7,6 +7,9 @@ import {type, optional, unionOf} from '@ember-decorators/argument/type';
 // Utilities
 import uuid from 'poe-world/utilities/uuid';
 
+// Global constants
+import KEY_CODES from 'poe-world/constants/key-codes';
+
 // Constants
 const TEXTAREA_TYPE = 'textarea';
 const DEFAULT_TEXTAREA_ROWS = 5;
@@ -40,6 +43,18 @@ export default class InputField extends Component {
   @type(Function)
   onChange = () => {};
 
+  @argument
+  @type(Function)
+  onFocus = () => {};
+
+  @argument
+  @type(Function)
+  onBlur = () => {};
+
+  @argument
+  @type(Function)
+  onEscape = () => {};
+
   id = null;
 
   @equal('type', TEXTAREA_TYPE)
@@ -51,5 +66,11 @@ export default class InputField extends Component {
 
   inputChange({target: {value}}) {
     this.onChange(value);
+  }
+
+  inputKeyUp({keyCode}) {
+    if (KEY_CODES.ESCAPE !== keyCode) return;
+
+    this.onEscape(this.value);
   }
 }

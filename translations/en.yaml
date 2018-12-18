@@ -4,6 +4,17 @@ components:
     popover_area_level: 'Area Level: {areaLevel}'
     popover_pantheon: 'Pantheon: {pantheon}'
     search_placeholder: Search…
+    search_helper:
+      title: Pro-tips
+      name: Name (by default)
+      tier: Tier
+      area_level: Area level
+      pantheon: Pantheon
+      color: Color
+      layout_rating: Layout rating (A,B,C)
+      boss_rating: Boss rating (1 to 5)
+      drop: Drop
+      examples: Examples
   price:
     undefined: Undefined pricing
   map_trade_list:

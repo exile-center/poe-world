@@ -28,14 +28,15 @@ export default class Atlas extends Component {
 
   maps = null;
   searchedMaps = null;
+  hoveredMap = null;
 
   mapsLoadTask = task(function*() {
     const maps = yield this.mapsFetcher.fetch();
     this.set('maps', maps);
   }).drop();
 
-  mapsSearchTask = task(function*(query) {
-    yield timeout(SEARCH_DEBOUNCE);
+  mapsSearchTask = task(function*({query, debounce}) {
+    yield timeout(debounce);
     this.set('searchedMaps', this.mapsSearcher.search(this.maps, query));
   }).restartable();
 
@@ -50,7 +51,23 @@ export default class Atlas extends Component {
 
   @action
   mapSearch(query) {
-    this.get('mapsSearchTask').perform(query);
+    this.get('mapsSearchTask').perform({
+      query,
+      debounce: SEARCH_DEBOUNCE
+    });
+  }
+
+  @action
+  mapSearchClear() {
+    this.get('mapsSearchTask').perform({
+      query: '',
+      debounce: 0
+    });
+  }
+
+  @action
+  mapHover(map) {
+    this.set('hoveredMap', map);
   }
 
   @action

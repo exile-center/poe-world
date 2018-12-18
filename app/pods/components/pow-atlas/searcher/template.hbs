@@ -1,15 +1,88 @@
-<div local-class="wrapper">
+<div local-class="wrapper {{if this.isActive "active"}}">
   {{pow-input-field
+    local-class="input-field"
     placeholder=(t "components.atlas.search_placeholder")
     value=this.query
-    onChange=(action @onMapSearch)
+    onChange=(action this.searchChange)
+    onFocus=(action this.searchFocus)
+    onBlur=(action this.searchBlur)
+    onEscape=(action this.searchClear)
   }}
 
-  <ul class="list-unstyled">
-    {{#each @maps as |map|}}
-      <li {{action @onMapSelect map}}>
-        {{map.name}}
-      </li>
-    {{/each}}
-  </ul>
+  {{fa-icon "times" local-class="clear" click=(action this.searchClear)}}
+
+  {{#pow-popover title=(t "components.atlas.search_helper.title") local-class="helper"}}
+    {{fa-icon "question-circle"}}
+
+    <div popover-content>
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        {{t "components.atlas.search_helper.name"}}
+        <code class="ml-3">name</code>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        {{t "components.atlas.search_helper.tier"}}
+        <code class="ml-3">tier</code>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        {{t "components.atlas.search_helper.area_level"}}
+        <code class="ml-3">alvl</code>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        {{t "components.atlas.search_helper.pantheon"}}
+        <code class="ml-3">pantheon</code>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        {{t "components.atlas.search_helper.color"}}
+        <code class="ml-3">color</code>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        {{t "components.atlas.search_helper.layout_rating"}}
+        <code class="ml-3">layout</code>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        {{t "components.atlas.search_helper.boss_rating"}}
+        <code class="ml-3">boss</code>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-1">
+        {{t "components.atlas.search_helper.drop"}}
+        <code class="ml-3">drop</code>
+      </div>
+
+      <h4 class="mt-3 mb-0">
+        {{t "components.atlas.search_helper.examples"}}
+      </h4>
+
+      <code class="d-block my-1">park</code>
+      <code class="d-block my-1">color=red; layout=A</code>
+      <code class="d-block my-1">alvl>75; boss<3</code>
+    </div>
+  {{/pow-popover}}
+
+  {{#if @maps}}
+    <ul class="list-unstyled" local-class="map-items">
+      {{#each @maps as |map|}}
+        <li
+          class="d-flex align-items-center p-1"
+          local-class="map-item"
+          {{action @onMapSelect map}}
+          {{action @onMapHover map on="mouseEnter"}}
+        >
+          <img
+            class="pr-2"
+            local-class="map-image"
+            src={{map.imageUrl}}
+            alt=""
+          >
+          {{map.name}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
 </div>

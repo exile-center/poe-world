@@ -1,5 +1,65 @@
 .wrapper {
   position: absolute;
+  top: #{$navigation-height + 75px};
   left: 0;
-  top: 100px;
+  width: 200px;
+  background-color: rgba($dark, 0.9);
+  transition: width ease-in-out 200ms;
+  border-bottom-right-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+
+  :global(.form-control) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  &.active {
+    width: 350px;
+  }
+}
+
+.input-field {
+  padding: 1rem 1rem 0 0;
+}
+
+.helper,
+.clear {
+  position: absolute;
+  color: $dark;
+  cursor: pointer;
+}
+
+.helper {
+  top: 22px;
+  right: 23px;
+}
+
+.clear {
+  top: 26px;
+  right: 51px;
+}
+
+.map-items {
+  overflow-y: scroll;
+  max-height: calc(100vh - 300px);
+}
+
+.map-item {
+  border-top: 1px solid $darker;
+  transition: color ease-in-out 200ms;
+  cursor: pointer;
+
+  &:first-child {
+    border-top: 0;
+  }
+
+  &:focus,
+  &:hover {
+    color: $gray-400;
+  }
+}
+
+.map-image {
+  width: auto;
+  height: 30px;
 }

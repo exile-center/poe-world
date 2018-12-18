@@ -1,37 +1,41 @@
-{{! template-lint-disable no-bare-strings no-implicit-this }}
-
 <div class="form-group">
-  {{#if label}}
-    <label for={{id}}>
-      {{label}}
+  {{#if @label}}
+    <label for={{this.id}}>
+      {{@label}}
     </label>
   {{/if}}
 
-  {{#if isTextarea}}
+  {{#if this.isTextarea}}
     <textarea
-      id={{id}}
-      placeholder={{placeholder}}
+      id={{this.id}}
+      placeholder={{@placeholder}}
       class="form-control"
       local-class="textarea"
-      value={{value}}
-      rows={{rows}}
-      oninput={{action inputChange}}
+      value={{@value}}
+      rows={{@rows}}
+      oninput={{action this.inputChange}}
+      onfocus={{action @onFocus}}
+      onblur={{action @onBlur}}
+      onkeyup={{action this.inputKeyUp}}
     ></textarea>
   {{else}}
     <input
-      type={{type}}
-      id={{id}}
-      placeholder={{placeholder}}
+      type={{@type}}
+      id={{this.id}}
+      placeholder={{@placeholder}}
       class="form-control"
-      value={{value}}
-      oninput={{action inputChange}}
+      value={{@value}}
+      oninput={{action this.inputChange}}
+      onfocus={{action @onFocus}}
+      onblur={{action @onBlur}}
+      onkeyup={{action this.inputKeyUp}}
     >
   {{/if}}
 
-  {{#if helper}}
+  {{#if @helper}}
     <small class="form-text text-white">
       {{fa-icon "info-circle"}}
-      {{helper}}
+      {{@helper}}
     </small>
   {{/if}}
 

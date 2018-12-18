@@ -18,5 +18,42 @@ export default class AtlasSearcher extends Component {
   @type(Function)
   onMapSelect;
 
+  @argument
+  @type(Function)
+  onMapHover;
+
+  @argument
+  @type(Function)
+  onMapSearchClear;
+
   query = '';
+  isActive = false;
+
+  searchChange(query) {
+    this.setProperties({
+      query,
+      isActive: true
+    });
+
+    this.onMapSearch(query);
+  }
+
+  searchFocus() {
+    this.set('isActive', true);
+  }
+
+  searchBlur() {
+    if (this.query) return;
+
+    this.set('isActive', false);
+  }
+
+  searchClear() {
+    this.setProperties({
+      query: '',
+      isActive: false
+    });
+
+    this.onMapSearchClear();
+  }
 }

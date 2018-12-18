@@ -11,11 +11,16 @@
       <div local-class="map-background"></div>
 
       {{#if this.maps}}
-        {{pow-atlas/maps
-          currentMap=@currentMap
-          maps=this.maps
-          onMapClick=(action this.mapSelect)
-        }}
+        <ul class="list-unstyled">
+          {{#each this.maps as |map|}}
+            {{pow-atlas/map
+              map=map
+              currentMap=@currentMap
+              hoveredMap=this.hoveredMap
+              onMapClick=(action this.mapSelect)
+            }}
+          {{/each}}
+        </ul>
       {{/if}}
 
       {{#if @currentMap}}
@@ -29,6 +34,8 @@
   {{pow-atlas/searcher
     maps=this.searchedMaps
     onMapSearch=(action this.mapSearch)
+    onMapSearchClear=(action this.mapSearchClear)
     onMapSelect=(action this.mapSelect)
+    onMapHover=(action this.mapHover)
   }}
 </div>
