@@ -17,6 +17,8 @@ export default class Fetcher extends Service {
       defaultValue: []
     });
 
-    return rawTrades.map(rawTrade => Trade.create(rawTrade));
+    return rawTrades
+      .map(rawTrade => Trade.create(rawTrade))
+      .sort((tradeA, tradeB) => tradeB.updatedAt.localeCompare(tradeA.updatedAt));
   }
 }
