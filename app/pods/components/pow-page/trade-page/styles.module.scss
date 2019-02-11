@@ -1,103 +1,17 @@
-$trade-header-height: 150px;
+$trade-page-top-margin: 46px;
 
-.header {
-  height: $trade-header-height;
+.side-panel {
+  width: 450px;
 }
 
-.label {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.tags {
-  position: relative;
-  overflow-x: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20px;
-    height: 100%;
-    background: linear-gradient(to left, $darker, rgba($darker, 0));
-  }
-}
-
-.url {
-  position: relative;
-  align-self: flex-end;
-  padding: 5px 35px 5px 15px;
-  background-color: $dark;
-  border-top-right-radius: 10px;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 13px;
-    right: -31px;
-    transform: rotate(45deg);
-    width: 65px;
-    height: 43px;
-    background-color: $dark;
-    border-top-left-radius: 10px;
-  }
-}
-
-.url-prefix {
-  opacity: 0.5;
-}
-
-.url-slug {
-  &::before {
-    content: '/';
-    opacity: 0.5;
-  }
-}
-
-.browser-container {
-  position: relative;
-  height: calc(100vh - #{$trade-header-height + $navigation-height});
-}
-
-.sidebar {
-  overflow-y: scroll;
-  height: calc(100vh - #{$navigation-height});
-}
-
-.filters-item {
-  border-bottom: 1px solid $darker;
-  transition: padding ease 200ms;
-  cursor: pointer;
-
-  &:last-child {
-    border-bottom: 0;
-  }
-
-  &:hover {
-    background-color: rgba($darker, 0.1);
-  }
-}
-
-.notes {
-  overflow-y: auto;
-  height: 100%;
-  padding-left: 30px;
-  font-size: 0.75rem;
-  line-height: 1.4;
-}
-
-.notes-field {
-  textarea {
-    padding: 5px;
-    font-size: 0.75rem;
-    line-height: 1.4;
-  }
-}
-
-.notes-icon {
+.top-toolbar {
   position: absolute;
-  top: 3px;
-  left: 0;
+  top: 0;
+  width: 100%;
+  height: $trade-page-top-margin;
+}
+
+.trade-browser {
+  height: 100%;
+  padding-top: $trade-page-top-margin;
 }

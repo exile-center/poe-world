@@ -1,13 +1,11 @@
-{{! template-lint-disable no-bare-strings no-implicit-this }}
-
 <div class="container-fluid pb-2">
   <h2>{{t "components.page.settings_global_page.leagues_title"}}</h2>
 
-  {{#pow-task-load-container task=leaguesLoadTask}}
+  {{#pow-task-load-container task=this.leaguesLoadTask}}
     <div class="btn-group">
       {{#each leagues as |league|}}
-        <button type="button" class="btn btn-primary" {{action applyLeague league}}>
-          {{#if (eq league.slug currentLeagueSlug)}}
+        <button type="button" class="btn btn-primary" {{action this.applyLeague league}}>
+          {{#if (eq league.slug this.currentLeagueSlug)}}
             {{fa-icon "check"}}
           {{/if}}
 
@@ -25,21 +23,21 @@
     <div class="form-group w-50">
       {{pow-input-field
         label=(t "components.page.settings_global_page.account_label")
-        value=currentAccount
-        onChange=(action applyAccount)
+        value=this.currentAccount
+        onChange=(action this.applyAccount)
       }}
 
       {{pow-input-field
         label=(t "components.page.settings_global_page.poesessid_label")
-        value=currentPoesessid
-        onChange=(action applyPoesessid)
+        value=this.currentPoesessid
+        onChange=(action this.applyPoesessid)
       }}
 
       <p>
-        {{#if testAuthenticationTask.isRunning}}
+        {{#if this.testAuthenticationTask.isRunning}}
           {{fa-icon "spinner" spin=true}}
         {{else}}
-          {{#if isAuthenticated}}
+          {{#if this.isAuthenticated}}
             {{fa-icon "check"}} {{t "components.page.settings_global_page.authenticated"}}
           {{else}}
             {{fa-icon "times"}} {{t "components.page.settings_global_page.not_authenticated"}}
@@ -54,7 +52,7 @@
           {{t "components.page.settings_global_page.danger_title"}}
         </h5>
         <div class="pt-2">
-          <button type="button" class="btn btn-danger" {{action openDevTools}}>
+          <button type="button" class="btn btn-danger" {{action this.openDevTools}}>
             {{t "components.page.settings_global_page.open_dev_tools"}}
           </button>
         </div>

@@ -3,6 +3,7 @@ import {tagName} from '@ember-decorators/component';
 import Component from '@ember/component';
 import {argument} from '@ember-decorators/argument';
 import {type, optional, unionOf, arrayOf} from '@ember-decorators/argument/type';
+import {action} from '@ember-decorators/object';
 
 // Constants
 import KEY_CODES from 'poe-world/constants/key-codes';
@@ -30,14 +31,17 @@ export default class TagsField extends Component {
     this.set('id', uuid());
   }
 
+  @action
   remove(tagToRemove) {
     this.tags.removeObject(tagToRemove);
   }
 
+  @action
   newTagInputChange({target: {value}}) {
     this.set('newTag', value);
   }
 
+  @action
   newTagInputKeydown({keyCode}) {
     if (![KEY_CODES.TAB, KEY_CODES.ENTER].includes(keyCode)) return true;
 
@@ -45,6 +49,7 @@ export default class TagsField extends Component {
     return false;
   }
 
+  @action
   newTagInputBlur() {
     this._confirmNewTag();
   }

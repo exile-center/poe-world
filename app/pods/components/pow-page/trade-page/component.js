@@ -2,46 +2,31 @@
 import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
 import {computed} from '@ember-decorators/object';
-import {bool} from '@ember-decorators/object/computed';
+import {action} from '@ember-decorators/object';
+import {tagName} from '@ember-decorators/component';
+
+// Models
+import Trade from 'poe-world/models/trade';
 
 // Constants
 import TRADE from 'poe-world/constants/trade';
 const TRADE_WEBSITE_OFFSET = 192;
 
-// Models
-import Trade from 'poe-world/models/trade';
-
+@tagName('')
 export default class PageTrade extends Component {
+  @service('intl')
+  intl;
+
   @service('active-league/setting')
   activeLeagueSetting;
 
-  @service('trade/fetcher')
-  tradeFetcher;
-
-  @service('trade/filterer')
-  tradeFilterer;
-
-  @service('trade/persister')
-  tradePersister;
-
-  @service('trade/destroyer')
-  tradeDestroyer;
-
   tradeWebsiteOffset = TRADE_WEBSITE_OFFSET;
-  currentTradeSlug = '';
+  currentTradeSlug = null;
   currentTrade = null;
-  stagedTrade = null;
-  trades = null;
-  searchValue = '';
 
-  @bool('stagedTrade')
-  isEditing;
-
-  @computed('currentTradeSlug', 'currentTrade', 'currentTrade.slug')
-  get isTradeSlugDirty() {
-    if (!this.currentTrade) return false;
-
-    return this.currentTradeSlug !== this.currentTrade.slug;
+  @computed('currentTradeSlug', 'currentTrade')
+  get canCreate() {
+    return this.currentTradeSlug && !this.currentTrade;
   }
 
   @computed('activeLeagueSetting.league.id')
@@ -52,24 +37,20 @@ export default class PageTrade extends Component {
 
   @computed('tradeBaseUrl', 'currentTradeSlug')
   get currentTradeUrl() {
+    if (!this.currentTradeSlug) return this.tradeBaseUrl;
+
     return `${this.tradeBaseUrl}/${this.currentTradeSlug}`;
   }
 
-  @computed('trades', 'searchValue')
-  get filteredTrades() {
-    if (!this.searchValue) return this.trades;
-
-    return this.tradeFilterer.filter(this.trades, this.searchValue);
+  @action
+  select(trade) {
+    this.setProperties({
+      currentTrade: trade,
+      currentTradeSlug: trade.slug
+    });
   }
 
-  willInsertElement() {
-    this._refreshTrades();
-
-    if (!this.trades.length) return this.create();
-
-    this._makeFirstTradeActive();
-  }
-
+  @action
   tradeUrlUpdate(newTradeUrl) {
     const matchedSlug = newTradeUrl.match(/trade\/\w+\/\w+\/(\w+)$/);
     if (!matchedSlug) return;
@@ -77,92 +58,24 @@ export default class PageTrade extends Component {
     this.set('currentTradeSlug', matchedSlug[1]);
   }
 
-  view(trade) {
-    this.setProperties({
-      currentTrade: trade,
-      currentTradeSlug: trade.slug
-    });
-  }
-
-  edit() {
-    this.set('stagedTrade', this.currentTrade.clone());
-  }
-
-  delete() {
-    if (!this.tradeDestroyer.destroy(this.currentTrade)) return;
-
-    this._refreshTrades();
-    this._makeFirstTradeActive();
-  }
-
-  duplicate() {
-    const duplicatedTrade = this.tradePersister.persist(
-      this.currentTrade.clone({
-        id: null,
-        label: `${this.currentTrade.label} *`
-      })
-    );
-
-    this._refreshTrades();
-    this.setProperties({
-      currentTrade: duplicatedTrade,
-      currentTradeSlug: duplicatedTrade.slug,
-      stagedTrade: null
-    });
-  }
-
-  save() {
-    this.stagedTrade.updateProperties({
-      slug: this.currentTradeSlug,
-      label: this.stagedTrade.label || this.currentTradeSlug
-    });
-    const savedTrade = this.tradePersister.persist(this.stagedTrade);
-
-    this._refreshTrades();
-    this.setProperties({
-      currentTrade: savedTrade,
-      currentTradeSlug: savedTrade.slug,
-      stagedTrade: null
-    });
-  }
-
-  cancel() {
-    this.setProperties({
-      stagedTrade: null,
-      currentTradeSlug: this.currentTrade.slug
-    });
-  }
-
+  @action
   create() {
+    this.set('currentTrade', Trade.create({
+      label: this.intl.formatTime(new Date()),
+      slug: this.currentTradeSlug
+    }));
+  }
+
+  @action
+  clearAll() {
     this.setProperties({
-      currentTrade: null,
-      stagedTrade: Trade.create(),
-      currentTradeSlug: ''
+      currentTradeSlug: null,
+      currentTrade: null
     });
   }
 
-  updateTradeSlug() {
-    this.currentTrade.updateProperties({slug: this.currentTradeSlug});
-    this.tradePersister.persist(this.currentTrade);
-
-    this._refreshTrades();
-  }
-
-  revertTradeSlug() {
-    this.set('currentTradeSlug', this.currentTrade.slug);
-  }
-
-  _refreshTrades() {
-    const trades = this.tradeFetcher.fetchAll();
-
-    this.set('trades', trades);
-  }
-
-  _makeFirstTradeActive() {
-    const currentTrade = this.trades[0];
-    this.setProperties({
-      currentTrade,
-      currentTradeSlug: currentTrade.slug
-    });
+  @action
+  clearCurrentTrade() {
+    this.set('currentTrade', null);
   }
 }

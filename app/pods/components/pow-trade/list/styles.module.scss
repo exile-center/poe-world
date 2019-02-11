@@ -1,0 +1,13 @@
+.filters-item {
+  border-bottom: 1px solid $darker;
+  transition: padding ease 200ms;
+  cursor: pointer;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    background-color: rgba($darker, 0.1);
+  }
+}

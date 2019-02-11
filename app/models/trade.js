@@ -10,11 +10,12 @@ export default class Trade extends EmberObject {
   tags = null;
   updatedAt = null;
 
-  constructor(props) {
+  constructor(props = {}) {
     super(props);
+
     this.setProperties({
       ...props,
-      tags: A(props.tags)
+      tags: A(props.tags || [])
     });
   }
 

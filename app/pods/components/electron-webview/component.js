@@ -17,21 +17,23 @@ export default class ElectronWebview extends Component {
   offset = 0;
 
   @argument
-  @type(Function)
+  @type(optional(Function))
   onUrlChange;
 
+  webview = null;
+
   didNavigateTask = task(function*(url) {
-    this.onUrlChange(url);
+    if (this.onUrlChange) this.onUrlChange(url);
 
     if (!this.offset) return;
     yield timeout(SCROLL_TIMEOUT);
 
-    const webview = this.$('webview')[0];
-    webview.executeJavaScript(`window.scroll({top: ${this.offset}, left: 0, behavior: 'smooth'});`);
+    this.webview.executeJavaScript(`window.scroll({top: ${this.offset}, left: 0, behavior: 'smooth'});`);
   }).restartable();
 
   didInsertElement() {
     const webview = this.$('webview')[0];
+    this.set('webview', webview);
 
     webview.addEventListener('did-navigate', ({url}) => this.get('didNavigateTask').perform(url));
     webview.addEventListener('did-navigate-in-page', ({url}) => this.get('didNavigateTask').perform(url));

@@ -3,6 +3,7 @@ import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
 import {task, timeout} from 'ember-concurrency';
 import {reads} from '@ember-decorators/object/computed';
+import {action} from '@ember-decorators/object';
 
 // Constants
 const TEST_AUTHENTICATION_DEBOUNCE = 1000; // 1 second
@@ -59,20 +60,24 @@ export default class PageSettingsGlobal extends Component {
     this.get('testAuthenticationTask').perform();
   }
 
+  @action
   applyLeague(league) {
     this.activeLeagueSetting.apply(league);
   }
 
+  @action
   applyPoesessid(poesessid) {
     this.authenticationSetting.applyPoesessid(poesessid);
     this.get('debouncedTestAuthenticationTask').perform();
   }
 
+  @action
   applyAccount(account) {
     this.authenticationSetting.applyAccount(account);
     this.get('debouncedTestAuthenticationTask').perform();
   }
 
+  @action
   openDevTools() {
     this.electronDevTools.open();
   }

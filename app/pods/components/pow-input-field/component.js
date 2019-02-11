@@ -3,6 +3,7 @@ import Component from '@ember/component';
 import {equal} from '@ember-decorators/object/computed';
 import {argument} from '@ember-decorators/argument';
 import {type, optional, unionOf} from '@ember-decorators/argument/type';
+import {action} from '@ember-decorators/object';
 
 // Utilities
 import uuid from 'poe-world/utilities/uuid';
@@ -12,16 +13,11 @@ import KEY_CODES from 'poe-world/constants/key-codes';
 
 // Constants
 const TEXTAREA_TYPE = 'textarea';
-const DEFAULT_TEXTAREA_ROWS = 5;
 
 export default class InputField extends Component {
   @argument
   @type(optional('string'))
   type = 'text';
-
-  @argument
-  @type(optional('number'))
-  rows = DEFAULT_TEXTAREA_ROWS;
 
   @argument
   @type(optional(unionOf('string', 'object')))
@@ -41,19 +37,19 @@ export default class InputField extends Component {
 
   @argument
   @type(Function)
-  onChange = () => {};
+  onChange;
 
   @argument
-  @type(Function)
-  onFocus = () => {};
+  @type(optional(Function))
+  onFocus;
 
   @argument
-  @type(Function)
-  onBlur = () => {};
+  @type(optional(Function))
+  onBlur;
 
   @argument
-  @type(Function)
-  onEscape = () => {};
+  @type(optional(Function))
+  onEscape;
 
   id = null;
 
@@ -64,13 +60,42 @@ export default class InputField extends Component {
     this.set('id', uuid());
   }
 
-  inputChange({target: {value}}) {
-    this.onChange(value);
+  didInsertElement() {
+    this._adjustTextareaHeight();
   }
 
+  @action
+  inputChange({target: {value}}) {
+    this.onChange(value);
+
+    this._adjustTextareaHeight();
+  }
+
+  @action
   inputKeyUp({keyCode}) {
-    if (KEY_CODES.ESCAPE !== keyCode) return;
+    if (KEY_CODES.ESCAPE !== keyCode || !this.onEscape) return;
 
     this.onEscape(this.value);
+  }
+
+  @action
+  inputFocus() {
+    if (!this.onFocus) return;
+
+    this.onFocus();
+  }
+
+  @action
+  inputBlur() {
+    if (!this.onBlur) return;
+
+    this.onBlur();
+  }
+
+  _adjustTextareaHeight() {
+    if (!this.isTextarea) return;
+
+    const $textarea = this.$('textarea');
+    $textarea.height(0).height($textarea[0].scrollHeight);
   }
 }

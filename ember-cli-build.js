@@ -44,7 +44,8 @@ module.exports = function(defaults) {
           'cog',
           'exclamation-circle',
           'arrow-right',
-          'question-circle'
+          'question-circle',
+          'bookmark'
         ],
         'free-brands-svg-icons': ['github', 'discord', 'reddit']
       }

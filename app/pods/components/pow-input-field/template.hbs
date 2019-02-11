@@ -12,10 +12,9 @@
       class="form-control"
       local-class="textarea"
       value={{@value}}
-      rows={{@rows}}
       oninput={{action this.inputChange}}
-      onfocus={{action @onFocus}}
-      onblur={{action @onBlur}}
+      onfocus={{action this.inputFocus}}
+      onblur={{action this.inputBlur}}
       onkeyup={{action this.inputKeyUp}}
     ></textarea>
   {{else}}
@@ -26,8 +25,8 @@
       class="form-control"
       value={{@value}}
       oninput={{action this.inputChange}}
-      onfocus={{action @onFocus}}
-      onblur={{action @onBlur}}
+      onfocus={{action this.inputFocus}}
+      onblur={{action this.inputBlur}}
       onkeyup={{action this.inputKeyUp}}
     >
   {{/if}}

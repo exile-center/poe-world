@@ -1,20 +1,20 @@
-{{! template-lint-disable no-bare-strings no-implicit-this }}
-
 <div class="form-group">
-  {{#if label}}
-    <label for={{id}}>{{label}}</label>
+  {{#if @label}}
+    <label for={{this.id}}>
+      {{@label}}
+    </label>
   {{/if}}
 
   <label
-    for={{id}}
-    class="form-control py-0 d-flex align-items-center"
+    class="form-control d-flex align-items-center flex-wrap"
     local-class="label-wrapper"
+    for={{this.id}}
   >
-    {{#each tags as |tag|}}
+    {{#each @tags as |tag|}}
       <button
         type="button"
-        class="btn btn-primary btn-sm py-1 mr-1"
-        {{action remove tag}}
+        class="btn btn-primary btn-sm py-1 mr-1 my-1"
+        {{action this.remove tag}}
       >
         {{tag}}
         {{fa-icon "times" class="ml-1"}}
@@ -23,13 +23,13 @@
 
     <input
       type="text"
-      id={{id}}
-      placeholder={{placeholder}}
-      value={{newTag}}
+      id={{this.id}}
+      placeholder={{@placeholder}}
+      value={{this.newTag}}
       local-class="input"
-      oninput={{action newTagInputChange}}
-      onkeydown={{action newTagInputKeydown}}
-      onblur={{action newTagInputBlur}}
+      oninput={{action this.newTagInputChange}}
+      onkeydown={{action this.newTagInputKeydown}}
+      onblur={{action this.newTagInputBlur}}
     >
   </label>
 </div>

@@ -1,0 +1,36 @@
+{{pow-input-field
+  placeholder=(t "components.page.trade_page.search_placeholder")
+  helper=(t "components.page.trade_page.search_helper")
+  value=this.searchValue
+  onChange=(action (mut this.searchValue))
+}}
+
+<ul class="list-unstyled">
+  {{#each this.filteredTrades as |trade|}}
+    <li
+      local-class="filters-item"
+      class="py-1"
+      {{action @onSelect trade}}
+    >
+      {{#if trade.label}}
+        <h5 class="mb-0">
+          {{trade.label}}
+        </h5>
+      {{/if}}
+
+      {{#if trade.tags}}
+        <div class="d-flex flex-wrap mt-1">
+          {{#each trade.tags as |tag|}}
+            <span class="badge badge-primary badge-pill text-capitalize mr-1 mb-1">
+              {{tag}}
+            </span>
+          {{/each}}
+        </div>
+      {{/if}}
+
+      <small>
+        {{t "components.page.trade_page.updated_at" timeAgo=(format-relative trade.updatedAt)}}
+      </small>
+    </li>
+  {{/each}}
+</ul>

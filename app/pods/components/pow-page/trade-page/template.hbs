@@ -1,176 +1,45 @@
-{{! template-lint-disable no-bare-strings no-implicit-this }}
-
 <div class="d-flex w-100 h-100">
-  <div class="w-75">
-    <div local-class="header" class="d-flex flex-column bg-darker pt-2">
-      <div class="row flex-grow-1">
-        <div class="col-7">
-          <div class="pl-2">
-            {{#if isEditing}}
-              {{pow-input-field
-                placeholder=(t "components.page.trade_page.label_placeholder")
-                value=stagedTrade.label
-                onChange=(action (mut stagedTrade.label))
-              }}
-            {{else}}
-              <h2 local-class="label" class="mb-0">
-                {{currentTrade.label}}
-              </h2>
-            {{/if}}
-          </div>
+  <div class="position-relative flex-grow-1 flex-shrink-1">
+    <div local-class="top-toolbar" class="px-1 d-flex justify-content-end align-items-center">
+      {{#if this.canCreate}}
+        <button
+          class="btn btn-outline-primary ml-1"
+          {{action this.create}}
+        >
+          {{fa-icon "bookmark" class="mr-1"}}
+          {{t "components.page.trade_page.create"}}
+        </button>
+      {{/if}}
 
-          <div class="pl-2">
-            {{#if isEditing}}
-              {{pow-tags-field
-                placeholder=(t "components.page.trade_page.tags_placeholder")
-                tags=stagedTrade.tags
-              }}
-            {{else}}
-              <h4 local-class="tags" class="d-flex flex-nowrap mb-0 mt-2">
-                {{#each currentTrade.tags as |tag|}}
-                  <div class="badge badge-primary badge-pill text-capitalize px-2 py-1 mr-1">
-                    {{tag}}
-                  </div>
-                {{/each}}
-              </h4>
-            {{/if}}
-          </div>
-        </div>
-
-        <div class="col-5">
-          <div class="pr-2 h-100">
-            {{#if isEditing}}
-              {{pow-input-field
-                local-class="notes-field"
-                type="textarea"
-                rows=5
-                placeholder=(t "components.page.trade_page.notes_placeholder")
-                value=stagedTrade.notes
-                onChange=(action (mut stagedTrade.notes))
-              }}
-            {{else}}
-              <div class="position-relative h-100">
-                {{#if currentTrade.notes}}
-                  <div local-class="notes">
-                    {{fa-icon "file-alt" size="2x" local-class="notes-icon"}}
-                    {{textarea-value currentTrade.notes}}
-                  </div>
-                {{/if}}
-              </div>
-            {{/if}}
-          </div>
-        </div>
-      </div>
-
-      <div class="d-flex justify-content-between flex-shrink-0">
-        <div class="d-flex">
-          <div local-class="url" class="mr-2">
-            <span local-class="url-prefix">
-              {{tradeBaseUrl}}
-            </span>
-
-            {{#if currentTradeSlug}}
-              <span local-class="url-slug" class="{{if isTradeSlugDirty "text-warning"}}">
-                {{currentTradeSlug}}
-              </span>
-            {{/if}}
-          </div>
-
-          {{#if isTradeSlugDirty}}
-            <div class="ml-3">
-              <button type="button" class="btn btn-sm btn-warning" {{action updateTradeSlug}}>
-                {{fa-icon "save"}}
-                {{t "components.page.trade_page.update"}}
-              </button>
-
-              <button type="button" class="btn btn-sm btn-outline-warning" {{action revertTradeSlug}}>
-                {{fa-icon "undo"}}
-                {{t "components.page.trade_page.revert"}}
-              </button>
-            </div>
-          {{/if}}
-        </div>
-
-        <div class="mr-2 mb-1">
-          {{#if isEditing}}
-            <button type="button" class="btn btn-sm btn-outline-primary" {{action cancel}}>
-              {{fa-icon "undo"}}
-              {{t "components.page.trade_page.cancel"}}
-            </button>
-
-            <button type="button" class="btn btn-sm btn-primary" {{action save}}>
-              {{fa-icon "save"}}
-              {{t "components.page.trade_page.save"}}
-            </button>
-          {{else}}
-            <button type="button" class="btn btn-sm btn-primary" {{action edit}}>
-              {{fa-icon "edit"}}
-              {{t "components.page.trade_page.edit"}}
-            </button>
-
-            <button type="button" class="btn btn-sm btn-primary" {{action duplicate}}>
-              {{fa-icon "copy"}}
-              {{t "components.page.trade_page.duplicate"}}
-            </button>
-
-            <button type="button" class="btn btn-sm btn-danger" {{action delete}}>
-              {{fa-icon "trash"}}
-              {{t "components.page.trade_page.delete"}}
-            </button>
-          {{/if}}
-        </div>
-      </div>
+      <button
+        class="btn btn-primary ml-1"
+        {{action this.clearAll}}
+      >
+        {{fa-icon "undo" class="mr-1"}}
+        {{t "components.page.trade_page.clear"}}
+      </button>
     </div>
 
     {{electron-webview
-      local-class="browser-container"
-      url=currentTradeUrl
-      offset=tradeWebsiteOffset
-      onUrlChange=(action tradeUrlUpdate)
+      local-class="trade-browser"
+      url=this.currentTradeUrl
+      offset=this.tradeWebsiteOffset
+      onUrlChange=(action this.tradeUrlUpdate)
     }}
   </div>
 
-  <div local-class="sidebar" class="w-25 p-2">
-    <h2>
-      {{t "components.page.trade_page.trades_title"}}
-    </h2>
-
-    {{pow-input-field
-      placeholder=(t "components.page.trade_page.search_placeholder")
-      helper=(t "components.page.trade_page.search_helper")
-      value=searchValue
-      onChange=(action (mut searchValue))
-    }}
-
-    <button type="button" class="btn btn-primary btn-block btn-lg mb-2" {{action create}}>
-      {{fa-icon "plus" class="mr-1"}}
-      {{t "components.page.trade_page.create"}}
-    </button>
-
-    <ul class="list-unstyled">
-      {{#each filteredTrades as |trade|}}
-        <li
-          local-class="filters-item"
-          class="{{if (eq trade.id currentTrade.id) "pl-3" "pl-2"}} py-2 pr-2"
-          {{action view trade}}
-        >
-          <h5 class="mb-0">
-            {{trade.label}}
-          </h5>
-
-          <div class="my-1">
-            {{#each trade.tags as |tag|}}
-              <span class="badge badge-primary badge-pill text-capitalize">
-                {{tag}}
-              </span>
-            {{/each}}
-          </div>
-
-          <small>
-            {{t "components.page.trade_page.updated_at" timeAgo=(format-relative trade.updatedAt)}}
-          </small>
-        </li>
-      {{/each}}
-    </ul>
+  <div local-class="side-panel" class="py-1 px-2">
+    {{#if this.currentTrade}}
+      {{pow-trade/details
+        currentTradeSlug=this.currentTradeSlug
+        trade=this.currentTrade
+        onDelete=(action this.clearCurrentTrade)
+        onClose=(action this.clearCurrentTrade)
+      }}
+    {{else}}
+      {{pow-trade/list
+        onSelect=(action this.select)
+      }}
+    {{/if}}
   </div>
 </div>

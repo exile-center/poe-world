@@ -59,6 +59,13 @@ components:
   poe_ninja_credit:
     credit: Pricing analytics powered by
     poe_ninja: poe.ninja
+  trade:
+    details:
+      notes: Notes
+      edit: Edit
+      save: Save
+      cancel: Cancel
+      delete: Delete
   page:
     home_page:
       tiles:
@@ -151,6 +158,8 @@ components:
       vendor_recipe: Vendor recipe
       divination_summary: Divination cards summary
     trade_page:
+      create: Bookmark
+      clear: Reset
       label_placeholder: Label
       notes_placeholder: Notes
       tags_placeholder: Tags
@@ -164,7 +173,6 @@ components:
       trades_title: Your trades
       search_placeholder: Search…
       search_helper: Multiple terms can be separated with a comma.
-      create: New trade query
       updated_at: Updated {timeAgo}
 services:
   toaster:
