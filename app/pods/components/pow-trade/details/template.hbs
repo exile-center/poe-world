@@ -3,12 +3,7 @@
     {{fa-icon "times"}}
   </button>
 
-  {{#unless this.isEditing}}
-    <button class="btn btn-primary" {{action this.initializeEdit}}>
-      {{fa-icon "edit"}}
-      {{t "components.trade.details.edit"}}
-    </button>
-  {{else}}
+  {{#if this.isEditing}}
     <button class="btn btn-primary mr-1" {{action this.persistEdit}}>
       {{fa-icon "save"}}
       {{t "components.trade.details.save"}}
@@ -18,7 +13,12 @@
       {{fa-icon "undo"}}
       {{t "components.trade.details.cancel"}}
     </button>
-  {{/unless}}
+  {{else}}
+    <button class="btn btn-primary" {{action this.initializeEdit}}>
+      {{fa-icon "edit"}}
+      {{t "components.trade.details.edit"}}
+    </button>
+  {{/if}}
 
   <button class="btn btn-danger ml-auto" {{action this.delete}}>
     {{fa-icon "trash"}}
@@ -26,7 +26,25 @@
   </button>
 </div>
 
-{{#unless this.isEditing}}
+{{#if this.isEditing}}
+  {{pow-input-field
+    placeholder=(t "components.page.trade_page.label_placeholder")
+    value=this.stagedValues.label
+    onChange=(action (mut this.stagedValues.label))
+  }}
+
+  {{pow-tags-field
+    placeholder=(t "components.page.trade_page.tags_placeholder")
+    tags=this.stagedValues.tags
+  }}
+
+  {{pow-input-field
+    type="textarea"
+    placeholder=(t "components.page.trade_page.notes_placeholder")
+    value=this.stagedValues.notes
+    onChange=(action (mut this.stagedValues.notes))
+  }}
+{{else}}
   {{#if @trade.label}}
     <h3>
       {{@trade.label}}
@@ -51,22 +69,4 @@
 
     {{textarea-value @trade.notes}}
   {{/if}}
-{{else}}
-  {{pow-input-field
-    placeholder=(t "components.page.trade_page.label_placeholder")
-    value=this.stagedValues.label
-    onChange=(action (mut this.stagedValues.label))
-  }}
-
-  {{pow-tags-field
-    placeholder=(t "components.page.trade_page.tags_placeholder")
-    tags=this.stagedValues.tags
-  }}
-
-  {{pow-input-field
-    type="textarea"
-    placeholder=(t "components.page.trade_page.notes_placeholder")
-    value=this.stagedValues.notes
-    onChange=(action (mut this.stagedValues.notes))
-  }}
-{{/unless}}
+{{/if}}

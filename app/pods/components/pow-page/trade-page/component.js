@@ -60,10 +60,12 @@ export default class PageTrade extends Component {
 
   @action
   create() {
-    this.set('currentTrade', Trade.create({
+    const trade = Trade.create({
       label: this.intl.formatTime(new Date()),
       slug: this.currentTradeSlug
-    }));
+    });
+
+    this.set('currentTrade', trade);
   }
 
   @action

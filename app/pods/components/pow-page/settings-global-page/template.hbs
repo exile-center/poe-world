@@ -3,7 +3,7 @@
 
   {{#pow-task-load-container task=this.leaguesLoadTask}}
     <div class="btn-group">
-      {{#each leagues as |league|}}
+      {{#each this.leagues as |league|}}
         <button type="button" class="btn btn-primary" {{action this.applyLeague league}}>
           {{#if (eq league.slug this.currentLeagueSlug)}}
             {{fa-icon "check"}}
