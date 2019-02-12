@@ -4,15 +4,21 @@
   </button>
 
   {{#if this.isEditing}}
-    <button class="btn btn-primary mr-1" {{action this.persistEdit}}>
+    <button
+      class="btn btn-primary mr-1"
+      disabled={{this.cantSave}}
+      {{action this.persistEdit}}
+    >
       {{fa-icon "save"}}
       {{t "components.trade.details.save"}}
     </button>
 
-    <button class="btn btn-primary" {{action this.cancelEdit}}>
-      {{fa-icon "undo"}}
-      {{t "components.trade.details.cancel"}}
-    </button>
+    {{#unless this.isNew}}
+      <button class="btn btn-primary" {{action this.cancelEdit}}>
+        {{fa-icon "undo"}}
+        {{t "components.trade.details.cancel"}}
+      </button>
+    {{/unless}}
   {{else}}
     <button class="btn btn-primary" {{action this.initializeEdit}}>
       {{fa-icon "edit"}}
@@ -20,10 +26,12 @@
     </button>
   {{/if}}
 
-  <button class="btn btn-danger ml-auto" {{action this.delete}}>
-    {{fa-icon "trash"}}
-    {{t "components.trade.details.delete"}}
-  </button>
+  {{#unless this.isNew}}
+    <button class="btn btn-danger ml-auto" {{action this.delete}}>
+      {{fa-icon "trash"}}
+      {{t "components.trade.details.delete"}}
+    </button>
+  {{/unless}}
 </div>
 
 {{#if this.isEditing}}

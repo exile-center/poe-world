@@ -2,7 +2,7 @@
 import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
 import {argument} from '@ember-decorators/argument';
-import {bool} from '@ember-decorators/object/computed';
+import {bool, not} from '@ember-decorators/object/computed';
 import {type} from '@ember-decorators/argument/type';
 import {action} from '@ember-decorators/object';
 
@@ -23,16 +23,18 @@ export default class TradeDetails extends Component {
 
   @argument
   @type(Function)
-  onDelete;
-
-  @argument
-  @type(Function)
   onClose;
 
   stagedValues = null;
 
   @bool('stagedValues')
   isEditing;
+
+  @not('trade.label')
+  cantSave;
+
+  @not('trade.id')
+  isNew;
 
   didReceiveAttrs() {
     if (this.trade.id) return;
@@ -46,9 +48,7 @@ export default class TradeDetails extends Component {
 
   @action
   cancelEdit() {
-    if (this.trade.id) return this.set('stagedValues', null);
-
-    this.onDelete();
+    this.set('stagedValues', null);
   }
 
   @action
@@ -62,7 +62,7 @@ export default class TradeDetails extends Component {
   @action
   delete() {
     this.tradeDestroyer.destroy(this.trade);
-    this.onDelete();
+    this.onClose();
   }
 
   _stageValues() {
