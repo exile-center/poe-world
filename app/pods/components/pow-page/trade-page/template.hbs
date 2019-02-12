@@ -1,6 +1,6 @@
 <div class="d-flex w-100 h-100">
   <div class="position-relative flex-grow-1 flex-shrink-1">
-    <div local-class="top-toolbar" class="px-1 d-flex justify-content-end align-items-center">
+    <div local-class="top-toolbar" class="pt-1 pb-2 px-3 d-flex justify-content-end align-items-center bg-dark">
       {{#if this.canCreate}}
         <button
           class="btn btn-outline-primary ml-1"
@@ -21,7 +21,7 @@
     </div>
 
     {{electron-webview
-      local-class="trade-browser"
+      class="h-100"
       url=this.currentTradeUrl
       offset=this.tradeWebsiteOffset
       onUrlChange=(action this.tradeUrlUpdate)
