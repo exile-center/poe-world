@@ -66,6 +66,9 @@ components:
       save: Save
       cancel: Cancel
       delete: Delete
+    list:
+      no_trade_message: Set up your first trade query by clicking the "Bookmark" button while seing the desired trade results.
+      empty_search_result_message: No trade query matched the search query.
   page:
     home_page:
       tiles:

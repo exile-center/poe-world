@@ -30,7 +30,7 @@ export default class TradeDetails extends Component {
   @bool('stagedValues')
   isEditing;
 
-  @not('trade.label')
+  @not('stagedValues.label')
   cantSave;
 
   @not('trade.id')
