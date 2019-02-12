@@ -23,6 +23,7 @@ export default class PageTrade extends Component {
   tradeWebsiteOffset = TRADE_WEBSITE_OFFSET;
   currentTradeSlug = null;
   currentTrade = null;
+  electronWebview = null;
 
   @computed('currentTradeSlug', 'currentTrade')
   get canCreate() {
@@ -35,11 +36,9 @@ export default class PageTrade extends Component {
     return `${TRADE.BASE_URL}/${activeLeagueId}`;
   }
 
-  @computed('tradeBaseUrl', 'currentTradeSlug')
-  get currentTradeUrl() {
-    if (!this.currentTradeSlug) return this.tradeBaseUrl;
-
-    return `${this.tradeBaseUrl}/${this.currentTradeSlug}`;
+  @action
+  electronWebviewReady(electronWebview) {
+    this.set('electronWebview', electronWebview);
   }
 
   @action
@@ -48,14 +47,17 @@ export default class PageTrade extends Component {
       currentTrade: trade,
       currentTradeSlug: trade.slug
     });
+
+    this._refreshCurrentTradeUrl();
   }
 
   @action
   tradeUrlUpdate(newTradeUrl) {
-    const matchedSlug = newTradeUrl.match(/trade\/\w+\/\w+\/(\w+)$/);
-    if (!matchedSlug) return;
+    const slugMatcher = newTradeUrl.match(/trade\/\w+\/\w+\/(\w+)$/);
 
-    this.set('currentTradeSlug', matchedSlug[1]);
+    this.setProperties({
+      currentTradeSlug: slugMatcher ? slugMatcher[1] : null
+    });
   }
 
   @action
@@ -73,10 +75,27 @@ export default class PageTrade extends Component {
       currentTradeSlug: null,
       currentTrade: null
     });
+
+    this._refreshCurrentTradeUrl();
   }
 
   @action
   clearCurrentTrade() {
     this.set('currentTrade', null);
+  }
+
+  @action
+  resetCurrentSlug() {
+    this.set('currentTradeSlug', this.currentTrade.slug);
+    this._refreshCurrentTradeUrl();
+  }
+
+  _refreshCurrentTradeUrl() {
+    if (!this.electronWebview) return;
+
+    let updatedUrl = this.tradeBaseUrl;
+    if (this.currentTradeSlug) updatedUrl += `/${this.currentTradeSlug}`;
+
+    this.electronWebview.navigateTo(updatedUrl);
   }
 }

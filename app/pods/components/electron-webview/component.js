@@ -20,6 +20,10 @@ export default class ElectronWebview extends Component {
   @type(optional(Function))
   onUrlChange;
 
+  @argument
+  @type(optional(Function))
+  onReady;
+
   webview = null;
 
   didNavigateTask = task(function*(url) {
@@ -37,5 +41,13 @@ export default class ElectronWebview extends Component {
 
     webview.addEventListener('did-navigate', ({url}) => this.get('didNavigateTask').perform(url));
     webview.addEventListener('did-navigate-in-page', ({url}) => this.get('didNavigateTask').perform(url));
+
+    if (this.onReady) this.onReady(this._publicReference());
+  }
+
+  _publicReference() {
+    return {
+      navigateTo: (url, params) => this.webview.loadURL(url, params)
+    };
   }
 }

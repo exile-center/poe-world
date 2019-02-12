@@ -2,8 +2,9 @@
 import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
 import {argument} from '@ember-decorators/argument';
+import {computed} from '@ember-decorators/object';
 import {bool, not} from '@ember-decorators/object/computed';
-import {type} from '@ember-decorators/argument/type';
+import {type, optional} from '@ember-decorators/argument/type';
 import {action} from '@ember-decorators/object';
 
 export default class TradeDetails extends Component {
@@ -14,7 +15,7 @@ export default class TradeDetails extends Component {
   tradeDestroyer;
 
   @argument
-  @type('string')
+  @type(optional('string'))
   currentTradeSlug = null;
 
   @argument
@@ -24,6 +25,10 @@ export default class TradeDetails extends Component {
   @argument
   @type(Function)
   onClose;
+
+  @argument
+  @type(Function)
+  onSlugReset;
 
   stagedValues = null;
 
@@ -35,6 +40,13 @@ export default class TradeDetails extends Component {
 
   @not('trade.id')
   isNew;
+
+  @computed('currentTradeSlug', 'trade.slug')
+  get isSlugDirty() {
+    if (!this.currentTradeSlug) return false;
+
+    return this.currentTradeSlug !== this.trade.slug;
+  }
 
   didReceiveAttrs() {
     if (this.trade.id) return;
@@ -57,6 +69,12 @@ export default class TradeDetails extends Component {
     this.tradePersister.persist(this.trade);
 
     this.set('stagedValues', null);
+  }
+
+  @action
+  persistSlug() {
+    this.trade.set('slug', this.currentTradeSlug);
+    this.tradePersister.persist(this.trade);
   }
 
   @action
