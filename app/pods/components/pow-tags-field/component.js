@@ -43,7 +43,7 @@ export default class TagsField extends Component {
 
   @action
   newTagInputKeydown({keyCode}) {
-    if (![KEY_CODES.TAB, KEY_CODES.ENTER].includes(keyCode)) return true;
+    if (![KEY_CODES.ENTER].includes(keyCode)) return true;
 
     this._confirmNewTag();
     return false;
