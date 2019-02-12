@@ -1,5 +1,4 @@
 // Vendor
-import {tagName} from '@ember-decorators/component';
 import Component from '@ember/component';
 import {argument} from '@ember-decorators/argument';
 import {type, optional, unionOf, arrayOf} from '@ember-decorators/argument/type';
@@ -11,7 +10,6 @@ import KEY_CODES from 'poe-world/constants/key-codes';
 // Utilities
 import uuid from 'poe-world/utilities/uuid';
 
-@tagName('')
 export default class TagsField extends Component {
   @argument
   @type(optional(unionOf('string', 'object')))

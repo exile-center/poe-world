@@ -1,36 +1,34 @@
-<div class="form-group">
-  {{#if @label}}
-    <label for={{this.id}}>
-      {{@label}}
-    </label>
-  {{/if}}
-
-  <label
-    class="form-control d-flex align-items-center flex-wrap"
-    local-class="label-wrapper"
-    for={{this.id}}
-  >
-    {{#each @tags as |tag|}}
-      <button
-        type="button"
-        class="btn btn-primary btn-sm py-1 mr-1 my-1"
-        tabindex="-1"
-        {{action this.remove tag}}
-      >
-        {{tag}}
-        {{fa-icon "times" class="ml-1"}}
-      </button>
-    {{/each}}
-
-    <input
-      type="text"
-      id={{this.id}}
-      placeholder={{@placeholder}}
-      value={{this.newTag}}
-      local-class="input"
-      oninput={{action this.newTagInputChange}}
-      onkeydown={{action this.newTagInputKeydown}}
-      onblur={{action this.newTagInputBlur}}
-    >
+{{#if @label}}
+  <label for={{this.id}}>
+    {{@label}}
   </label>
-</div>
+{{/if}}
+
+<label
+  class="form-control d-flex align-items-center flex-wrap"
+  local-class="label-wrapper"
+  for={{this.id}}
+>
+  {{#each @tags as |tag|}}
+    <button
+      type="button"
+      class="btn btn-primary btn-sm py-1 mr-1 my-1"
+      tabindex="-1"
+      {{action this.remove tag}}
+    >
+      {{tag}}
+      {{fa-icon "times" class="ml-1"}}
+    </button>
+  {{/each}}
+
+  <input
+    type="text"
+    id={{this.id}}
+    placeholder={{@placeholder}}
+    value={{this.newTag}}
+    local-class="input"
+    oninput={{action this.newTagInputChange}}
+    onkeydown={{action this.newTagInputKeydown}}
+    onblur={{action this.newTagInputBlur}}
+  >
+</label>

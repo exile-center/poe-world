@@ -36,12 +36,14 @@
 
 {{#if this.isEditing}}
   {{pow-input-field
+    class="form-group"
     placeholder=(t "components.page.trade_page.label_placeholder")
     value=this.stagedValues.label
     onChange=(action (mut this.stagedValues.label))
   }}
 
   {{pow-tags-field
+    class="form-group"
     placeholder=(t "components.page.trade_page.tags_placeholder")
     tags=this.stagedValues.tags
   }}
@@ -52,6 +54,7 @@
   </h5>
 
   {{pow-input-field
+    class="form-group"
     type="textarea"
     placeholder=(t "components.page.trade_page.notes_placeholder")
     value=this.stagedValues.notes

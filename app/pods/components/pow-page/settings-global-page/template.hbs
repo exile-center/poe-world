@@ -22,12 +22,14 @@
   {{#pow-desktop-container}}
     <div class="form-group w-50">
       {{pow-input-field
+        class="form-group"
         label=(t "components.page.settings_global_page.account_label")
         value=this.currentAccount
         onChange=(action this.applyAccount)
       }}
 
       {{pow-input-field
+        class="form-group"
         label=(t "components.page.settings_global_page.poesessid_label")
         value=this.currentPoesessid
         onChange=(action this.applyPoesessid)

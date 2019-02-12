@@ -1,42 +1,40 @@
-<div class="form-group">
-  {{#if @label}}
-    <label for={{this.id}}>
-      {{@label}}
-    </label>
-  {{/if}}
+{{#if @label}}
+  <label for={{this.id}}>
+    {{@label}}
+  </label>
+{{/if}}
 
-  {{#if this.isTextarea}}
-    <textarea
-      id={{this.id}}
-      placeholder={{@placeholder}}
-      class="form-control"
-      local-class="textarea"
-      value={{@value}}
-      oninput={{action this.inputChange}}
-      onfocus={{action this.inputFocus}}
-      onblur={{action this.inputBlur}}
-      onkeyup={{action this.inputKeyUp}}
-    ></textarea>
-  {{else}}
-    <input
-      type={{@type}}
-      id={{this.id}}
-      placeholder={{@placeholder}}
-      class="form-control"
-      value={{@value}}
-      oninput={{action this.inputChange}}
-      onfocus={{action this.inputFocus}}
-      onblur={{action this.inputBlur}}
-      onkeyup={{action this.inputKeyUp}}
-    >
-  {{/if}}
+{{#if this.isTextarea}}
+  <textarea
+    id={{this.id}}
+    placeholder={{@placeholder}}
+    class="form-control"
+    local-class="textarea"
+    value={{@value}}
+    oninput={{action this.inputChange}}
+    onfocus={{action this.inputFocus}}
+    onblur={{action this.inputBlur}}
+    onkeyup={{action this.inputKeyUp}}
+  ></textarea>
+{{else}}
+  <input
+    type={{@type}}
+    id={{this.id}}
+    placeholder={{@placeholder}}
+    class="form-control"
+    value={{@value}}
+    oninput={{action this.inputChange}}
+    onfocus={{action this.inputFocus}}
+    onblur={{action this.inputBlur}}
+    onkeyup={{action this.inputKeyUp}}
+  >
+{{/if}}
 
-  {{#if @helper}}
-    <small class="form-text text-white">
-      {{fa-icon "info-circle"}}
-      {{@helper}}
-    </small>
-  {{/if}}
+{{#if @helper}}
+  <small class="form-text text-white">
+    {{fa-icon "info-circle"}}
+    {{@helper}}
+  </small>
+{{/if}}
 
-  {{yield}}
-</div>
+{{yield}}
