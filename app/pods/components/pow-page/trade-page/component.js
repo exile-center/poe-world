@@ -10,7 +10,6 @@ import Trade from 'poe-world/models/trade';
 
 // Constants
 import TRADE from 'poe-world/constants/trade';
-const TRADE_WEBSITE_OFFSET = 192;
 
 @tagName('')
 export default class PageTrade extends Component {
@@ -20,7 +19,6 @@ export default class PageTrade extends Component {
   @service('active-league/setting')
   activeLeagueSetting;
 
-  tradeWebsiteOffset = TRADE_WEBSITE_OFFSET;
   currentTradeSlug = null;
   currentTrade = null;
   electronWebview = null;
