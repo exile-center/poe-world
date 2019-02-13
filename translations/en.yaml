@@ -31,8 +31,8 @@ components:
     copy: Copy to clipboard
     copied: Copied
   navigation:
-    atlas: Your atlas
-    stash: Your stash
+    atlas: Atlas
+    stash: Stash
     trade: Trade
     settings: Settings
     authenticated: Authenticated
