@@ -1,3 +1,4 @@
 export default {
-  BASE_URL: 'https://www.pathofexile.com/trade/search'
+  BASE_URL: 'https://www.pathofexile.com/trade',
+  DEFAULT_TYPE: 'search'
 };

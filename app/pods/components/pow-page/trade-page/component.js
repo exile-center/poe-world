@@ -28,10 +28,9 @@ export default class PageTrade extends Component {
     return this.currentTradeSlug && !this.currentTrade;
   }
 
-  @computed('activeLeagueSetting.league.id')
-  get tradeBaseUrl() {
-    const activeLeagueId = this.activeLeagueSetting.league.id;
-    return `${TRADE.BASE_URL}/${activeLeagueId}`;
+  @computed
+  get defaultTradeUrl() {
+    return `${TRADE.BASE_URL}/${TRADE.DEFAULT_TYPE}`;
   }
 
   @action
@@ -51,11 +50,7 @@ export default class PageTrade extends Component {
 
   @action
   tradeUrlUpdate(newTradeUrl) {
-    const slugMatcher = newTradeUrl.match(/trade\/\w+\/\w+\/(\w+)$/);
-
-    this.setProperties({
-      currentTradeSlug: slugMatcher ? slugMatcher[1] : null
-    });
+    this.set('currentTradeSlug', this._extractSlugFrom(newTradeUrl));
   }
 
   @action
@@ -90,10 +85,22 @@ export default class PageTrade extends Component {
 
   _refreshCurrentTradeUrl() {
     if (!this.electronWebview) return;
+    if (!this.currentTrade) return this.electronWebview.navigateTo(this.defaultTradeUrl);
 
-    let updatedUrl = this.tradeBaseUrl;
-    if (this.currentTradeSlug) updatedUrl += `/${this.currentTradeSlug}`;
+    const {type, slug} = this.currentTrade.urlParts;
 
-    this.electronWebview.navigateTo(updatedUrl);
+    const urlParts = [TRADE.BASE_URL];
+    urlParts.push(type);
+    urlParts.push(this.activeLeagueSetting.league.id);
+    urlParts.push(slug);
+
+    this.electronWebview.navigateTo(urlParts.join('/'));
+  }
+
+  _extractSlugFrom(tradeUrl) {
+    const slugMatcher = tradeUrl.match(/trade\/(\w+)\/\w+\/(\w+)$/);
+    if (!slugMatcher) return null;
+
+    return `${slugMatcher[2]}:${slugMatcher[1]}`;
   }
 }
