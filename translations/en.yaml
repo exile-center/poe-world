@@ -177,7 +177,7 @@ components:
       revert: Revert
       trades_title: Your trades
       search_placeholder: Search…
-      search_helper: Multiple terms can be separated with a comma.
+      search_helper: Multiple terms can be separated with a semicolon.
       updated_at: Updated {timeAgo}
 services:
   toaster:

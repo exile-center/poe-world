@@ -7,7 +7,7 @@ import substringSearch from 'poe-world/utilities/substring-search';
 export default class Filterer extends Service {
   filter(trades, searchValue) {
     return trades.filter(trade => {
-      return searchValue.split(',').every(searchTerm => this._compare(trade, searchTerm));
+      return searchValue.split(';').every(searchTerm => this._compare(trade, searchTerm));
     });
   }
 
