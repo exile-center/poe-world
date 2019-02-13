@@ -37,14 +37,14 @@
 {{#if this.isEditing}}
   {{pow-input-field
     class="form-group"
-    placeholder=(t "components.page.trade_page.label_placeholder")
+    placeholder=(t "components.trade.details.label_placeholder")
     value=this.stagedValues.label
     onChange=(action (mut this.stagedValues.label))
   }}
 
   {{pow-tags-field
     class="form-group"
-    placeholder=(t "components.page.trade_page.tags_placeholder")
+    placeholder=(t "components.trade.details.tags_placeholder")
     tags=this.stagedValues.tags
   }}
 
@@ -56,7 +56,7 @@
   {{pow-input-field
     class="form-group"
     type="textarea"
-    placeholder=(t "components.page.trade_page.notes_placeholder")
+    placeholder=(t "components.trade.details.notes_placeholder")
     value=this.stagedValues.notes
     onChange=(action (mut this.stagedValues.notes))
   }}

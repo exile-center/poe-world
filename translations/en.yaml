@@ -61,6 +61,9 @@ components:
     poe_ninja: poe.ninja
   trade:
     details:
+      label_placeholder: Label
+      notes_placeholder: Notes
+      tags_placeholder: Tags
       notes: Notes
       edit: Edit
       save: Save
@@ -69,6 +72,9 @@ components:
       slug_dirty_message: The trade query change.
       revert: Revert
     list:
+      search_placeholder: Search…
+      search_helper: Multiple terms can be separated with a semicolon.
+      updated_at: Updated {timeAgo}
       no_trade_message: Set up your first trade query by clicking the "Bookmark" button while seing the desired trade results.
       empty_search_result_message: No trade query matched the search query.
   page:
@@ -165,20 +171,6 @@ components:
     trade_page:
       create: Bookmark
       clear: Reset
-      label_placeholder: Label
-      notes_placeholder: Notes
-      tags_placeholder: Tags
-      cancel: Cancel
-      save: Save
-      edit: Edit
-      delete: Delete
-      duplicate: Duplicate
-      update: Update
-      revert: Revert
-      trades_title: Your trades
-      search_placeholder: Search…
-      search_helper: Multiple terms can be separated with a semicolon.
-      updated_at: Updated {timeAgo}
 services:
   toaster:
     unexpected_error: An unexpected error occurred. Try again later.

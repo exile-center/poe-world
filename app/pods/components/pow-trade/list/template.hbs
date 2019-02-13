@@ -1,8 +1,8 @@
 {{#if this.trades}}
   {{pow-input-field
     class="pb-2"
-    placeholder=(t "components.page.trade_page.search_placeholder")
-    helper=(t "components.page.trade_page.search_helper")
+    placeholder=(t "components.trade.list.search_placeholder")
+    helper=(t "components.trade.list.search_helper")
     value=this.searchValue
     onChange=(action (mut this.searchValue))
   }}
@@ -31,7 +31,7 @@
         {{/if}}
 
         <small>
-          {{t "components.page.trade_page.updated_at" timeAgo=(format-relative trade.updatedAt)}}
+          {{t "components.trade.list.updated_at" timeAgo=(format-relative trade.updatedAt)}}
         </small>
       </li>
     {{else}}
