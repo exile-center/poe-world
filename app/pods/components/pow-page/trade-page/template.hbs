@@ -1,9 +1,14 @@
 <div class="d-flex w-100 h-100">
   <div class="position-relative flex-grow-1 flex-shrink-1">
     <div local-class="top-toolbar" class="pt-1 pb-2 px-2 d-flex justify-content-end align-items-center bg-dark">
+      <button class="btn btn-light mr-1" {{action this.reloadWebview}}>
+        {{fa-icon "sync" class="mr-1"}}
+        {{t "components.page.trade_page.reload"}}
+      </button>
+
       {{#if this.canCreate}}
         <button
-          class="btn btn-outline-primary ml-1"
+          class="btn btn-primary mr-1"
           {{action this.create}}
         >
           {{fa-icon "bookmark" class="mr-1"}}
@@ -12,10 +17,10 @@
       {{/if}}
 
       <button
-        class="btn btn-primary ml-1"
+        class="btn btn-danger"
         {{action this.clearAll}}
       >
-        {{fa-icon "undo" class="mr-1"}}
+        {{fa-icon "times" class="mr-1"}}
         {{t "components.page.trade_page.clear"}}
       </button>
     </div>

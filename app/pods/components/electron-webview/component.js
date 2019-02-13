@@ -34,7 +34,8 @@ export default class ElectronWebview extends Component {
 
   _publicReference() {
     return {
-      navigateTo: (url, params) => this.webview.loadURL(url, params)
+      navigateTo: (url, params) => this.webview.loadURL(url, params),
+      reload: () => this.webview.reload()
     };
   }
 }

@@ -83,6 +83,12 @@ export default class PageTrade extends Component {
     this._refreshCurrentTradeUrl();
   }
 
+  @action
+  reloadWebview() {
+    if (!this.electronWebview) return;
+    this.electronWebview.reload();
+  }
+
   _refreshCurrentTradeUrl() {
     if (!this.electronWebview) return;
     if (!this.currentTrade) return this.electronWebview.navigateTo(this.defaultTradeUrl);

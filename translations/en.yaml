@@ -171,6 +171,7 @@ components:
     trade_page:
       create: Bookmark
       clear: Reset
+      reload: Reload
 services:
   toaster:
     unexpected_error: An unexpected error occurred. Try again later.
