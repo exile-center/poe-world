@@ -101,13 +101,9 @@ export default class PageTrade extends Component {
     if (!this.currentTrade) return this.electronWebview.navigateTo(this.defaultTradeUrl);
 
     const {type, slug} = this.currentTrade.urlParts;
+    const leagueId = this.activeLeagueSetting.league.id;
 
-    const urlParts = [TRADE.BASE_URL];
-    urlParts.push(type);
-    urlParts.push(this.activeLeagueSetting.league.id);
-    urlParts.push(slug);
-
-    this.electronWebview.navigateTo(urlParts.join('/'));
+    this.electronWebview.navigateTo([TRADE.BASE_URL, type, leagueId, slug].join('/'));
   }
 
   _extractSlugFrom(tradeUrl) {
