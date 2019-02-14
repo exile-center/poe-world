@@ -32,11 +32,7 @@ export default class PageTrade extends Component {
 
   @computed
   get defaultTradeUrl() {
-    return [
-      TRADE.BASE_URL,
-      TRADE.DEFAULT_TYPE,
-      this.activeLeagueSetting.league.id
-    ].join('/');
+    return [TRADE.BASE_URL, TRADE.DEFAULT_TYPE, this.activeLeagueSetting.league.id].join('/');
   }
 
   updateTradeUrlTask = task(function*(tradeUrl) {
