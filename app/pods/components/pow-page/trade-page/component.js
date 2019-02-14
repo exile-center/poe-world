@@ -4,12 +4,14 @@ import {service} from '@ember-decorators/service';
 import {computed} from '@ember-decorators/object';
 import {action} from '@ember-decorators/object';
 import {tagName} from '@ember-decorators/component';
+import {task, timeout} from 'ember-concurrency';
 
 // Models
 import Trade from 'poe-world/models/trade';
 
 // Constants
 import TRADE from 'poe-world/constants/trade';
+const DOUBLE_LOAD_DELAY = 1500; // The site always redirect twice
 
 @tagName('')
 export default class PageTrade extends Component {
@@ -30,8 +32,17 @@ export default class PageTrade extends Component {
 
   @computed
   get defaultTradeUrl() {
-    return `${TRADE.BASE_URL}/${TRADE.DEFAULT_TYPE}`;
+    return [
+      TRADE.BASE_URL,
+      TRADE.DEFAULT_TYPE,
+      this.activeLeagueSetting.league.id
+    ].join('/');
   }
+
+  updateTradeUrlTask = task(function*(tradeUrl) {
+    yield timeout(DOUBLE_LOAD_DELAY);
+    this.set('currentTradeSlug', this._extractSlugFrom(tradeUrl));
+  }).restartable();
 
   @action
   electronWebviewReady(electronWebview) {
@@ -49,8 +60,8 @@ export default class PageTrade extends Component {
   }
 
   @action
-  tradeUrlUpdate(newTradeUrl) {
-    this.set('currentTradeSlug', this._extractSlugFrom(newTradeUrl));
+  tradeUrlUpdate(tradeUrl) {
+    this.get('updateTradeUrlTask').perform(tradeUrl);
   }
 
   @action
