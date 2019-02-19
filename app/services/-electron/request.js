@@ -60,7 +60,11 @@ export default class Request extends Service {
 
         this.globalState.set('isAuthenticated', true);
 
-        return resolve(JSON.parse(data));
+        try {
+          return resolve(JSON.parse(data));
+        } catch (_) {
+          return resolve(data);
+        }
       });
 
       ipcRenderer.once(responseErrorChannel, (_event, error) => {
