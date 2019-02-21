@@ -8,3 +8,11 @@
   overflow-y: auto;
   height: 100%;
 }
+
+.list-split {
+  position: relative;
+  break-inside: avoid-column;
+  column-count: 2;
+  column-gap: $grid-gutter-width;
+  page-break-inside: avoid;
+}

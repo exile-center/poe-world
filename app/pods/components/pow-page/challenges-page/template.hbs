@@ -32,9 +32,9 @@
                 {{t "components.page.challenges_page.most_advanced_sub_challenges"}}
               </h4>
 
-              <ul class="list-unstyled">
+              <ul local-class="{{unless this.selectedChallenge.leastAdvancedSubChallenges "list-split"}}" class="list-unstyled">
                 {{#each this.selectedChallenge.mostAdvancedSubChallenges as |subChallenge|}}
-                  <li class="d-flex justify-content-between align-items-center">
+                  <li class="d-inline-flex justify-content-between align-items-center w-100 p-1">
                     {{subChallenge.description}}
                     {{pow-challenge-progress/badge challenge=subChallenge}}
                   </li>
@@ -50,7 +50,7 @@
 
                 <ul class="list-unstyled">
                   {{#each this.selectedChallenge.leastAdvancedSubChallenges as |subChallenge|}}
-                    <li class="d-flex justify-content-between align-items-center">
+                    <li class="d-flex justify-content-between align-items-center p-1">
                       {{subChallenge.description}}
                       {{pow-challenge-progress/badge challenge=subChallenge}}
                     </li>
