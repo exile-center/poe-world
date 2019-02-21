@@ -34,6 +34,7 @@ components:
     atlas: Atlas
     stash: Stash
     trade: Trade
+    challenges: Challenges
     settings: Settings
     authenticated: Authenticated
     not_authenticated: Not authenticated
@@ -78,6 +79,9 @@ components:
       no_trade_message: Set up your first trade query by clicking the "Bookmark" button while seing the desired trade results.
       empty_search_result_message: No trade query matched the search query.
   page:
+    challenges_page:
+      most_advanced_sub_challenges: Sub-challenges
+      discarded_sub_challenges: Discarded sub-challenges
     home_page:
       tiles:
         atlas: Atlas

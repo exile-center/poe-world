@@ -1,6 +1,7 @@
 // Vendor
 import EmberObject from '@ember/object';
 import {computed} from '@ember-decorators/object';
+import {sort} from '@ember-decorators/object/computed';
 
 // Utilities
 import slugify from 'poe-world/utilities/slugify';
@@ -30,9 +31,9 @@ export default class Challenge extends EmberObject {
     let progress = 0;
 
     if (this.subChallenges.length) {
-      const progresses = this.mostAdvancedSubChallenges.map(subChallenge => subChallenge.progress);
-      progress = progresses.reduce((sum, progress) => sum + progress);
-      progress /= progresses.length;
+      const stagedChallenges = this.mostAdvancedSubChallenges.toArray();
+      progress = stagedChallenges.reduce((sum, subChallenge) => sum + subChallenge.progress, 0);
+      progress /= stagedChallenges.length;
     } else {
       progress = this.completion / this.treshold;
     }
@@ -40,11 +41,11 @@ export default class Challenge extends EmberObject {
     return Math.min(progress, 1);
   }
 
-  @computed('subChallenges')
-  get sortedSubChallenges() {
-    return this.subChallenges.sort((subChallengeA, subChallengeB) => {
-      return subChallengeB.progress - subChallengeA.progress;
-    });
+  @sort('subChallenges')
+  sortedSubChallenges(subChallengeA, subChallengeB) {
+    if (subChallengeA.progress !== subChallengeB.progress) return subChallengeB.progress - subChallengeA.progress;
+
+    return subChallengeA.description.localeCompare(subChallengeB.description);
   }
 
   @computed('sortedSubChallenges', 'treshold')

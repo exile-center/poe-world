@@ -30,7 +30,8 @@ export default class Fetcher extends Service {
           .find('.achievement-list > .achievement')
           .map((_, challengeNode) => {
             return this._parseChallenge(challengeNode);
-          });
+          })
+          .toArray();
       });
   }
 
@@ -57,28 +58,30 @@ export default class Fetcher extends Service {
       description,
       completed: !$challenge.hasClass('incomplete'),
       subChallenges: this._parseSubChallenges($challenge.find('span.items > ul > li')),
-      completion,
-      treshold
+      completion: completion || 0,
+      treshold: treshold || 1
     });
   }
 
   _parseSubChallenges(subChallengeNodes) {
     if (!subChallengeNodes) return [];
 
-    return subChallengeNodes.map((_, subChallenge) => {
-      const $subChallenge = $(subChallenge);
-      const fullDescription = $subChallenge.text().trim();
-      const [completion, treshold] = this._parseCompletionFrom(fullDescription);
+    return subChallengeNodes
+      .map((_, subChallenge) => {
+        const $subChallenge = $(subChallenge);
+        const fullDescription = $subChallenge.text().trim();
+        const [completion, treshold] = this._parseCompletionFrom(fullDescription);
 
-      return Challenge.create({
-        name: null,
-        description: fullDescription.replace(/ \(\d+\/\d+\)/, ''),
-        completed: $subChallenge.hasClass('finished'),
-        subChallenges: [],
-        completion,
-        treshold
-      });
-    });
+        return Challenge.create({
+          name: null,
+          description: fullDescription.replace(/ \(\d+\/\d+\)/, ''),
+          completed: $subChallenge.hasClass('finished'),
+          subChallenges: [],
+          completion: completion || 0,
+          treshold: treshold || 1
+        });
+      })
+      .toArray();
   }
 
   _parseCompletionFrom(textValue) {
