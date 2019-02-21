@@ -16,11 +16,7 @@ export default class Fetcher extends Service {
   @service('authentication/setting')
   authenticationSetting;
 
-  @service('active-league/setting')
-  activeLeagueSetting;
-
-  fetch() {
-    const leagueId = this.activeLeagueSetting.league.id;
+  fetch(leagueId) {
     const account = this.authenticationSetting.account;
 
     return this.electronRequest

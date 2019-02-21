@@ -7,6 +7,11 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function(defaults) {
   const app = new EmberApp(defaults, {
     hinting: false,
+    autoImport: {
+      alias: {
+        chartjs: 'chart.js/dist/Chart'
+      }
+    },
     babel: {
       plugins: ['transform-object-rest-spread']
     },

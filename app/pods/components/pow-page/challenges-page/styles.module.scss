@@ -4,7 +4,13 @@
   height: 100%;
 }
 
-.challenge-details {
+.challenges-list-item {
+  &.active {
+    background: $dark;
+  }
+}
+
+.content {
   overflow-y: auto;
   height: 100%;
 }
@@ -15,4 +21,8 @@
   column-count: 2;
   column-gap: $grid-gutter-width;
   page-break-inside: avoid;
+}
+
+.slim-progress {
+  height: 3px;
 }

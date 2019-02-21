@@ -13,7 +13,6 @@ describe('Unit | Services | Challenges | Fetcher', () => {
   beforeEach(function() {
     service = this.owner.lookup('service:challenges/fetcher');
     electronRequestMock = sinon.mock(service.electronRequest);
-    sinon.stub(service.activeLeagueSetting, 'league').value({id: 'fake-league'});
     sinon.stub(service.authenticationSetting, 'account').value('fake-account');
   });
 
@@ -33,7 +32,7 @@ describe('Unit | Services | Challenges | Fetcher', () => {
           )
         );
 
-      const [challenge] = await service.fetch();
+      const [challenge] = await service.fetch('fake-league');
 
       expect(challenge.name).to.equal('Complete Zana Questline');
       expect(challenge.description).to.equal('Complete the entire questline given by Zana.');
@@ -52,7 +51,7 @@ describe('Unit | Services | Challenges | Fetcher', () => {
           )
         );
 
-      const [challenge] = await service.fetch();
+      const [challenge] = await service.fetch('fake-league');
 
       expect(challenge.name).to.equal('Complete Atlas Objectives');
       expect(challenge.description).to.equal('Complete 400 Atlas Objectives.');
@@ -72,7 +71,7 @@ describe('Unit | Services | Challenges | Fetcher', () => {
           )
         );
 
-      const [challenge] = await service.fetch();
+      const [challenge] = await service.fetch('fake-league');
 
       expect(challenge.name).to.equal('Complete Endgame Grinds');
       expect(challenge.description).to.equal('Complete any 4 of these encounters the specified number of times.');

@@ -3,7 +3,7 @@ import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
 import {task, timeout} from 'ember-concurrency';
 import {computed} from '@ember-decorators/object';
-import {sort} from '@ember-decorators/object/computed';
+import {sort, reads} from '@ember-decorators/object/computed';
 import {action} from '@ember-decorators/object';
 import {tagName} from '@ember-decorators/component';
 
@@ -12,11 +12,17 @@ const POLLING_INTERVAL = 60000; // 60 seconds
 
 @tagName('')
 export default class PageChallenges extends Component {
+  @service('active-league/setting')
+  activeLeagueSetting;
+
   @service('challenges/fetcher')
   challengesFetcher;
 
   challenges = [];
   selectedChallengeSlug = null;
+
+  @reads('activeLeagueSetting.league')
+  league;
 
   @sort('challenges')
   sortedChallenges(challengeA, challengeB) {
@@ -33,7 +39,7 @@ export default class PageChallenges extends Component {
   }
 
   challengesLoadTask = task(function*() {
-    const challenges = yield this.challengesFetcher.fetch();
+    const challenges = yield this.challengesFetcher.fetch(this.league.id);
 
     this.set('challenges', challenges);
   }).drop();
