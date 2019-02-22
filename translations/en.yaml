@@ -20,8 +20,8 @@ components:
     discarded_sub_challenges: Discarded sub-challenges
   challenge_progress:
     doughnut_chart:
-      league: League
-      challenge: Challenge
+      league_progress: 'League: {progress}%'
+      challenge_progress: 'Challenge: {progress}%'
   price:
     undefined: Undefined pricing
   map_trade_list:

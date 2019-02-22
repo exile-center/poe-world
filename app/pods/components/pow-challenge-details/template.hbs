@@ -1,6 +1,19 @@
-<div class="card">
-  <div class="card-body text-center">
-    {{@challenge.description}}
+
+
+<div class="card ">
+  <div class="card-body row">
+    <div class="col-6 d-flex align-items-center">
+      <p local-class="description" class="px-2 m-0">
+        {{@challenge.description}}
+      </p>
+    </div>
+
+    <div class="col-6 d-flex justify-content-center align-items-center">
+      {{pow-challenge-progress/doughnut-chart
+        challenge=@challenge
+        league=this.league
+      }}
+    </div>
   </div>
 </div>
 
@@ -60,8 +73,4 @@
   </div>
 {{/if}}
 
-{{pow-challenge-progress/doughnut-chart
-  class="d-flex justify-content-center mt-4"
-  challenge=@challenge
-  league=this.league
-}}
+

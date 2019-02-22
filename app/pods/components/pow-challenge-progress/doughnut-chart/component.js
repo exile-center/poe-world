@@ -32,6 +32,16 @@ export default class ChallengeProgressDoughnutChart extends Component {
 
   chart = null;
 
+  @computed('challenge.progress')
+  get formattedChallengeProgress() {
+    return Math.round(this.challenge.progress * 100);
+  }
+
+  @computed('league.progress')
+  get formattedLeagueProgress() {
+    return Math.round(this.league.progress * 100);
+  }
+
   @computed('challenge.progress', 'league.progress')
   get challengeColor() {
     if (this.challenge.progress > this.league.progress) return POSITIVE_PROGRESS;
@@ -41,6 +51,7 @@ export default class ChallengeProgressDoughnutChart extends Component {
   @computed('league.progress')
   get leagueDataset() {
     return {
+      borderWidth: 0,
       backgroundColor: [LEAGUE_COLOR, NULL_COLOR],
       hoverBackgroundColor: [LEAGUE_COLOR, NULL_COLOR],
       borderColor: [LEAGUE_COLOR, NULL_COLOR],
@@ -51,6 +62,7 @@ export default class ChallengeProgressDoughnutChart extends Component {
   @computed('challenge.progress')
   get challengeDataset() {
     return {
+      borderWidth: 0,
       backgroundColor: [this.challengeColor, NULL_COLOR],
       hoverBackgroundColor: [this.challengeColor, NULL_COLOR],
       borderColor: [this.challengeColor, NULL_COLOR],
