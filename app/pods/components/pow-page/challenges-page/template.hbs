@@ -33,11 +33,7 @@
       {{else}}
         <div local-class="content" class="flex-grow-1 d-flex h-100 align-items-center justify-content-center">
           <h2 class="m-0">
-            {{t
-              "components.page.challenges_page.league_remaining"
-              league=this.league.name
-              relativeTime=(format-relative this.league.endAt)
-            }}
+            {{this.splashMessage}}
           </h2>
         </div>
       {{/if}}

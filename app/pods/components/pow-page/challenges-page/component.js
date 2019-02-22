@@ -12,6 +12,12 @@ const POLLING_INTERVAL = 60000; // 60 seconds
 
 @tagName('')
 export default class PageChallenges extends Component {
+  @service('intl')
+  intl;
+
+  @service('clock')
+  clock;
+
   @service('active-league/setting')
   activeLeagueSetting;
 
@@ -29,6 +35,14 @@ export default class PageChallenges extends Component {
     if (challengeA.progress !== challengeB.progress) return challengeA.progress - challengeB.progress;
 
     return challengeA.name.localeCompare(challengeB.name);
+  }
+
+  @computed('league', 'clock.hour')
+  get splashMessage() {
+    return this.intl.t('components.page.challenges_page.league_remaining', {
+      league: this.league.name,
+      relativeTime: this.intl.formatRelative(this.league.endAt)
+    });
   }
 
   @computed('selectedChallengeSlug', 'challenges.@each')
