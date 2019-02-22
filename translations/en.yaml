@@ -15,6 +15,9 @@ components:
       boss_rating: Boss rating (1 to 5)
       drop: Drop
       examples: Examples
+  challenge_details:
+    most_advanced_sub_challenges: Sub-challenges
+    discarded_sub_challenges: Discarded sub-challenges
   challenge_progress:
     doughnut_chart:
       league: League
@@ -84,8 +87,6 @@ components:
       empty_search_result_message: No trade query matched the search query.
   page:
     challenges_page:
-      most_advanced_sub_challenges: Sub-challenges
-      discarded_sub_challenges: Discarded sub-challenges
       league_remaining: The {league} league ends {relativeTime}.
     home_page:
       tiles:
