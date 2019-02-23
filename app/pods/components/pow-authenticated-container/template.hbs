@@ -1,7 +1,5 @@
-{{! template-lint-disable no-bare-strings no-implicit-this }}
-
 {{#pow-desktop-container}}
-  {{#if isAuthenticated}}
+  {{#if this.isAuthenticated}}
     {{yield}}
   {{else}}
     <p>{{t "components.authenticated_container.warning_message"}}</p>

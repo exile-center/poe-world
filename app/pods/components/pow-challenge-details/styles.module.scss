@@ -1,0 +1,16 @@
+.description {
+  font-size: 1.25rem;
+  font-weight: $font-weight-light;
+}
+
+.list-split {
+  position: relative;
+  break-inside: avoid-column;
+  column-count: 2;
+  column-gap: $grid-gutter-width;
+  page-break-inside: avoid;
+}
+
+.slim-progress {
+  height: 3px;
+}

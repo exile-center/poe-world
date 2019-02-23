@@ -1,0 +1,11 @@
+{{#if this.hasProgression}}
+  <span class="badge badge-{{if this.isCompleted "success" "primary"}} badge-pill d-flex align-items-center">
+    {{@challenge.completion}} / {{@challenge.treshold}}
+  </span>
+{{else}}
+  {{#if this.isCompleted}}
+    <span class="badge badge-success badge-pill d-flex align-items-center">
+      {{fa-icon "check"}}
+    </span>
+  {{/if}}
+{{/if}}

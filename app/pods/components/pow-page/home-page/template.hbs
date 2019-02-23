@@ -1,59 +1,59 @@
-{{! template-lint-disable no-bare-strings no-implicit-this }}
-
 <div class="container-fluid py-2">
   <div class="row">
-    <div class="col-8 pl-0">
+    <div class="col-9 col-md-8 pl-0">
       {{pow-release-banner}}
 
       <div class="d-flex flex-column">
-        {{#pow-link "atlas" local-class="tile" class="d-flex mb-2 pr-3"}}
-          <img src="/assets/images/home-tiles/atlas.png" alt="" local-class="tile-image">
-          <div class="py-3">
-            <h2 local-class="tile-title">
-              {{t "components.page.home_page.tiles.atlas"}}
-            </h2>
-            <p local-class="tile-description">
-              {{t "components.page.home_page.tiles.atlas_description"}}
-            </p>
+        <div class="row mb-3">
+          <div class="col-6">
+            {{#pow-link "atlas" local-class="tile"}}
+              <img src="/assets/images/home-tiles/atlas.png" alt="" local-class="tile-image">
+              <h3 local-class="tile-title">
+                {{t "components.page.home_page.tiles.atlas"}}
+              </h3>
+            {{/pow-link}}
           </div>
-        {{/pow-link}}
 
-        {{#pow-link "stash" local-class="tile" class="d-flex mb-2 pr-3"}}
-          <img src="/assets/images/home-tiles/stash.png" alt="" local-class="tile-image">
-          <div class="py-3">
-            <h2 local-class="tile-title">
-              {{t "components.page.home_page.tiles.stash"}}
-            </h2>
-            <p local-class="tile-description">
-              {{t "components.page.home_page.tiles.stash_description"}}
-            </p>
+          <div class="col-6">
+            {{#pow-link "stash" local-class="tile"}}
+              <img src="/assets/images/home-tiles/stash.png" alt="" local-class="tile-image">
+              <h3 local-class="tile-title">
+                {{t "components.page.home_page.tiles.stash"}}
+              </h3>
+            {{/pow-link}}
           </div>
-        {{/pow-link}}
-
-        {{#pow-link "trade" local-class="tile" class="d-flex pr-3"}}
-          <img src="/assets/images/home-tiles/trade.png" alt="" local-class="tile-image">
-          <div class="py-3">
-            <h2 local-class="tile-title">
-              {{t "components.page.home_page.tiles.trade"}}
-            </h2>
-            <p local-class="tile-description">
-              {{t "components.page.home_page.tiles.trade_description"}}
-            </p>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            {{#pow-link "trade" local-class="tile"}}
+              <img src="/assets/images/home-tiles/trade.png" alt="" local-class="tile-image">
+              <h3 local-class="tile-title">
+                {{t "components.page.home_page.tiles.trade"}}
+              </h3>
+            {{/pow-link}}
           </div>
-        {{/pow-link}}
+          <div class="col-6">
+            {{#pow-link "challenges" local-class="tile"}}
+              <img src="/assets/images/home-tiles/challenges.png" alt="" local-class="tile-image">
+              <h3 local-class="tile-title">
+                {{t "components.page.home_page.tiles.challenges"}}
+              </h3>
+            {{/pow-link}}
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="col-4">
+    <div class="col-3 col-md-4">
       <ul class="list-unstyled">
         <li class="mb-2">
-          {{#pow-external-link url=issuesUrl class="btn btn-primary btn-block text-left"}}
+          {{#pow-external-link url=this.issuesUrl class="btn btn-primary btn-block text-left"}}
             {{fa-icon "github" prefix="fab" class="mr-1"}}
             {{t "components.page.home_page.poe_world_on.issue"}}
           {{/pow-external-link}}
         </li>
         <li class="mb-2">
-          {{#pow-external-link url=releasesUrl class="btn btn-primary btn-block text-left"}}
+          {{#pow-external-link url=this.releasesUrl class="btn btn-primary btn-block text-left"}}
             {{fa-icon "github" prefix="fab" class="mr-1"}}
             {{t "components.page.home_page.poe_world_on.releases"}}
           {{/pow-external-link}}
@@ -74,13 +74,13 @@
         </li>
         --}}
         <li class="mb-2">
-          {{#pow-external-link url=discordUrl class="btn btn-primary btn-block text-left"}}
+          {{#pow-external-link url=this.discordUrl class="btn btn-primary btn-block text-left"}}
             {{fa-icon "discord" prefix="fab" class="mr-1"}}
             {{t "components.page.home_page.poe_world_on.discord"}}
           {{/pow-external-link}}
         </li>
         <li class="mb-2">
-          {{#pow-external-link url=githubUrl class="btn btn-primary btn-block text-left"}}
+          {{#pow-external-link url=this.githubUrl class="btn btn-primary btn-block text-left"}}
             {{fa-icon "github" prefix="fab" class="mr-1"}}
             {{t "components.page.home_page.poe_world_on.github"}}
           {{/pow-external-link}}
@@ -92,7 +92,7 @@
       </h3>
 
       <ul class="list-unstyled">
-        {{#each externalLinks as |link|}}
+        {{#each this.externalLinks as |link|}}
           <li class="mb-2">
             {{#pow-external-link url=link.url class="btn btn-primary btn-block text-left"}}
               {{#if link.icon}}

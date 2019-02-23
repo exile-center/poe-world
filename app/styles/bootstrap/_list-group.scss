@@ -3,3 +3,8 @@
     background-color: $list-group-alt-bg;
   }
 }
+
+button.list-group-item-action {
+  outline: none;
+  cursor: pointer;
+}

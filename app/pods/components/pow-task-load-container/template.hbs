@@ -1,6 +1,4 @@
-{{! template-lint-disable no-bare-strings no-implicit-this }}
-
-{{#if task.isRunning}}
+{{#if @task.isRunning}}
   <div class="p-4 text-center">
     {{fa-icon "spinner" spin=true size="2x"}}
   </div>
