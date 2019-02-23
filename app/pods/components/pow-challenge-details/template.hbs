@@ -1,9 +1,11 @@
-
-
 <div class="card ">
   <div class="card-body row">
-    <div class="col-6 d-flex align-items-center">
-      <p local-class="description" class="px-2 m-0">
+    <div class="col-6 d-flex flex-column">
+      <h2>
+        {{@challenge.name}}
+      </h2>
+
+      <p local-class="description" class="m-0">
         {{@challenge.description}}
       </p>
     </div>
@@ -72,5 +74,3 @@
     {{/if}}
   </div>
 {{/if}}
-
-
