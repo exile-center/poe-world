@@ -1,7 +1,7 @@
 // Vendor
 import EmberObject from '@ember/object';
 import {computed} from '@ember-decorators/object';
-import {sort} from '@ember-decorators/object/computed';
+import {sort, or} from '@ember-decorators/object/computed';
 
 // Utilities
 import slugify from 'poe-world/utilities/slugify';
@@ -14,10 +14,16 @@ export default class Challenge extends EmberObject {
   completion = null;
   treshold = null;
 
+  isTrophyRewarded = false;
+  isMtxRewarded = false;
+
   constructor(props) {
     super(props);
     this.setProperties(props);
   }
+
+  @or('isTrophyRewarded', 'isMtxRewarded')
+  isRewarded;
 
   @computed('name')
   get slug() {

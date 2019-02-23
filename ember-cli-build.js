@@ -50,7 +50,9 @@ module.exports = function(defaults) {
           'exclamation-circle',
           'arrow-right',
           'question-circle',
-          'bookmark'
+          'bookmark',
+          'star',
+          'trophy'
         ],
         'free-brands-svg-icons': ['github', 'discord', 'reddit']
       }

@@ -3,12 +3,16 @@ import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
 import {task, timeout} from 'ember-concurrency';
 import {computed} from '@ember-decorators/object';
-import {sort, reads} from '@ember-decorators/object/computed';
+import {reads} from '@ember-decorators/object/computed';
 import {action} from '@ember-decorators/object';
 import {tagName} from '@ember-decorators/component';
 
 // Constants
+/* eslint-disable no-magic-numbers */
 const POLLING_INTERVAL = 60000; // 60 seconds
+const TROPHY_REWARDS = [19, 22, 25, 28, 31, 34, 37, 40];
+const MTX_REWARDS = [12, 24, 36];
+/* eslint-enable no-magic-numbers */
 
 @tagName('')
 export default class PageChallenges extends Component {
@@ -30,11 +34,18 @@ export default class PageChallenges extends Component {
   @reads('activeLeagueSetting.league')
   league;
 
-  @sort('challenges')
-  sortedChallenges(challengeA, challengeB) {
-    if (challengeA.progress !== challengeB.progress) return challengeA.progress - challengeB.progress;
+  @computed('challenges')
+  get sortedChallenges() {
+    const sortedChallenges = this.challenges.sort((challengeA, challengeB) => {
+      if (challengeA.progress !== challengeB.progress) return challengeB.progress - challengeA.progress;
 
-    return challengeA.name.localeCompare(challengeB.name);
+      return challengeB.name.localeCompare(challengeA.name);
+    });
+
+    TROPHY_REWARDS.forEach(index => sortedChallenges[index - 1].set('isTrophyRewarded', true));
+    MTX_REWARDS.forEach(index => sortedChallenges[index - 1].set('isMtxRewarded', true));
+
+    return sortedChallenges.reverse();
   }
 
   @computed('league', 'clock.hour')

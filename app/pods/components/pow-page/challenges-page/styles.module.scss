@@ -18,3 +18,31 @@
 .slim-progress {
   height: 3px;
 }
+
+.reward-separator {
+  display: flex;
+  position: relative;
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  background-color: $light;
+  border-bottom-right-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+
+  &::after {
+    display: block;
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 3px;
+    right: -5px;
+    transform: rotate(45deg);
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    background-color: $light;
+  }
+}
