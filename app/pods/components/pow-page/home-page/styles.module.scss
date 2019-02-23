@@ -1,8 +1,10 @@
 .tile {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: $border-radius;
   background-color: $darker;
   transition: background-color ease-in-out 200ms;
-  border-bottom-right-radius: $border-radius;
-  border-top-right-radius: $border-radius;
 
   &:hover,
   &:focus {
@@ -15,32 +17,24 @@
     }
 
     .tile-title {
-      margin-left: -100px;
-    }
-
-    .tile-description {
-      margin-left: -75px;
+      transform: rotate(50deg) translate(-20px, 27px);
     }
   }
 }
 
 .tile-image {
-  align-self: center;
   transition: ease-in-out 200ms;
   transition-property: filter, clip-path;
   clip-path: polygon(0 0, 70% 0, 90% 100%, 0% 100%);
   filter: grayscale(50%);
 }
 
-.tile-title,
-.tile-description {
-  transition: margin-left ease-in-out 200ms;
-}
-
 .tile-title {
-  margin-left: -85px;
-}
-
-.tile-description {
-  margin-left: -70px;
+  position: absolute;
+  top: 10px;
+  left: 360px;
+  transform: rotate(68deg);
+  transform-origin: top left;
+  margin: 0;
+  transition: transform ease-in-out 200ms;
 }
