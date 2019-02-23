@@ -1,13 +1,18 @@
 // Vendor
 import EmberObject from '@ember/object';
 import {computed} from '@ember-decorators/object';
-import {reads} from '@ember-decorators/object/computed';
+import {reads, bool} from '@ember-decorators/object/computed';
+
+// Constants
+const HARDCORE_RULE_NAME = 'Hardcore';
+const SSF_RULE_NAME = 'Solo';
 
 export default class League extends EmberObject {
   id = null;
   url = null;
   startAt = null;
   endAt = null;
+  rules = [];
 
   constructor(props) {
     super(props);
@@ -16,6 +21,9 @@ export default class League extends EmberObject {
 
   @reads('id')
   name;
+
+  @bool('endAt')
+  isChallengeLeague;
 
   @computed('id')
   get slug() {
@@ -36,5 +44,15 @@ export default class League extends EmberObject {
 
     const progress = (currentTime - startTime) / (endTime - startTime);
     return Math.round(progress * 100) / 100;
+  }
+
+  @computed('rules')
+  get isHardcore() {
+    return Boolean(this.rules.find(({name}) => name === HARDCORE_RULE_NAME));
+  }
+
+  @computed('rules')
+  get isSoloSelfFound() {
+    return Boolean(this.rules.find(({name}) => name === SSF_RULE_NAME));
   }
 }

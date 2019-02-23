@@ -90,6 +90,7 @@ components:
       league_remaining: The {league} league ends {relativeTime}.
       trophy_reward: Trophy reward
       mtx_reward: Microtransaction reward
+      no_challenge_league: There is currently no active challenge league.
     home_page:
       tiles:
         atlas: Atlas

@@ -3,7 +3,6 @@ import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
 import {task, timeout} from 'ember-concurrency';
 import {computed} from '@ember-decorators/object';
-import {reads} from '@ember-decorators/object/computed';
 import {action} from '@ember-decorators/object';
 import {tagName} from '@ember-decorators/component';
 
@@ -22,17 +21,15 @@ export default class PageChallenges extends Component {
   @service('clock')
   clock;
 
-  @service('active-league/setting')
-  activeLeagueSetting;
+  @service('leagues/fetcher')
+  leaguesFetcher;
 
   @service('challenges/fetcher')
   challengesFetcher;
 
   challenges = [];
   selectedChallengeSlug = null;
-
-  @reads('activeLeagueSetting.league')
-  league;
+  league = null;
 
   @computed('challenges')
   get sortedChallenges() {
@@ -82,6 +79,11 @@ export default class PageChallenges extends Component {
   }).drop();
 
   challengesInitialLoadTask = task(function*() {
+    const leagues = yield this.leaguesFetcher.fetch();
+    const currentChallengeLeague = leagues.find(league => league.isChallengeLeague && !league.isHardcore);
+    if (!currentChallengeLeague) return this.get('challengesPollingTask').cancelAll();
+
+    this.set('league', currentChallengeLeague);
     yield this.get('challengesLoadTask').perform();
   }).drop();
 
