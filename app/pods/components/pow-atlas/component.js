@@ -35,7 +35,7 @@ export default class Atlas extends Component {
 
   mapsLoadTask = task(function*() {
     const maps = yield this.mapsFetcher.fetch();
-    this.set('maps', maps);
+    this.set('maps', maps.filter(map => map.hasOffsets));
   }).drop();
 
   mapsSearchTask = task(function*({query, debounce}) {

@@ -1,6 +1,6 @@
 import EmberObject from '@ember/object';
 import {computed} from '@ember-decorators/object';
-import {equal} from '@ember-decorators/object/computed';
+import {equal, and} from '@ember-decorators/object/computed';
 
 // Constants
 const YELLOW_TIER_MIN_TIER = 6;
@@ -29,6 +29,9 @@ export default class AtlasMap extends EmberObject {
     super(props);
     this.setProperties(props);
   }
+
+  @and('offsetLeft', 'offsetTop')
+  hasOffsets;
 
   @equal('type', UNIQUE_RARITY)
   isUnique;
