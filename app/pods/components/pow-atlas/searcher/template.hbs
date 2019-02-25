@@ -81,6 +81,7 @@
           local-class="map-item"
           {{action @onMapSelect map}}
           {{action @onMapHover map on="mouseEnter"}}
+          {{action @onMapHover null on="mouseLeave"}}
         >
           <img
             class="pr-2"
