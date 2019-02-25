@@ -20,7 +20,7 @@
 
       {{#if @map.pantheon}}
         <p local-class="pantheon-color" class="mt-1 mb-0">
-          {{t "components.atlas.popover_pantheon" pantheon=@map.pantheon}}
+          {{t "components.atlas.popover_pantheon" pantheon=@map.pantheon.god}}
         </p>
       {{/if}}
     </div>
@@ -31,6 +31,6 @@
   {{/if}}
 
   {{#if @map.pantheon}}
-    <div local-class="pantheon-indicator"></div>
+    <img local-class="pantheon-indicator" src="assets/images/pantheon.png" />
   {{/if}}
 </li>

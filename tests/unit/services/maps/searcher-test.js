@@ -31,7 +31,7 @@ describe('Unit | Services | Maps | Searcher', () => {
         name: 'Beach',
         tier: 2,
         areaLevel: 60,
-        pantheon: 'JohnCena',
+        pantheon: {god: 'JohnCena'},
         layoutRating: 'B',
         bossRating: 4,
         drops: []

@@ -49,11 +49,6 @@ $map-fading-in-duration: 1500ms;
 .pantheon-indicator {
   position: absolute;
   z-index: $zindex-fixed - 1;
-  bottom: -5%;
-  left: calc(50% - 3px);
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: $pantheon-color;
-  box-shadow: 0 0 10px 10px $pantheon-color;
+  top: -25px;
+  left: 15px;
 }

@@ -123,7 +123,7 @@ components:
       layout_rating_C: The map has an open layout with many obstacles, or has long
         side paths that require backtracking.
       boss_title: Boss
-      pantheon: Pantheon
+      pantheon: '{type} Pantheon'
     map_trade_page:
       not_tradable_warning: This map is not available in any kind of currency. Therefore,
         it is not possible to get it via trading.

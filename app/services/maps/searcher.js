@@ -40,7 +40,7 @@ export default class MapsSearcher extends Service {
       name: (map, _, value) => substringSearch(map.name, value),
       tier: (map, comparator, value) => this._simpleCompare(map.tier, parseInt(value, 10), comparator),
       alvl: (map, comparator, value) => this._simpleCompare(map.areaLevel, parseInt(value, 10), comparator),
-      pantheon: (map, _, value) => map.pantheon && substringSearch(map.pantheon, value),
+      pantheon: (map, _, value) => map.pantheon && substringSearch(map.pantheon.god, value),
       color: (map, _, value) => map.tierColor === value,
       layout: (map, comparator, value) => {
         return this._simpleCompare(value.toLowerCase(), map.layoutRating.toLowerCase(), comparator);
