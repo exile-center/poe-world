@@ -4,8 +4,7 @@ import config from './config/environment';
 
 const {
   locationType,
-  rootURL,
-  APP: {DEBUG}
+  rootURL
 } = config;
 
 class Router extends EmberRouter {
@@ -15,11 +14,6 @@ class Router extends EmberRouter {
 
 /* eslint-disable max-nested-callbacks */
 Router.map(function() {
-  // Dev routes
-  if (DEBUG) {
-    this.route('atlas-offsets');
-  }
-
   this.route('home', {path: '/'});
 
   this.route('atlas', function() {
