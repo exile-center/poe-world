@@ -1,6 +1,6 @@
 // Vendor
 import EmberObject from '@ember/object';
-import {not} from '@ember-decorators/object/computed';
+import {not, and} from '@ember-decorators/object/computed';
 
 export default class TradeMap extends EmberObject {
   id = null;
@@ -27,6 +27,9 @@ export default class TradeMap extends EmberObject {
     super(props);
     this.setProperties(props);
   }
+
+  @and('priceAmount', 'priceCurrencyId')
+  hasPrice;
 
   @not('identified')
   isUnidentified;
