@@ -6,6 +6,7 @@ import {equal, and} from '@ember-decorators/object/computed';
 const YELLOW_TIER_MIN_TIER = 6;
 const RED_TIER_MIN_TIER = 11;
 const UNIQUE_RARITY = 'unique';
+const ESTIMATED_SEXTANT_RANGE = 170;
 
 export default class AtlasMap extends EmberObject {
   id = null;
@@ -28,6 +29,14 @@ export default class AtlasMap extends EmberObject {
   constructor(props) {
     super(props);
     this.setProperties(props);
+  }
+
+  isInSextantRangeOf(map) {
+    const distance = Math.sqrt(
+      Math.pow(this.offsetLeft - map.offsetLeft, 2) + Math.pow(this.offsetTop - map.offsetTop, 2)
+    );
+
+    return distance <= ESTIMATED_SEXTANT_RANGE;
   }
 
   @and('offsetLeft', 'offsetTop')

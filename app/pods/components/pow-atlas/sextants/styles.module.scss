@@ -1,11 +1,11 @@
 .sextant {
   position: absolute;
   z-index: $zindex-fixed - 2;
-  width: $atlas-sextants-item-radius * 2;
-  height: $atlas-sextants-item-radius * 2;
+  width: 100px;
+  height: 100px;
   border: 2px solid $white;
   border-radius: 50%;
-  margin: ($atlas-sextants-item-radius * -1) 0 0 ($atlas-sextants-item-radius * -1);
+  margin: -50px 0 0 -50px;
 }
 
 .sextant-white {
@@ -18,4 +18,8 @@
 
 .sextant-red {
   border-color: $red-tier-color;
+}
+
+.out-of-range {
+  border-style: dashed;
 }

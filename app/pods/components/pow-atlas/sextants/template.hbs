@@ -1,8 +1,6 @@
-{{! template-lint-disable no-bare-strings no-implicit-this }}
-
-{{#each map.sextants as |sextantMap|}}
+{{#each @map.sextants as |sextant|}}
   <div
-    local-class="sextant sextant-{{sextantMap.tierColor}}"
-    style={{css-offset sextantMap.offsetLeft sextantMap.offsetTop}}
+    local-class="sextant sextant-{{sextant.map.tierColor}} {{unless sextant.isInRange "out-of-range"}}"
+    style={{css-offset sextant.map.offsetLeft sextant.map.offsetTop}}
   ></div>
 {{/each}}

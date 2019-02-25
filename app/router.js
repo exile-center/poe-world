@@ -2,10 +2,7 @@
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
-const {
-  locationType,
-  rootURL
-} = config;
+const {locationType, rootURL} = config;
 
 class Router extends EmberRouter {
   location = locationType;
