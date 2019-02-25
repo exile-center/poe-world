@@ -7,6 +7,7 @@ import {type, optional} from '@ember-decorators/argument/type';
 import {action} from '@ember-decorators/object';
 
 // Constants
+import RESOURCES from 'poe-world/constants/resources';
 const SEARCH_DEBOUNCE = 500;
 
 export default class Atlas extends Component {
@@ -25,6 +26,8 @@ export default class Atlas extends Component {
   @argument
   @type(optional('object'))
   currentMap = null;
+
+  atlasBackgroundUrl = RESOURCES.ATLAS_BACKGROUND_URL;
 
   maps = null;
   searchedMaps = null;
