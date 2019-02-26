@@ -1,19 +1,64 @@
-{{! template-lint-disable no-bare-strings no-implicit-this }}
+{{#if @map.sextants}}
+  <h2>
+    {{fa-icon "circle" class="mr-1"}}
+    {{t "components.page.map_information_page.sextants_title"}}
+  </h2>
 
-{{#if map.drops}}
+  {{#if @map.confirmedSextants}}
+    <h5>
+      {{t "components.page.map_information_page.confirmed"}}
+    </h5>
+
+    <div class="list-group mb-3">
+      {{#each @map.confirmedSextants as |map|}}
+        <div class="list-group-item">
+          <img
+            class="mr-1"
+            local-class="map-icon"
+            src={{map.imageUrl}}
+            alt=""
+          >
+          {{map.name}}
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+
+  {{#if @map.potentialSextants}}
+    <h5>
+      {{t "components.page.map_information_page.potential"}}
+    </h5>
+
+    <div class="list-group mb-3">
+      {{#each map.potentialSextants as |map|}}
+        <div local-class="potential-sextant" class="list-group-item">
+          <img
+            class="mr-1"
+            local-class="map-icon"
+            src={{map.imageUrl}}
+            alt=""
+          >
+          {{map.name}}
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+{{/if}}
+
+{{#if @map.drops}}
   <h2>
     {{fa-icon "coins" class="mr-1"}}
     {{t "components.page.map_information_page.drops_title"}}
   </h2>
 
   <div class="list-group">
-    {{#each map.drops as |drop|}}
+    {{#each @map.drops as |drop|}}
       {{#if drop.wikiUrl}}
         {{#pow-external-link url=drop.wikiUrl class="list-group-item list-group-item-action"}}
           {{drop.name}}
         {{/pow-external-link}}
       {{else}}
-        <div class="div list-group-item">
+        <div class="list-group-item">
           {{drop.name}}
         </div>
       {{/if}}
@@ -21,7 +66,7 @@
   </div>
 {{/if}}
 
-{{#if map.layoutRating}}
+{{#if @map.layoutRating}}
   <h2 class="mt-3">
     {{fa-icon "compass" class="mr-1"}}
     {{t "components.page.map_information_page.layout_title"}}
@@ -29,37 +74,37 @@
 
   <div class="d-flex align-items-center">
     <div local-class="layout" class="bg-darker px-2 py-0 mr-3">
-      {{map.layoutRating}}
+      {{@map.layoutRating}}
     </div>
 
     <p class="mb-0">
-      {{t layoutRatingDescriptionKey}}
+      {{t this.layoutRatingDescriptionKey}}
     </p>
   </div>
 {{/if}}
 
-{{#if map.bossRating}}
+{{#if @map.bossRating}}
   <h2 class="mt-3">
     {{fa-icon "skull" class="mr-1"}}
     {{t "components.page.map_information_page.boss_title"}}
   </h2>
 
   <p class="lead">
-    {{map.bossRating}} / 5
+    {{@map.bossRating}} / 5
   </p>
 {{/if}}
 
-{{#if map.pantheon}}
+{{#if @map.pantheon}}
   <h2 class="mt-3 text-capitalize">
     {{fa-icon "church" class="mr-1"}}
-    {{t "components.page.map_information_page.pantheon" type=map.pantheon.type}}
+    {{t "components.page.map_information_page.pantheon" type=@map.pantheon.type}}
   </h2>
 
   <p class="lead font-weight-bold">
-    {{map.pantheon.god}}
+    {{@map.pantheon.god}}
   </p>
 
   <p>
-    {{map.pantheon.upgrade}}
+    {{@map.pantheon.upgrade}}
   </p>
 {{/if}}

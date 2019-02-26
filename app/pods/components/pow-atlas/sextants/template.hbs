@@ -1,6 +1,13 @@
-{{#each @map.sextants as |sextant|}}
+{{#each @map.confirmedSextants as |map|}}
   <div
-    local-class="sextant sextant-{{sextant.map.tierColor}} {{unless sextant.isInRange "out-of-range"}}"
-    style={{css-offset sextant.map.offsetLeft sextant.map.offsetTop}}
+    local-class="sextant sextant-{{map.tierColor}}"
+    style={{css-offset map.offsetLeft map.offsetTop}}
+  ></div>
+{{/each}}
+
+{{#each @map.potentialSextants as |map|}}
+  <div
+    local-class="sextant sextant-{{map.tierColor}} potential"
+    style={{css-offset map.offsetLeft map.offsetTop}}
   ></div>
 {{/each}}

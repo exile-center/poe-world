@@ -52,7 +52,8 @@ module.exports = function(defaults) {
           'question-circle',
           'bookmark',
           'star',
-          'trophy'
+          'trophy',
+          'circle'
         ],
         'free-brands-svg-icons': ['github', 'discord', 'reddit']
       }

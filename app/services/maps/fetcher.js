@@ -34,15 +34,7 @@ export default class Fetcher extends Service {
     const maps = Object.values(mapHash);
 
     maps.forEach(map => {
-      const sextants = map.sextants.map(mapId => {
-        const sextantMap = mapHash[mapId];
-
-        return {
-          map: sextantMap,
-          isInRange: map.isInSextantRangeOf(sextantMap)
-        };
-      });
-
+      const sextants = map.sextants.map(mapId => mapHash[mapId]);
       map.set('sextants', sextants);
     });
 

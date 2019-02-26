@@ -114,6 +114,9 @@ components:
       trade: Trade
       stats: Stats
     map_information_page:
+      sextants_title: Sextants
+      confirmed: Confirmed
+      potential: Potential
       drops_title: Notable drops
       layout_title: Layout
       layout_rating_A: The map has a consistent layout that can be reliably fully
