@@ -30,7 +30,7 @@
     </h5>
 
     <div class="list-group mb-3">
-      {{#each map.potentialSextants as |map|}}
+      {{#each @map.potentialSextants as |map|}}
         <div local-class="potential-sextant" class="list-group-item">
           <img
             class="mr-1"
@@ -90,7 +90,7 @@
   </h2>
 
   <p class="lead">
-    {{@map.bossRating}} / 5
+    {{t "components.atlas.search_helper.boss_rating" rating=@map.bossRating}}
   </p>
 {{/if}}
 

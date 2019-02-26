@@ -7,19 +7,19 @@
         {{#if this.hasProperties}}
           {{#if @tradeMap.itemQuantity}}
             <p class="my-1">
-              {{t "components.map_trade_list.item_quantity" itemQuantity=tradeMap.itemQuantity}}
+              {{t "components.map_trade_list.item_quantity" itemQuantity=@tradeMap.itemQuantity}}
             </p>
           {{/if}}
 
           {{#if @tradeMap.itemRarity}}
             <p class="my-1">
-              {{t "components.map_trade_list.item_rarity" itemRarity=tradeMap.itemRarity}}
+              {{t "components.map_trade_list.item_rarity" itemRarity=@tradeMap.itemRarity}}
             </p>
           {{/if}}
 
           {{#if @tradeMap.monsterPackSize}}
             <p class="my-1">
-              {{t "components.map_trade_list.monster_pack_size" monsterPackSize=tradeMap.monsterPackSize}}
+              {{t "components.map_trade_list.monster_pack_size" monsterPackSize=@tradeMap.monsterPackSize}}
             </p>
           {{/if}}
 
@@ -75,7 +75,7 @@
       </p>
 
       <p class="my-0">
-        {{t "components.map_trade_list.sold_by" account=tradeMap.account}}
+        {{t "components.map_trade_list.sold_by" account=@tradeMap.account}}
 
         {{#if @tradeMap.isAfk}}
           <span class="badge badge-warning">
