@@ -79,10 +79,11 @@ $enable-print-styles: false;
 $spacer: 1.5rem;
 
 //
-// Body
+// Global
 //
 $body-bg: $dark;
 $body-color: $white;
+$border-color: rgba($gray-200, 0.45);
 
 //
 // Breakpoints
@@ -123,7 +124,7 @@ $headings-font-family: $font-family-accent;
 //
 // Navs
 //
-$nav-tabs-border-color: rgba($gray-200, 0.45);
+$nav-tabs-border-color: $border-color;
 $nav-tabs-link-hover-border-color: $nav-tabs-border-color;
 $nav-tabs-link-active-color: $white;
 $nav-tabs-link-active-border-color: $nav-tabs-border-color;

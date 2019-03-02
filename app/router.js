@@ -13,6 +13,8 @@ class Router extends EmberRouter {
 Router.map(function() {
   this.route('home', {path: '/'});
 
+  this.route('dashboard');
+
   this.route('atlas', function() {
     this.route('map', {path: '/:slug'}, function() {
       this.route('information', {path: '/'});

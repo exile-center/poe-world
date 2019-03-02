@@ -1,0 +1,13 @@
+{{pow-page/dashboard-page/manager
+  class="mb-2 bg-darker border-bottom"
+  dashboards=this.dashboards
+  activeDashboard=this.activeDashboard
+  onDashboardSelect=(action this.selectDashboard)
+  onDashboardsUpdate=(action this.updateDashboards)
+}}
+
+{{#if this.activeDashboard}}
+  {{pow-page/dashboard-page/widget-board
+    activeDashboard=this.activeDashboard
+  }}
+{{/if}}

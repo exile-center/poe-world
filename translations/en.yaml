@@ -39,6 +39,7 @@ components:
     copy: Copy to clipboard
     copied: Copied
   navigation:
+    dashboard: Dashboard
     atlas: Atlas
     stash: Stash
     trade: Trade
@@ -92,6 +93,13 @@ components:
       trophy_reward: Trophy reward
       mtx_reward: Microtransaction reward
       no_challenge_league: There is currently no active challenge league.
+    dashboard_page:
+      dashboards-manager:
+        untitled: Untitled
+        save: Save
+        cancel: Cancel
+        create: New dashboard
+        edit: Edit label
     home_page:
       tiles:
         atlas: Atlas

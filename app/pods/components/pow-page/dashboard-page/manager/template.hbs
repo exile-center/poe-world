@@ -1,0 +1,61 @@
+<div class="d-flex align-items-center">
+  {{#pow-horizontal-container
+    tagName="ul"
+    class="nav nav-pills flex-nowrap pl-1 py-1 flex-grow-1 flex-shrink-1"
+  }}
+    {{#each @dashboards as |dashboard index|}}
+      <li class="nav-item text-nowrap">
+        <button
+          class="nav-link {{if (eq dashboard.id @activeDashboard.id) "active"}}"
+          {{action @onDashboardSelect dashboard}}
+        >
+          {{#if dashboard.label}}
+            {{dashboard.label}}
+          {{else}}
+            {{t "components.page.dashboard_page.dashboards-manager.untitled"}} #{{index}}
+          {{/if}}
+        </button>
+      </li>
+    {{/each}}
+  {{/pow-horizontal-container}}
+
+  <div class="ml-auto pl-2 pr-1 flex-grow-0 flex-shrink-0">
+    {{#if @activeDashboard}}
+      <button class="btn btn-outline-primary" {{action this.edit}}>
+        {{fa-icon "edit" class="mr-1"}}
+        {{t "components.page.dashboard_page.dashboards-manager.edit"}}
+      </button>
+    {{/if}}
+
+    <button class="btn btn-primary" {{action this.create}}>
+      {{fa-icon "plus" class="mr-1"}}
+      {{t "components.page.dashboard_page.dashboards-manager.create"}}
+    </button>
+  </div>
+</div>
+
+{{#pow-modal
+  isOpened=this.isEditing
+  onClose=(action this.cancel)
+  title=(t "components.page.dashboard_page.dashboards-manager.edit")
+  size="small"
+}}
+  {{pow-input-field
+    class="form-group"
+    placeholder=(t "components.page.dashboard_page.dashboards-manager.untitled")
+    value=this.stagedValues.label
+    onChange=(action (mut this.stagedValues.label))
+  }}
+
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-primary" {{action this.save}}>
+      {{fa-icon "save" class="mr-1"}}
+      {{t "components.page.dashboard_page.dashboards-manager.save"}}
+    </button>
+
+    <button class="btn btn-primary ml-1" {{action this.cancel}}>
+      {{fa-icon "undo" class="mr-1"}}
+      {{t "components.page.dashboard_page.dashboards-manager.cancel"}}
+    </button>
+  </div>
+{{/pow-modal}}
