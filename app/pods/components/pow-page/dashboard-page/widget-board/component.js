@@ -33,4 +33,10 @@ export default class PageDashboardWidgetBoard extends Component {
   updateWidget(widget) {
     console.log('updating', widget);
   }
+
+  @action
+  deleteWidget(columnIndex, widgetIndex) {
+    this.activeDashboard.removeWidget(columnIndex, widgetIndex);
+    this.dashboardPersister.persist(this.activeDashboard);
+  }
 }

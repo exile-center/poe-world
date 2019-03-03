@@ -28,6 +28,10 @@ export default class DashboardWidget extends Component {
   @type(Function)
   onUpdate;
 
+  @argument
+  @type(Function)
+  onDelete;
+
   @computed('widget.type')
   get widgetDefinition() {
     return DASHBOARD_WIDGETS[this.widget.type];

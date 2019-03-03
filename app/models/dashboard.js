@@ -26,6 +26,13 @@ export default class Dashboard extends EmberObject {
     this.widgets.objectAt(columnIndex).addObject(widget);
   }
 
+  removeWidget(columnIndex, widgetIndex) {
+    const column = this.widgets.objectAt(columnIndex);
+    column.removeAt(widgetIndex);
+
+    if (column.length === 0 && this.widgets.length > 1) this.widgets.removeAt(columnIndex);
+  }
+
   asJson() {
     return {
       ...this.getProperties('id', 'label', 'updatedAt'),

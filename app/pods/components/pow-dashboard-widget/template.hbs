@@ -1,4 +1,4 @@
-<div class="card mb-2 py-1 px-2">
+<div class="position-relative overflow-hidden card mb-2 py-1 px-2">
   {{component
     this.resolvedComponent
     state=@widget.state
@@ -6,4 +6,12 @@
     params=this.widgetDefinition.params
     onStateUpdate=(action this.updateState)
   }}
+
+  <div local-class="toolbar {{unless @isLocked "visible"}}">
+    {{#pow-tooltip placement="left" title=(t "components.dashboard_widget.delete")}}
+      <button class="btn btn-sm btn-danger" {{action @onDelete}}>
+        {{fa-icon "trash"}}
+      </button>
+    {{/pow-tooltip}}
+  </div>
 </div>
