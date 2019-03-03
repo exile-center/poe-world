@@ -25,7 +25,12 @@ export default class PageDashboardWidgetBoard extends Component {
 
   @action
   addWidget(columnIndex, widget) {
-    this.activeDashboard.addWidget(widget, columnIndex);
+    this.activeDashboard.addWidget({
+      type: widget.type,
+      state: widget.state,
+      settings: widget.settings
+    }, columnIndex);
+
     this.dashboardPersister.persist(this.activeDashboard);
   }
 

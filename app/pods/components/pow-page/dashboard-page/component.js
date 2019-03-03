@@ -21,12 +21,14 @@ export default class PageDashboard extends Component {
 
   willInsertElement() {
     const dashboards = this.dashboardFetcher.fetchAll();
-
     if (!dashboards.length) dashboards.push(this.dashboardPersister.persist(Dashboard.create()));
+
+    const activeDashboard = dashboards[0];
 
     this.setProperties({
       dashboards,
-      activeDashboard: dashboards[0]
+      activeDashboard,
+      widgetsAreLocked: activeDashboard.hasWidgets
     });
   }
 
