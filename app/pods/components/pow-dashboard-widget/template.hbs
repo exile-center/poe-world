@@ -5,6 +5,7 @@
     settings=@widget.settings
     params=this.widgetDefinition.params
     onStateUpdate=(action this.updateState)
+    onSetupLoadTask=(action this.setupLoadTask)
   }}
 
   <div local-class="toolbar {{unless @isLocked "visible"}}">
@@ -14,4 +15,8 @@
       </button>
     {{/pow-tooltip}}
   </div>
+
+  {{#if this.isLoading}}
+    {{fa-icon "spinner" spin=true local-class="loader"}}
+  {{/if}}
 </div>

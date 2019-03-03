@@ -3,6 +3,7 @@ import Component from '@ember/component';
 import {argument} from '@ember-decorators/argument';
 import {type, shapeOf, optional} from '@ember-decorators/argument/type';
 import {action, computed} from '@ember-decorators/object';
+import {and} from '@ember-decorators/object/computed';
 import {tagName} from '@ember-decorators/component';
 
 // Constants
@@ -32,6 +33,11 @@ export default class DashboardWidget extends Component {
   @type(Function)
   onDelete;
 
+  loadTask = null;
+
+  @and('loadTask', 'loadTask.isRunning')
+  isLoading;
+
   @computed('widget.type')
   get widgetDefinition() {
     return DASHBOARD_WIDGETS[this.widget.type];
@@ -56,5 +62,10 @@ export default class DashboardWidget extends Component {
       ...this.widget,
       settings: newSettings
     });
+  }
+
+  @action
+  setupLoadTask(task) {
+    this.set('loadTask', task);
   }
 }

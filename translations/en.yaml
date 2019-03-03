@@ -24,6 +24,8 @@ components:
       league_progress: 'League: {progress}%'
       challenge_progress: 'Challenge: {progress}%'
   dashboard_widget:
+    vendor_chaos_recipe:
+      title: Chaos recipes
     delete: Remove
   price:
     undefined: Undefined pricing

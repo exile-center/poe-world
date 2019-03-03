@@ -1,1 +1,20 @@
-CHAOS BABY !
+<h5>
+  {{t "components.dashboard_widget.vendor_chaos_recipe.title"}}
+</h5>
+
+<div class="row">
+  {{#each this.chaosRecipeSlots as |chaosRecipeSlot|}}
+    <div class="col-4">
+      <div class="card text-center {{if chaosRecipeSlot.isDanger "bg-danger" (if chaosRecipeSlot.isWarning "bg-warning")}}">
+        <p class="text-capitalize m-0">
+          {{chaosRecipeSlot.slot}}
+        </p>
+
+        <p class="lead font-weight-bold m-0">
+          {{chaosRecipeSlot.recipeCount}}
+          {{fa-icon "times"}}
+        </p>
+      </div>
+    </div>
+  {{/each}}
+</div>

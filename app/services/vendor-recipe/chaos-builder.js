@@ -100,6 +100,7 @@ export default class ChaosBuilder extends Service {
   _initializeDataStructure() {
     return {
       helmet: {
+        slot: 'helmet',
         itemChaosCount: 0,
         itemRegalCount: 0,
         recipeCount: 0,
@@ -107,6 +108,7 @@ export default class ChaosBuilder extends Service {
         isWarning: false
       },
       boots: {
+        slot: 'boots',
         itemChaosCount: 0,
         itemRegalCount: 0,
         recipeCount: 0,
@@ -114,6 +116,7 @@ export default class ChaosBuilder extends Service {
         isWarning: false
       },
       gloves: {
+        slot: 'gloves',
         itemChaosCount: 0,
         itemRegalCount: 0,
         recipeCount: 0,
@@ -121,6 +124,7 @@ export default class ChaosBuilder extends Service {
         isWarning: false
       },
       belt: {
+        slot: 'belt',
         itemChaosCount: 0,
         itemRegalCount: 0,
         recipeCount: 0,
@@ -128,6 +132,7 @@ export default class ChaosBuilder extends Service {
         isWarning: false
       },
       chest: {
+        slot: 'chest',
         itemChaosCount: 0,
         itemRegalCount: 0,
         recipeCount: 0,
@@ -135,6 +140,7 @@ export default class ChaosBuilder extends Service {
         isWarning: false
       },
       ring: {
+        slot: 'ring',
         itemChaosCount: 0,
         itemRegalCount: 0,
         recipeCount: 0,
@@ -142,6 +148,7 @@ export default class ChaosBuilder extends Service {
         isWarning: false
       },
       amulet: {
+        slot: 'amulet',
         itemChaosCount: 0,
         itemRegalCount: 0,
         recipeCount: 0,
@@ -149,6 +156,7 @@ export default class ChaosBuilder extends Service {
         isWarning: false
       },
       hands: {
+        slot: 'hands',
         oneHanded: {
           itemChaosCount: 0,
           itemRegalCount: 0
