@@ -100,6 +100,9 @@ components:
         cancel: Cancel
         create: New dashboard
         edit: Edit label
+      widget_board:
+        add_dropdown:
+          label: Add a widget
     home_page:
       tiles:
         atlas: Atlas

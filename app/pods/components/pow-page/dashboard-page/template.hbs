@@ -1,13 +1,18 @@
-{{pow-page/dashboard-page/manager
-  class="mb-2 bg-darker border-bottom"
-  dashboards=this.dashboards
-  activeDashboard=this.activeDashboard
-  onDashboardSelect=(action this.selectDashboard)
-  onDashboardsUpdate=(action this.updateDashboards)
-}}
-
-{{#if this.activeDashboard}}
-  {{pow-page/dashboard-page/widget-board
+<div class="d-flex flex-column h-100">
+  {{pow-page/dashboard-page/manager
+    class="bg-darker border-bottom"
+    dashboards=this.dashboards
     activeDashboard=this.activeDashboard
+    widgetsAreLocked=this.widgetsAreLocked
+    onDashboardSelect=(action this.selectDashboard)
+    onDashboardsUpdate=(action this.updateDashboards)
+    onWidgetsLockToggle=(action this.toggleWidgetsLock)
   }}
-{{/if}}
+
+  {{#pow-horizontal-container class="flex-grow-1 pt-2"}}
+    {{pow-page/dashboard-page/widget-board
+      activeDashboard=this.activeDashboard
+      widgetsAreLocked=this.widgetsAreLocked
+    }}
+  {{/pow-horizontal-container}}
+</div>

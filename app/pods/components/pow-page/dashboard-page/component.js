@@ -2,10 +2,12 @@
 import Component from '@ember/component';
 import {action} from '@ember-decorators/object';
 import {service} from '@ember-decorators/service';
+import {tagName} from '@ember-decorators/component';
 
 // Models
 import Dashboard from 'poe-world/models/dashboard';
 
+@tagName('')
 export default class PageDashboard extends Component {
   @service('dashboard/persister')
   dashboardPersister;
@@ -15,6 +17,7 @@ export default class PageDashboard extends Component {
 
   dashboards = [];
   activeDashboard = null;
+  widgetsAreLocked = true;
 
   willInsertElement() {
     const dashboards = this.dashboardFetcher.fetchAll();
@@ -29,11 +32,19 @@ export default class PageDashboard extends Component {
 
   @action
   selectDashboard(dashboard) {
-    this.set('activeDashboard', dashboard);
+    this.setProperties({
+      activeDashboard: dashboard,
+      widgetsAreLocked: dashboard.hasWidgets
+    });
   }
 
   @action
   updateDashboards(dashboards) {
     this.set('dashboards', dashboards);
+  }
+
+  @action
+  toggleWidgetsLock() {
+    this.toggleProperty('widgetsAreLocked');
   }
 }

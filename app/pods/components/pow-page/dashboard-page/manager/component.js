@@ -22,12 +22,20 @@ export default class PageDashboardManager extends Component {
   activeDashboard;
 
   @argument
+  @type('boolean')
+  widgetsAreLocked;
+
+  @argument
   @type(Function)
   onDashboardSelect;
 
   @argument
   @type(Function)
   onDashboardsUpdate;
+
+  @argument
+  @type(Function)
+  onWidgetsLockToggle;
 
   stagedValues = null;
 

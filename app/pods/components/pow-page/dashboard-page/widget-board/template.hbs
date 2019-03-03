@@ -1,30 +1,31 @@
-<button class="btn btn-warning" {{action this.toggleWidgetsLock}}>
-  lock toggle
-</button>
+<div class="d-flex">
+  {{#each @activeDashboard.widgets as |widgets index|}}
+    <div local-class="column" class="px-1">
+      {{#each widgets as |widget|}}
+        {{pow-dashboard-widget
+          widget=widget
+          isLocked=@widgetsAreLocked
+          onUpdate=(action this.updateWidget)
+        }}
+      {{/each}}
 
-{{#each @activeDashboard.widgets as |widgets index|}}
-  <div>
-    {{#each widgets as |widget|}}
-      {{pow-dashboard-widget
-        widget=widget
-        isLocked=this.widgetsAreLocked
-        onUpdate=(action this.updateWidget)
-      }}
-    {{/each}}
+      {{#unless @widgetsAreLocked}}
+        {{pow-page/dashboard-page/widget-board/add-dropdown
+          availableWidgets=this.availableWidgets
+          onWidgetAdd=(action this.addWidget index)
+        }}
+      {{/unless}}
+    </div>
+  {{/each}}
 
-    {{#unless this.widgetsAreLocked}}
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-          Dropdown button
-        </button>
-        <div class="dropdown-menu">
-          {{#each this.availableWidgets as |widget|}}
-            <button class="dropdown-item" {{action this.addWidget widget index}}>
-              {{widget.label}}
-            </button>
-          {{/each}}
-        </div>
+  {{#unless @widgetsAreLocked}}
+    {{#if this.hasWidgets}}
+      <div local-class="column" class="mx-1">
+        {{pow-page/dashboard-page/widget-board/add-dropdown
+          availableWidgets=this.availableWidgets
+          onWidgetAdd=(action this.addWidget @activeDashboard.widgets.length)
+        }}
       </div>
-    {{/unless}}
-  </div>
-{{/each}}
+    {{/if}}
+  {{/unless}}
+</div>

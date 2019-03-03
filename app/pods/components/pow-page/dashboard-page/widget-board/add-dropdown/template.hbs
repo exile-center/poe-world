@@ -1,0 +1,13 @@
+<div class="dropdown">
+  <button class="btn btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+    {{fa-icon "plus" class="mr-1"}}
+    {{t "components.page.dashboard_page.widget_board.add_dropdown.label"}}
+  </button>
+  <div class="dropdown-menu">
+    {{#each @availableWidgets as |widget|}}
+      <button class="dropdown-item" {{action @onWidgetAdd widget}}>
+        {{widget.label}}
+      </button>
+    {{/each}}
+  </div>
+</div>

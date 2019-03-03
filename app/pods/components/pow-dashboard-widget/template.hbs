@@ -1,7 +1,9 @@
-{{component
-  this.resolvedComponent
-  state=@widget.state
-  settings=@widget.settings
-  params=this.widgetDefinition.params
-  onStateUpdate=(action this.updateState)
-}}
+<div class="card mb-2 py-1 px-2">
+  {{component
+    this.resolvedComponent
+    state=@widget.state
+    settings=@widget.settings
+    params=this.widgetDefinition.params
+    onStateUpdate=(action this.updateState)
+  }}
+</div>

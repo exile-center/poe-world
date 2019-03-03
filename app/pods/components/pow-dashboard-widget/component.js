@@ -3,10 +3,12 @@ import Component from '@ember/component';
 import {argument} from '@ember-decorators/argument';
 import {type, shapeOf, optional} from '@ember-decorators/argument/type';
 import {action, computed} from '@ember-decorators/object';
+import {tagName} from '@ember-decorators/component';
 
 // Constants
 import DASHBOARD_WIDGETS from 'poe-world/constants/dashboard-widgets';
 
+@tagName('')
 export default class DashboardWidget extends Component {
   @argument
   @type(

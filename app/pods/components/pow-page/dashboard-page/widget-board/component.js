@@ -17,22 +17,15 @@ export default class PageDashboardWidgetBoard extends Component {
   @type('object')
   activeDashboard;
 
+  @argument
+  @type('boolean')
+  widgetsAreLocked;
+
   availableWidgets = Object.values(DASHBOARD_WIDGETS);
-  widgetsAreLocked = true;
 
   @action
-  toggleWidgetsLock() {
-    this.toggleProperty('widgetsAreLocked');
-  }
-
-  @action
-  addWidget(widget, columnIndex) {
-    this.activeDashboard.widgets.objectAt(columnIndex).addObject({
-      type: widget.type,
-      state: widget.state,
-      settings: widget.settings
-    });
-
+  addWidget(columnIndex, widget) {
+    this.activeDashboard.addWidget(widget, columnIndex);
     this.dashboardPersister.persist(this.activeDashboard);
   }
 

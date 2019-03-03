@@ -31,6 +31,10 @@
       {{fa-icon "plus" class="mr-1"}}
       {{t "components.page.dashboard_page.dashboards-manager.create"}}
     </button>
+
+    <button class="btn btn-warning ml-1" {{action @onWidgetsLockToggle}}>
+      {{fa-icon (if @widgetsAreLocked "lock" "unlock")}}
+    </button>
   </div>
 </div>
 
