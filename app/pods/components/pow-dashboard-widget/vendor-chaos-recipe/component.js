@@ -20,6 +20,7 @@ export default class extends BaseWidgetComponent {
   stashItemsFetcher;
 
   chaosRecipeSlots = [];
+  isRateLimited = false;
 
   vendorRecipeLoadTask = task(function*() {
     const stashIds = this.vendorRecipeSetting.stashIds;
@@ -34,8 +35,9 @@ export default class extends BaseWidgetComponent {
     while (true) {
       try {
         yield this.get('vendorRecipeLoadTask').perform();
+        this.set('isRateLimited', false);
       } catch (_error) {
-        // Prevent an API glitch from stopping the poll
+        this.set('isRateLimited', true);
       }
 
       yield timeout(RECIPE_POLLING_INTERVAL);

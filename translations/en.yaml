@@ -26,6 +26,8 @@ components:
   dashboard_widget:
     vendor_chaos_recipe:
       title: Chaos recipes
+      rate_limited_error: Encountered a rate limiting error.
+      rate_limited_error_description: It means there's too much widgets that load too many stash tabs.
     delete: Remove
   price:
     undefined: Undefined pricing
