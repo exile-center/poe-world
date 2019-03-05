@@ -34,6 +34,7 @@ export default class DashboardWidget extends Component {
   onDelete;
 
   loadTask = null;
+  isSettingsModalOpen = false;
 
   @and('loadTask', 'loadTask.isRunning')
   isLoading;
@@ -46,6 +47,13 @@ export default class DashboardWidget extends Component {
   @computed('widgetDefinition')
   get resolvedComponent() {
     return `pow-dashboard-widget/${this.widgetDefinition.component}`;
+  }
+
+  @computed('widgetDefinition')
+  get resolvedSettingsComponent() {
+    if (!this.widgetDefinition.settings) return null;
+
+    return `pow-dashboard-widget/${this.widgetDefinition.component}-settings`;
   }
 
   @action
@@ -67,5 +75,15 @@ export default class DashboardWidget extends Component {
   @action
   setupLoadTask(task) {
     this.set('loadTask', task);
+  }
+
+  @action
+  openSettingsModal() {
+    this.set('isSettingsModalOpen', true);
+  }
+
+  @action
+  closeSettingsModal() {
+    this.set('isSettingsModalOpen', false);
   }
 }

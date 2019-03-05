@@ -5,7 +5,7 @@
         {{pow-dashboard-widget
           widget=widget
           isLocked=@widgetsAreLocked
-          onUpdate=(action this.updateWidget)
+          onUpdate=(action this.updateWidget columnIndex widgetIndex)
           onDelete=(action this.deleteWidget columnIndex widgetIndex)
         }}
       {{/each}}

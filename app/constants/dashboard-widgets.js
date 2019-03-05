@@ -6,5 +6,15 @@ export default {
     state: null,
     params: null,
     settings: null
+  },
+  'challenge-tracker': {
+    type: 'challenge-tracker',
+    label: 'Challenge tracker',
+    component: 'challenge-tracker',
+    state: null,
+    params: null,
+    settings: {
+      challengeSlugs: []
+    }
   }
 };

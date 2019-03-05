@@ -1,5 +1,6 @@
 // Vendor
 import EmberObject from '@ember/object';
+import {set} from '@ember/object';
 import {A} from '@ember/array';
 import {bool} from '@ember-decorators/object/computed';
 
@@ -31,6 +32,13 @@ export default class Dashboard extends EmberObject {
     column.removeAt(widgetIndex);
 
     if (column.length === 0 && this.widgets.length > 1) this.widgets.removeAt(columnIndex);
+  }
+
+  updateWidget(columnIndex, widgetIndex, newWidget) {
+    const currentWidget = this.widgets.objectAt(columnIndex).objectAt(widgetIndex);
+
+    set(currentWidget, 'settings', newWidget.settings);
+    set(currentWidget, 'state', newWidget.state);
   }
 
   asJson() {

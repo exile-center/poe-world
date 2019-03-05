@@ -1,0 +1,13 @@
+{{#pow-task-load-container task=this.challengesLoadTask}}
+  <ul class="list-unstyled mb-0">
+    {{#each this.challenges as |challenge|}}
+      <li>
+        {{pow-dashboard-widget/challenge-tracker-settings/option
+          challenge=challenge
+          selectedSlugs=this.selectedChallengeSlugs
+          onChallengeSlugToggle=(action this.toggleChallengeSlug)
+        }}
+      </li>
+    {{/each}}
+  </ul>
+{{/pow-task-load-container}}

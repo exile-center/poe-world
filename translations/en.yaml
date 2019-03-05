@@ -24,11 +24,15 @@ components:
       league_progress: 'League: {progress}%'
       challenge_progress: 'Challenge: {progress}%'
   dashboard_widget:
+    challenge_tracker:
+      title: League challenges
     vendor_chaos_recipe:
       title: Chaos recipes
       rate_limited_error: Encountered a rate limiting error.
       rate_limited_error_description: It means there's too much widgets that load too many stash tabs.
     delete: Remove
+    settings: Configure
+    settings_title: Settings
   price:
     undefined: Undefined pricing
   map_trade_list:

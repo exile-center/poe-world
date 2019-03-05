@@ -14,9 +14,31 @@
         {{fa-icon "trash"}}
       </button>
     {{/pow-tooltip}}
+
+    {{#if @widget.settings}}
+      {{#pow-tooltip placement="left" title=(t "components.dashboard_widget.settings")}}
+        <button class="btn btn-sm btn-primary" {{action this.openSettingsModal}}>
+          {{fa-icon "cog"}}
+        </button>
+      {{/pow-tooltip}}
+    {{/if}}
   </div>
 
   {{#if this.isLoading}}
     {{fa-icon "spinner" spin=true local-class="loader"}}
   {{/if}}
 </div>
+
+{{#if @widget.settings}}
+  {{#pow-modal
+    isOpened=this.isSettingsModalOpen
+    onClose=(action this.closeSettingsModal)
+    title=(t "components.dashboard_widget.settings_title")
+  }}
+    {{component
+      this.resolvedSettingsComponent
+      settings=@widget.settings
+      onSettingsUpdate=(action this.updateSettings)
+    }}
+  {{/pow-modal}}
+{{/if}}

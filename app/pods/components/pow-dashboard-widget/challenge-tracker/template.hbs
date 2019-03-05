@@ -1,0 +1,19 @@
+<h5 class="mb-0">
+  {{t "components.dashboard_widget.challenge_tracker.title"}}
+</h5>
+
+{{#each this.filteredChallenges as |challenge|}}
+  <h6 class="my-1">
+    {{challenge.name}} {{challenge.completed}}
+  </h6>
+
+  <ul class="list-unstyled mb-0">
+    {{#each challenge.subChallenges as |subChallenge|}}
+      {{#unless subChallenge.completed}}
+        <li class="small">
+          {{subChallenge.description}}
+        </li>
+      {{/unless}}
+    {{/each}}
+  </ul>
+{{/each}}

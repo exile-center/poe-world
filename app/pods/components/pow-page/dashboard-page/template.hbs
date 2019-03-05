@@ -9,10 +9,9 @@
     onWidgetsLockToggle=(action this.toggleWidgetsLock)
   }}
 
-  {{#pow-horizontal-container class="flex-grow-1 pt-2"}}
-    {{pow-page/dashboard-page/widget-board
-      activeDashboard=this.activeDashboard
-      widgetsAreLocked=this.widgetsAreLocked
-    }}
-  {{/pow-horizontal-container}}
+  {{pow-page/dashboard-page/widget-board
+    class="flex-grow-1 pt-2"
+    activeDashboard=this.activeDashboard
+    widgetsAreLocked=this.widgetsAreLocked
+  }}
 </div>
