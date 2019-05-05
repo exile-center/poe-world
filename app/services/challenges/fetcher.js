@@ -81,9 +81,13 @@ export default class Fetcher extends Service {
   }
 
   _parseCompletionFrom(textValue) {
-    const completionMatch = textValue.match(/(\d+)\/(\d+)/);
+    const completionMatch = textValue.match(/([\d\,]+)\/([\d\,]+)/);
     if (!completionMatch) return [null, null];
 
-    return [parseInt(completionMatch[1], 10), parseInt(completionMatch[2], 10)];
+    return [this._parseCompletionValue(completionMatch[1]), this._parseCompletionValue(completionMatch[2])];
+  }
+
+  _parseCompletionValue(value) {
+    return parseInt(value.replace(/\D+/g, ''), 10);
   }
 }
