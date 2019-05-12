@@ -11,14 +11,14 @@
   <div local-class="toolbar {{unless @isLocked "visible"}}">
     {{#pow-tooltip placement="left" title=(t "components.dashboard_widget.delete")}}
       <button class="btn btn-sm btn-danger" {{action @onDelete}}>
-        {{fa-icon "trash"}}
+        {{fa-icon "trash" fixedWidth=true}}
       </button>
     {{/pow-tooltip}}
 
     {{#if @widget.settings}}
       {{#pow-tooltip placement="left" title=(t "components.dashboard_widget.settings")}}
         <button class="btn btn-sm btn-primary" {{action this.openSettingsModal}}>
-          {{fa-icon "cog"}}
+          {{fa-icon "cog" fixedWidth=true}}
         </button>
       {{/pow-tooltip}}
     {{/if}}
