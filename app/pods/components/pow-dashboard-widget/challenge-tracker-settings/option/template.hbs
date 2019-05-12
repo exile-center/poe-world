@@ -1,2 +1,3 @@
-{{if this.isSelected "YES" "NO"}}
-{{@challenge.name}}
+<button class="btn btn-block {{if this.isSelected "btn-success" "btn-primary"}}" {{action this.select}}>
+  {{@challenge.name}}
+</button>

@@ -1,12 +1,16 @@
 {{#pow-task-load-container task=this.challengesLoadTask}}
-  <ul class="list-unstyled mb-0">
+  <ul class="row list-unstyled mb-0">
     {{#each this.challenges as |challenge|}}
-      <li>
+      <li class="col-6 my-1">
         {{pow-dashboard-widget/challenge-tracker-settings/option
           challenge=challenge
-          selectedSlugs=this.selectedChallengeSlugs
-          onChallengeSlugToggle=(action this.toggleChallengeSlug)
+          selectedChallengeSlug=@settings.challengeSlug
+          onSelect=(action this.selectChallengeSlug)
         }}
+      </li>
+    {{else}}
+      <li class="col-12">
+        {{t "components.dashboard_widget.challenge_tracker_settings.no_trackable_challenges"}}
       </li>
     {{/each}}
   </ul>

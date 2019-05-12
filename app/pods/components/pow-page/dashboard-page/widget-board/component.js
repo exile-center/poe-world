@@ -1,6 +1,5 @@
 // Vendor
 import Component from '@ember/component';
-import {action} from '@ember-decorators/object';
 import {service} from '@ember-decorators/service';
 import {argument} from "@ember-decorators/argument";
 import {optional, type, arrayOf} from '@ember-decorators/argument/type';
@@ -21,28 +20,17 @@ export default class PageDashboardWidgetBoard extends Component {
   @type('boolean')
   widgetsAreLocked;
 
+  @argument
+  @type(Function)
+  addWidget;
+
+  @argument
+  @type(Function)
+  updateWidget;
+
+  @argument
+  @type(Function)
+  deleteWidget;
+
   availableWidgets = Object.values(DASHBOARD_WIDGETS);
-
-  @action
-  addWidget(columnIndex, widget) {
-    this.activeDashboard.addWidget({
-      type: widget.type,
-      state: widget.state,
-      settings: widget.settings
-    }, columnIndex);
-
-    this.dashboardPersister.persist(this.activeDashboard);
-  }
-
-  @action
-  updateWidget(columnIndex, widgetIndex, newWidget) {
-    this.activeDashboard.updateWidget(columnIndex, widgetIndex, newWidget);
-    this.dashboardPersister.persist(this.activeDashboard);
-  }
-
-  @action
-  deleteWidget(columnIndex, widgetIndex) {
-    this.activeDashboard.removeWidget(columnIndex, widgetIndex);
-    this.dashboardPersister.persist(this.activeDashboard);
-  }
 }

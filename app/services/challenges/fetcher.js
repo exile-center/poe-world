@@ -8,6 +8,7 @@ import Challenge from 'poe-world/models/challenge';
 
 // Constants
 import PRIVATE_API from 'poe-world/constants/private-api';
+const CACHE_DURATION = 120000; // 2 minutes
 
 export default class Fetcher extends Service {
   @service('-electron/request')
@@ -16,10 +17,19 @@ export default class Fetcher extends Service {
   @service('authentication/setting')
   authenticationSetting;
 
+  _cache = {
+    challenges: null,
+    timestamp: null
+  };
+
   fetch(leagueId) {
+    const timestamp = Date.now();
+    const cache = this._cache;
     const account = this.authenticationSetting.account;
 
-    return this.electronRequest
+    if (cache.challenges && cache.timestamp + CACHE_DURATION > timestamp) return cache.challenges;
+
+    const challenges = this.electronRequest
       .privateFetch(`${PRIVATE_API.PROFILE_BASE_URL}/${account}/challenges/${leagueId}`)
       .then(challengesHtml => {
         return $(challengesHtml)
@@ -29,6 +39,13 @@ export default class Fetcher extends Service {
           })
           .toArray();
       });
+
+    this.set('_cache', {
+      challenges,
+      timestamp
+    });
+
+    return challenges;
   }
 
   _parseChallenge(challengeNode) {

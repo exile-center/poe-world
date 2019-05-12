@@ -1,11 +1,12 @@
 <div class="d-flex flex-column h-100">
-  {{pow-page/dashboard-page/manager
+  {{pow-page/dashboard-page/header
     class="bg-darker border-bottom"
     dashboards=this.dashboards
     activeDashboard=this.activeDashboard
     widgetsAreLocked=this.widgetsAreLocked
     onDashboardSelect=(action this.selectDashboard)
-    onDashboardsUpdate=(action this.updateDashboards)
+    onDashboardCreate=(action this.createDashboard)
+    onActiveDashboardUpdate=(action this.updateActiveDashboard)
     onWidgetsLockToggle=(action this.toggleWidgetsLock)
   }}
 
@@ -13,5 +14,8 @@
     class="flex-grow-1 pt-2"
     activeDashboard=this.activeDashboard
     widgetsAreLocked=this.widgetsAreLocked
+    updateWidget=(action this.updateWidget)
+    deleteWidget=(action this.deleteWidget)
+    addWidget=(action this.addWidget)
   }}
 </div>

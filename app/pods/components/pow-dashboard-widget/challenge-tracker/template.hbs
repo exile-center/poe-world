@@ -2,18 +2,39 @@
   {{t "components.dashboard_widget.challenge_tracker.title"}}
 </h5>
 
-{{#each this.filteredChallenges as |challenge|}}
-  <h6 class="my-1">
-    {{challenge.name}} {{challenge.completed}}
-  </h6>
+{{#if this.trackedChallenge}}
+  <h5 class="mt-1">
+    {{this.trackedChallenge.name}}
+  </h5>
 
-  <ul class="list-unstyled mb-0">
-    {{#each challenge.subChallenges as |subChallenge|}}
-      {{#unless subChallenge.completed}}
-        <li class="small">
-          {{subChallenge.description}}
+  {{#unless this.trackedChallenge.completed}}
+    <ul class="list-unstyled m-0">
+      {{#each this.trackedChallenge.sortedSubChallenges as |subChallenge|}}
+        <li class="d-inline-flex flex-column w-100">
+          <div class="d-flex justify-content-between align-items-center w-100">
+            <div class="small" local-class="{{if subChallenge.completed "completed-description"}}">
+              {{subChallenge.description}}
+            </div>
+
+            {{pow-challenge-progress/badge
+              class="ml-2"
+              challenge=subChallenge
+            }}
+          </div>
+
+          <div local-class="slim-progress" class="progress w-100 mt-1 mb-2">
+            <div class="progress-bar" style={{css-percent-width subChallenge.progress}}></div>
+          </div>
         </li>
-      {{/unless}}
-    {{/each}}
-  </ul>
-{{/each}}
+      {{/each}}
+    </ul>
+  {{else}}
+    <div class="alert alert-success text-center py-1 mb-1 small">
+      {{t "components.dashboard_widget.challenge_tracker.completed"}}
+    </div>
+  {{/unless}}
+{{else}}
+  <div class="alert alert-warning text-center py-1 mt-2 mb-1 small">
+    {{t "components.dashboard_widget.challenge_tracker.not_configured"}}
+  </div>
+{{/if}}

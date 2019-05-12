@@ -12,28 +12,26 @@ export default class extends BaseWidgetSettingsComponent {
   challengesFetcher;
 
   challenges = [];
-  selectedChallengeSlugs;
 
   challengesLoadTask = task(function*() {
     const challenges = yield this.challengesFetcher.fetch();
-    this.set('challenges', challenges.filter(challenge => Boolean(challenge.subChallenges.length)));
+
+    this.set('challenges', challenges.filter(challenge => {
+      if (challenge.completed) return false;
+      if (!challenge.subChallenges.length) return false;
+
+      return true;
+    }));
   }).drop();
 
   willInsertElement() {
     this.get('challengesLoadTask').perform();
-    this.set('selectedChallengeSlugs', A(this.settings.challengeSlugs));
   }
 
   @action
-  toggleChallengeSlug(challengeSlug) {
-    if (this.selectedChallengeSlugs.includes(challengeSlug)) {
-      this.selectedChallengeSlugs.removeObject(challengeSlug);
-    } else {
-      this.selectedChallengeSlugs.addObject(challengeSlug);
-    }
-
+  selectChallengeSlug(challengeSlug) {
     this.onSettingsUpdate({
-      challengeSlugs: this.selectedChallengeSlugs.toArray()
+      challengeSlug
     });
   }
 }

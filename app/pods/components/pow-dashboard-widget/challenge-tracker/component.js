@@ -1,6 +1,5 @@
 // Vendor
 import {service} from '@ember-decorators/service';
-import {computed} from '@ember-decorators/object';
 import {task, timeout} from 'ember-concurrency';
 
 // Base widget
@@ -14,18 +13,12 @@ export default class extends BaseWidgetComponent {
   challengesFetcher;
 
   challenges = [];
-
-  @computed('challenges', 'settings.challengeSlugs')
-  get filteredChallenges() {
-    const challengeSlugs = this.settings.challengeSlugs;
-    return this.challenges.filter(challenge => {
-      return challengeSlugs.includes(challenge.slug) && !challenge.completed;
-    });
-  }
+  trackedChallenge = null;
 
   challengesLoadTask = task(function*() {
     const challenges = yield this.challengesFetcher.fetch();
-    this.set('challenges', challenges);
+
+    this.set('trackedChallenge', challenges.find(challenge => challenge.slug === this.settings.challengeSlug));
   }).drop();
 
   challengesPollingTask = task(function*() {
@@ -43,5 +36,9 @@ export default class extends BaseWidgetComponent {
   willInsertElement() {
     this.onSetupLoadTask(this.get('challengesLoadTask'));
     this.get('challengesPollingTask').perform();
+  }
+
+  didUpdateAttrs() {
+    this.challengesLoadTask.perform();
   }
 }

@@ -20,15 +20,12 @@ export default class PageDashboard extends Component {
   widgetsAreLocked = true;
 
   willInsertElement() {
-    const dashboards = this.dashboardFetcher.fetchAll();
-    if (!dashboards.length) dashboards.push(this.dashboardPersister.persist(Dashboard.create()));
-
-    const activeDashboard = dashboards[0];
+    this._refreshDashboards();
+    const activeDashboard = this.dashboards[0] || null;
 
     this.setProperties({
-      dashboards,
       activeDashboard,
-      widgetsAreLocked: activeDashboard.hasWidgets
+      widgetsAreLocked: activeDashboard && activeDashboard.hasWidgets
     });
   }
 
@@ -48,5 +45,45 @@ export default class PageDashboard extends Component {
   @action
   toggleWidgetsLock() {
     this.toggleProperty('widgetsAreLocked');
+  }
+
+  @action
+  createDashboard() {
+    const newDashboard = this.dashboardPersister.persist(Dashboard.create());
+    this._refreshDashboards();
+    this.set('activeDashboard', newDashboard);
+  }
+
+  @action
+  updateActiveDashboard(newProperties) {
+    this.activeDashboard.setProperties(newProperties);
+    this.dashboardPersister.persist(this.activeDashboard);
+  }
+
+  @action
+  addWidget(columnIndex, widget) {
+    this.activeDashboard.addWidget({
+      type: widget.type,
+      state: widget.state,
+      settings: widget.settings
+    }, columnIndex);
+
+    this.dashboardPersister.persist(this.activeDashboard);
+  }
+
+  @action
+  updateWidget(columnIndex, widgetIndex, widget) {
+    this.activeDashboard.updateWidget(columnIndex, widgetIndex, widget);
+    this.dashboardPersister.persist(this.activeDashboard);
+  }
+
+  @action
+  deleteWidget(columnIndex, widgetIndex) {
+    this.activeDashboard.removeWidget(columnIndex, widgetIndex);
+    this.dashboardPersister.persist(this.activeDashboard);
+  }
+
+  _refreshDashboards() {
+    this.set('dashboards', this.dashboardFetcher.fetchAll());
   }
 }

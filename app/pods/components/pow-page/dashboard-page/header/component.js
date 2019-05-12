@@ -2,17 +2,10 @@
 import Component from '@ember/component';
 import {action} from '@ember-decorators/object';
 import {bool} from '@ember-decorators/object/computed';
-import {service} from '@ember-decorators/service';
 import {argument} from '@ember-decorators/argument';
 import {optional, type, arrayOf} from '@ember-decorators/argument/type';
 
-// Models
-import Dashboard from 'poe-world/models/dashboard';
-
-export default class PageDashboardManager extends Component {
-  @service('dashboard/persister')
-  dashboardPersister;
-
+export default class PageDashboardHeader extends Component {
   @argument
   @type(arrayOf('object'))
   dashboards;
@@ -31,7 +24,11 @@ export default class PageDashboardManager extends Component {
 
   @argument
   @type(Function)
-  onDashboardsUpdate;
+  onDashboardCreate;
+
+  @argument
+  @type(Function)
+  onActiveDashboardUpdate;
 
   @argument
   @type(Function)
@@ -54,17 +51,7 @@ export default class PageDashboardManager extends Component {
 
   @action
   save() {
-    this.activeDashboard.setProperties(this.stagedValues);
-    this.dashboardPersister.persist(this.activeDashboard);
-
+    this.onActiveDashboardUpdate(this.stagedValues);
     this.set('stagedValues', null);
-  }
-
-  @action
-  create() {
-    const newDashboard = this.dashboardPersister.persist(Dashboard.create());
-
-    this.onDashboardsUpdate(this.dashboards.concat(newDashboard));
-    this.onDashboardSelect(newDashboard);
   }
 }

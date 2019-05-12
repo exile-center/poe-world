@@ -1,8 +1,8 @@
 // Vendor
 import Component from '@ember/component';
 import {argument} from '@ember-decorators/argument';
-import {type, arrayOf} from '@ember-decorators/argument/type';
-import {computed} from '@ember-decorators/object';
+import {type, optional} from '@ember-decorators/argument/type';
+import {action, computed} from '@ember-decorators/object';
 
 export default class extends Component {
   @argument
@@ -10,19 +10,20 @@ export default class extends Component {
   challenge;
 
   @argument
-  @type(arrayOf('string'))
-  selectedSlugs;
+  @type(optional('string'))
+  selectedChallengeSlug;
 
   @argument
   @type(Function)
-  onChallengeSlugToggle;
+  onSelect;
 
-  @computed('challenge', 'selectedSlugs.[]')
+  @computed('challenge.slug', 'selectedChallengeSlug')
   get isSelected() {
-    return this.selectedSlugs.includes(this.challenge.slug);
+    return this.challenge.slug === this.selectedChallengeSlug;
   }
 
-  click() {
-    this.onChallengeSlugToggle(this.challenge.slug);
+  @action
+  select() {
+    this.onSelect(this.challenge.slug);
   }
 }

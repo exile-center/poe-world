@@ -5,15 +5,15 @@
         {{pow-dashboard-widget
           widget=widget
           isLocked=@widgetsAreLocked
-          onUpdate=(action this.updateWidget columnIndex widgetIndex)
-          onDelete=(action this.deleteWidget columnIndex widgetIndex)
+          onUpdate=(action @updateWidget columnIndex widgetIndex)
+          onDelete=(action @deleteWidget columnIndex widgetIndex)
         }}
       {{/each}}
 
       {{#unless @widgetsAreLocked}}
         {{pow-page/dashboard-page/widget-board/add-dropdown
           availableWidgets=this.availableWidgets
-          onWidgetAdd=(action this.addWidget columnIndex)
+          onWidgetAdd=(action @addWidget columnIndex)
         }}
       {{/unless}}
     </div>

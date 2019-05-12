@@ -14,7 +14,7 @@ export default {
     state: null,
     params: null,
     settings: {
-      challengeSlugs: []
+      challengeSlug: null
     }
   }
 };
