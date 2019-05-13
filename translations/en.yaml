@@ -108,7 +108,7 @@ components:
       mtx_reward: Microtransaction reward
       no_challenge_league: There is currently no active challenge league.
     dashboard_page:
-      dashboards-manager:
+      header:
         untitled: Untitled
         save: Save
         cancel: Cancel
