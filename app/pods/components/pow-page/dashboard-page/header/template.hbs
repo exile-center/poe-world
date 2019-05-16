@@ -64,7 +64,9 @@
 
   <div class="card border-danger mt-2">
     <div class="card-body">
-      <p>Deleting the dashboard will also destroy all its widgets, be careful !</p>
+      <p>
+        {{t "components.page.dashboard_page.header.delete_warning"}}
+      </p>
 
       <div class="d-flex justify-content-end">
         {{#pow-hold-button type="danger" onHold=(action this.deleteActiveDashboard)}}

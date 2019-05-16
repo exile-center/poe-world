@@ -115,6 +115,7 @@ components:
         create: New dashboard
         settings: Dashboard settings
         name_label: Name
+        delete_warning: Deleting the dashboard will also destroy all its widgets, be careful !
         delete: Hold to delete
       widget_board:
         add_dropdown:

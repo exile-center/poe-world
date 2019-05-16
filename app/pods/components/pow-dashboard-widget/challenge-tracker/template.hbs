@@ -7,7 +7,11 @@
     {{this.trackedChallenge.name}}
   </h5>
 
-  {{#unless this.trackedChallenge.completed}}
+  {{#if this.trackedChallenge.completed}}
+    <div class="alert alert-success text-center py-1 mb-1 small">
+      {{t "components.dashboard_widget.challenge_tracker.completed"}}
+    </div>
+  {{else}}
     <ul class="list-unstyled m-0">
       {{#each this.trackedChallenge.sortedSubChallenges as |subChallenge|}}
         <li class="d-inline-flex flex-column w-100">
@@ -28,11 +32,7 @@
         </li>
       {{/each}}
     </ul>
-  {{else}}
-    <div class="alert alert-success text-center py-1 mb-1 small">
-      {{t "components.dashboard_widget.challenge_tracker.completed"}}
-    </div>
-  {{/unless}}
+  {{/if}}
 {{else}}
   <div class="alert alert-warning text-center py-1 mt-2 mb-1 small">
     {{t "components.dashboard_widget.challenge_tracker.not_configured"}}
