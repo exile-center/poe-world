@@ -113,7 +113,9 @@ components:
         save: Save
         cancel: Cancel
         create: New dashboard
-        edit: Edit label
+        settings: Dashboard settings
+        name_label: Name
+        delete: Hold to delete
       widget_board:
         add_dropdown:
           label: Add a widget

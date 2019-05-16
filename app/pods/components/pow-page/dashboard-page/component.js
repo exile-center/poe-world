@@ -12,6 +12,9 @@ export default class PageDashboard extends Component {
   @service('dashboard/persister')
   dashboardPersister;
 
+  @service('dashboard/destroyer')
+  dashboardDestroyer;
+
   @service('dashboard/fetcher')
   dashboardFetcher;
 
@@ -21,12 +24,9 @@ export default class PageDashboard extends Component {
 
   willInsertElement() {
     this._refreshDashboards();
-    const activeDashboard = this.dashboards[0] || null;
+    this._selectFirstDashboard();
 
-    this.setProperties({
-      activeDashboard,
-      widgetsAreLocked: activeDashboard && activeDashboard.hasWidgets
-    });
+    this.set('widgetsAreLocked', this.activeDashboard && this.activeDashboard.hasWidgets);
   }
 
   @action
@@ -61,6 +61,13 @@ export default class PageDashboard extends Component {
   }
 
   @action
+  deleteActiveDashboard() {
+    this.dashboardDestroyer.destroy(this.activeDashboard);
+    this._refreshDashboards();
+    this._selectFirstDashboard();
+  }
+
+  @action
   addWidget(columnIndex, widget) {
     this.activeDashboard.addWidget({
       type: widget.type,
@@ -85,5 +92,9 @@ export default class PageDashboard extends Component {
 
   _refreshDashboards() {
     this.set('dashboards', this.dashboardFetcher.fetchAll());
+  }
+
+  _selectFirstDashboard() {
+    this.set('activeDashboard', this.dashboards[0] || null)
   }
 }

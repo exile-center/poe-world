@@ -32,26 +32,43 @@ export default class PageDashboardHeader extends Component {
 
   @argument
   @type(Function)
+  onActiveDashboardDelete;
+
+  @argument
+  @type(Function)
   onWidgetsLockToggle;
 
   stagedValues = null;
+  isSettingsModalOpened = false;
 
   @bool('stagedValues')
   isEditing;
 
   @action
-  edit() {
-    this.set('stagedValues', this.activeDashboard.getProperties('label'));
+  openSettings() {
+    this.setProperties({
+      isSettingsModalOpened: true,
+      stagedValues: this.activeDashboard.getProperties('label')
+    });
   }
 
   @action
-  cancel() {
-    this.set('stagedValues', null);
+  closeSettings() {
+    this.setProperties({
+      isSettingsModalOpened: false,
+      stagedValues: null
+    });
   }
 
   @action
-  save() {
+  saveActiveDashboard() {
     this.onActiveDashboardUpdate(this.stagedValues);
-    this.set('stagedValues', null);
+    this.send('closeSettings');
+  }
+
+  @action
+  deleteActiveDashboard() {
+    this.onActiveDashboardDelete();
+    this.send('closeSettings');
   }
 }

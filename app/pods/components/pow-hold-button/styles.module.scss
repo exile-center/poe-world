@@ -1,0 +1,24 @@
+@keyframes hold-button-progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: calc(100% + 2px);
+  }
+}
+
+.hold-button {
+  background-color: cyan !important;
+}
+
+.hold-indicator {
+  position: absolute;
+  top: 0;
+  left: -1px;
+  height: calc(100% + 2px);
+  border-radius: $border-radius;
+  background: rgba($gray-100, 0.15);
+  animation: hold-button-progress;
+  animation-direction: initial;
+  animation-timing-function: linear;
+}
