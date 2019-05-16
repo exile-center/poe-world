@@ -69,11 +69,14 @@ export default class PageDashboard extends Component {
 
   @action
   addWidget(columnIndex, widget) {
-    this.activeDashboard.addWidget({
-      type: widget.type,
-      state: widget.state,
-      settings: widget.settings
-    }, columnIndex);
+    this.activeDashboard.addWidget(
+      {
+        type: widget.type,
+        state: widget.state,
+        settings: widget.settings
+      },
+      columnIndex
+    );
 
     this.dashboardPersister.persist(this.activeDashboard);
   }
@@ -95,6 +98,6 @@ export default class PageDashboard extends Component {
   }
 
   _selectFirstDashboard() {
-    this.set('activeDashboard', this.dashboards[0] || null)
+    this.set('activeDashboard', this.dashboards[0] || null);
   }
 }

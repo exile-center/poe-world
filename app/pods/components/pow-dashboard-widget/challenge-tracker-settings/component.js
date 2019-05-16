@@ -2,7 +2,6 @@
 import {service} from '@ember-decorators/service';
 import {task} from 'ember-concurrency';
 import {action} from '@ember-decorators/object';
-import {A} from '@ember/array';
 
 // Base widget
 import BaseWidgetSettingsComponent from '../base-widget-settings-component';
@@ -16,12 +15,15 @@ export default class extends BaseWidgetSettingsComponent {
   challengesLoadTask = task(function*() {
     const challenges = yield this.challengesFetcher.fetch();
 
-    this.set('challenges', challenges.filter(challenge => {
-      if (challenge.completed) return false;
-      if (!challenge.subChallenges.length) return false;
+    this.set(
+      'challenges',
+      challenges.filter(challenge => {
+        if (challenge.completed) return false;
+        if (!challenge.subChallenges.length) return false;
 
-      return true;
-    }));
+        return true;
+      })
+    );
   }).drop();
 
   willInsertElement() {

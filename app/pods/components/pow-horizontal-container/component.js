@@ -16,7 +16,6 @@ export default class HorizontalContainer extends Component {
     $this.on('mousewheel', this._handleScroll.bind(this));
   }
 
-
   willDestroyElement() {
     this.$().off('mousewheel');
   }
@@ -28,6 +27,6 @@ export default class HorizontalContainer extends Component {
     const currentScrollLeft = $this.scrollLeft();
     const delta = Math.max(-1, Math.min(1, event.originalEvent.wheelDelta));
 
-    $this.scrollLeft(currentScrollLeft + (delta * SCROLL_COEFFICIENT));
+    $this.scrollLeft(delta * SCROLL_COEFFICIENT + currentScrollLeft);
   }
 }

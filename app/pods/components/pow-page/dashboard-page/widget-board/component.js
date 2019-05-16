@@ -1,12 +1,11 @@
 // Vendor
 import Component from '@ember/component';
 import {service} from '@ember-decorators/service';
-import {argument} from "@ember-decorators/argument";
-import {optional, type, arrayOf} from '@ember-decorators/argument/type';
+import {argument} from '@ember-decorators/argument';
+import {type} from '@ember-decorators/argument/type';
 
 // Constants
 import DASHBOARD_WIDGETS from 'poe-world/constants/dashboard-widgets';
-
 
 export default class PageDashboardWidgetBoard extends Component {
   @service('dashboard/persister')

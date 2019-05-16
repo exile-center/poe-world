@@ -22,7 +22,7 @@ export default class Dashboard extends EmberObject {
   }
 
   addWidget(widget, columnIndex) {
-    if (this.widgets.length <= columnIndex) this.widgets.addObject(A([]))
+    if (this.widgets.length <= columnIndex) this.widgets.addObject(A([]));
 
     this.widgets.objectAt(columnIndex).addObject(widget);
   }
