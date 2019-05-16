@@ -14,7 +14,7 @@ module.exports = {
     'no-duplicate-attributes': true,
     'no-html-comments': true,
     'no-implicit-this': {
-      allow: ['pow-page/challenges-page', 'pow-release-banner']
+      allow: ['pow-page/challenges-page', 'pow-release-banner', 'pow-page/dashboard-page']
     },
     'no-log': true,
     'no-outlet-outside-routes': true,

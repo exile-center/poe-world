@@ -1,0 +1,79 @@
+<div class="d-flex align-items-center">
+  {{#pow-horizontal-container
+    tagName="ul"
+    class="nav nav-pills flex-nowrap pl-1 py-1 flex-grow-1 flex-shrink-1"
+  }}
+    {{#each @dashboards as |dashboard index|}}
+      <li class="nav-item text-nowrap">
+        <button
+          class="nav-link {{if (eq dashboard.id @activeDashboard.id) "active"}}"
+          {{action @onDashboardSelect dashboard}}
+        >
+          {{#if dashboard.label}}
+            {{dashboard.label}}
+          {{else}}
+            {{t "components.page.dashboard_page.header.untitled"}} #{{index}}
+          {{/if}}
+        </button>
+      </li>
+    {{/each}}
+  {{/pow-horizontal-container}}
+
+  <div class="ml-auto pl-2 pr-1 flex-grow-0 flex-shrink-0">
+    {{#if @activeDashboard}}
+      <button class="btn btn-outline-primary" {{action this.openSettings}}>
+        {{fa-icon "cog" class="mr-1"}}
+        {{t "components.page.dashboard_page.header.settings"}}
+      </button>
+    {{/if}}
+
+    <button class="btn btn-primary" {{action @onDashboardCreate}}>
+      {{fa-icon "plus" class="mr-1"}}
+      {{t "components.page.dashboard_page.header.create"}}
+    </button>
+
+    <button class="btn btn-warning ml-1" {{action @onWidgetsLockToggle}}>
+      {{fa-icon (if @widgetsAreLocked "lock" "unlock")}}
+    </button>
+  </div>
+</div>
+
+{{#pow-modal
+  isOpened=this.isSettingsModalOpened
+  onClose=(action this.closeSettings)
+  title=(t "components.page.dashboard_page.header.settings")
+}}
+  <div class="card">
+    <div class="card-body">
+      {{pow-input-field
+        class="form-group"
+        placeholder=(t "components.page.dashboard_page.header.untitled")
+        value=this.stagedValues.label
+        label=(t "components.page.dashboard_page.header.name_label")
+        onChange=(action (mut this.stagedValues.label))
+      }}
+
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-primary" {{action this.saveActiveDashboard}}>
+          {{fa-icon "save" class="mr-1"}}
+          {{t "components.page.dashboard_page.header.save"}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card border-danger mt-2">
+    <div class="card-body">
+      <p>
+        {{t "components.page.dashboard_page.header.delete_warning"}}
+      </p>
+
+      <div class="d-flex justify-content-end">
+        {{#pow-hold-button type="danger" onHold=(action this.deleteActiveDashboard)}}
+          {{fa-icon "trash" class="mr-1"}}
+          {{t "components.page.dashboard_page.header.delete"}}
+        {{/pow-hold-button}}
+      </div>
+    </div>
+  </div>
+{{/pow-modal}}

@@ -23,6 +23,24 @@ export default class ItemsFetcher extends Service {
   @service('active-league/setting')
   activeLeagueSetting;
 
+  @service('stash/tabs-fetcher')
+  stashTabsFetcher;
+
+  async fetchFromStashIds(stashIds) {
+    if (!stashIds.length) return [];
+
+    const stashTabs = await this.stashTabsFetcher.fetch();
+    const stashIndexes = stashTabs.filter(stashTab => stashIds.includes(stashTab.id)).map(stashTab => stashTab.index);
+
+    let stashItems = [];
+    while (stashIndexes.length) {
+      const newStashItems = await this.fetchFromStashIndex(stashIndexes.shift());
+      stashItems = stashItems.concat(newStashItems);
+    }
+
+    return stashItems;
+  }
+
   fetchFromStashIndex(stashIndex) {
     const leagueId = this.activeLeagueSetting.league.id;
     const account = this.authenticationSetting.account;

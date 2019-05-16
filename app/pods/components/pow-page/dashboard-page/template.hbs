@@ -1,0 +1,22 @@
+<div class="d-flex flex-column h-100">
+  {{pow-page/dashboard-page/header
+    class="bg-darker border-bottom"
+    dashboards=this.dashboards
+    activeDashboard=this.activeDashboard
+    widgetsAreLocked=this.widgetsAreLocked
+    onDashboardSelect=(action this.selectDashboard)
+    onDashboardCreate=(action this.createDashboard)
+    onActiveDashboardUpdate=(action this.updateActiveDashboard)
+    onActiveDashboardDelete=(action this.deleteActiveDashboard)
+    onWidgetsLockToggle=(action this.toggleWidgetsLock)
+  }}
+
+  {{pow-page/dashboard-page/widget-board
+    class="flex-grow-1 pt-2"
+    activeDashboard=this.activeDashboard
+    widgetsAreLocked=this.widgetsAreLocked
+    updateWidget=(action this.updateWidget)
+    deleteWidget=(action this.deleteWidget)
+    addWidget=(action this.addWidget)
+  }}
+</div>

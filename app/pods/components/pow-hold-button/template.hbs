@@ -1,0 +1,8 @@
+<button class="position-relative btn btn-{{this.type}}" onmousedown={{action this.startHolding}} onmouseup={{action this.stopHolding}}>
+  {{yield}}
+
+  {{#if this.holdTask.isRunning}}
+    <div local-class="hold-indicator" style={{css-style "animation-duration" this.cssAnimationDuration}}></div>
+  {{/if}}
+</button>
+

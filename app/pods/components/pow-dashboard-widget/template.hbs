@@ -1,0 +1,45 @@
+<div class="position-relative overflow-hidden card mb-2 py-1 px-2" local-class="wrapper">
+  {{component
+    this.resolvedComponent
+    state=@widget.state
+    settings=@widget.settings
+    params=this.widgetDefinition.params
+    onStateUpdate=(action this.updateState)
+    onSetupLoadTask=(action this.setupLoadTask)
+  }}
+
+  <div local-class="toolbar {{unless @isLocked "visible"}}">
+    {{#pow-tooltip placement="left" title=(t "components.dashboard_widget.delete")}}
+      <button class="btn btn-sm btn-danger" {{action @onDelete}}>
+        {{fa-icon "trash" fixedWidth=true}}
+      </button>
+    {{/pow-tooltip}}
+
+    {{#if @widget.settings}}
+      {{#pow-tooltip placement="left" title=(t "components.dashboard_widget.settings")}}
+        <button class="btn btn-sm btn-primary" {{action this.openSettingsModal}}>
+          {{fa-icon "cog" fixedWidth=true}}
+        </button>
+      {{/pow-tooltip}}
+    {{/if}}
+  </div>
+
+  {{#if this.isLoading}}
+    {{fa-icon "spinner" spin=true local-class="loader"}}
+  {{/if}}
+</div>
+
+{{#if @widget.settings}}
+  {{#pow-modal
+    isOpened=this.isSettingsModalOpen
+    onClose=(action this.closeSettingsModal)
+    title=(t "components.dashboard_widget.settings_title")
+    size="large"
+  }}
+    {{component
+      this.resolvedSettingsComponent
+      settings=@widget.settings
+      onSettingsUpdate=(action this.updateSettings)
+    }}
+  {{/pow-modal}}
+{{/if}}

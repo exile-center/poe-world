@@ -22,4 +22,8 @@ export default class Tooltip extends Component {
   willDestroyElement() {
     this.$().tooltip('dispose');
   }
+
+  click() {
+    this.$().tooltip('hide');
+  }
 }

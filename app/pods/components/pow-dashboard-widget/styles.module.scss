@@ -1,0 +1,21 @@
+.wrapper {
+  min-height: 100px;
+}
+
+.toolbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateX(100%);
+  transition: transform ease-in-out 200ms;
+
+  &.visible {
+    transform: translateX(0);
+  }
+}
+
+.loader {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}

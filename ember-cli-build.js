@@ -53,7 +53,9 @@ module.exports = function(defaults) {
           'bookmark',
           'star',
           'trophy',
-          'circle'
+          'circle',
+          'lock',
+          'unlock'
         ],
         'free-brands-svg-icons': ['github', 'discord', 'reddit']
       }

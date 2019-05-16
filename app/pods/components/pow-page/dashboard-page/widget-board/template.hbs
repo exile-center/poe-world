@@ -1,0 +1,32 @@
+<div class="d-flex">
+  {{#each @activeDashboard.widgets as |widgets columnIndex|}}
+    <div local-class="column" class="px-1">
+      {{#each widgets as |widget widgetIndex|}}
+        {{pow-dashboard-widget
+          widget=widget
+          isLocked=@widgetsAreLocked
+          onUpdate=(action @updateWidget columnIndex widgetIndex)
+          onDelete=(action @deleteWidget columnIndex widgetIndex)
+        }}
+      {{/each}}
+
+      {{#unless @widgetsAreLocked}}
+        {{pow-page/dashboard-page/widget-board/add-dropdown
+          availableWidgets=this.availableWidgets
+          onWidgetAdd=(action @addWidget columnIndex)
+        }}
+      {{/unless}}
+    </div>
+  {{/each}}
+
+  {{#unless @widgetsAreLocked}}
+    {{#if @activeDashboard.hasWidgets}}
+      <div local-class="column" class="mx-1">
+        {{pow-page/dashboard-page/widget-board/add-dropdown
+          availableWidgets=this.availableWidgets
+          onWidgetAdd=(action this.addWidget @activeDashboard.widgets.length)
+        }}
+      </div>
+    {{/if}}
+  {{/unless}}
+</div>

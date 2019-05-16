@@ -23,6 +23,20 @@ components:
     doughnut_chart:
       league_progress: 'League: {progress}%'
       challenge_progress: 'Challenge: {progress}%'
+  dashboard_widget:
+    challenge_tracker:
+      title: League challenge
+      completed: Completed
+      not_configured: There's currently no challenge associated to this widget.
+    challenge_tracker_settings:
+      no_trackable_challenges: Every challenges that have sub-challenges are completed.
+    vendor_chaos_recipe:
+      title: Chaos recipes
+      rate_limited_error: Encountered a rate limiting error.
+      rate_limited_error_description: It means there's too much widgets that load too many stash tabs.
+    delete: Remove
+    settings: Configure
+    settings_title: Widget settings
   price:
     undefined: Undefined pricing
   map_trade_list:
@@ -39,6 +53,7 @@ components:
     copy: Copy to clipboard
     copied: Copied
   navigation:
+    dashboard: Dashboard
     atlas: Atlas
     stash: Stash
     trade: Trade
@@ -92,6 +107,19 @@ components:
       trophy_reward: Trophy reward
       mtx_reward: Microtransaction reward
       no_challenge_league: There is currently no active challenge league.
+    dashboard_page:
+      header:
+        untitled: Untitled
+        save: Save
+        cancel: Cancel
+        create: New dashboard
+        settings: Dashboard settings
+        name_label: Name
+        delete_warning: Deleting the dashboard will also destroy all its widgets, be careful !
+        delete: Hold to delete
+      widget_board:
+        add_dropdown:
+          label: Add a widget
     home_page:
       tiles:
         atlas: Atlas
