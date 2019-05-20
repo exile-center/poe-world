@@ -3,9 +3,10 @@ import Component from '@ember/component';
 import {action} from '@ember-decorators/object';
 import {service} from '@ember-decorators/service';
 import {tagName} from '@ember-decorators/component';
+import {task} from 'ember-concurrency';
 
 // Models
-import Dashboard from 'poe-world/models/dashboard';
+import Dashboard from 'poe-world/models/dexie/dashboard';
 
 @tagName('')
 export default class PageDashboard extends Component {
@@ -22,18 +23,27 @@ export default class PageDashboard extends Component {
   activeDashboard = null;
   widgetsAreLocked = true;
 
-  willInsertElement() {
-    this._refreshDashboards();
-    this._selectFirstDashboard();
+  initialLoadDashboardsTask = task(function*() {
+    const dashboards = yield this.dashboardFetcher.fetchAll();
+    const activeDashboard = dashboards.firstObject;
 
-    this.set('widgetsAreLocked', this.activeDashboard && this.activeDashboard.hasWidgets);
+    const hasWidget = true;
+
+    this.setProperties({
+      dashboards,
+      activeDashboard,
+      widgetsAreLocked: !!activeDashboard && hasWidget
+    });
+  }).drop();
+
+  willInsertElement() {
+    this.get('initialLoadDashboardsTask').perform();
   }
 
   @action
   selectDashboard(dashboard) {
     this.setProperties({
-      activeDashboard: dashboard,
-      widgetsAreLocked: dashboard.hasWidgets
+      activeDashboard: dashboard
     });
   }
 
@@ -48,9 +58,9 @@ export default class PageDashboard extends Component {
   }
 
   @action
-  createDashboard() {
-    const newDashboard = this.dashboardPersister.persist(Dashboard.create());
-    this._refreshDashboards();
+  async createDashboard() {
+    const newDashboard =  await this.dashboardPersister.persist(Dashboard.create());
+    this.dashboards.addObject(newDashboard);
     this.set('activeDashboard', newDashboard);
   }
 
@@ -62,13 +72,17 @@ export default class PageDashboard extends Component {
 
   @action
   deleteActiveDashboard() {
-    this.dashboardDestroyer.destroy(this.activeDashboard);
-    this._refreshDashboards();
-    this._selectFirstDashboard();
+    const dashboardToDelete = this.activeDashboard;
+
+    this.set('activeDashboard', this.dashboards.firstObject);
+
+    this.dashboards.removeObject(dashboardToDelete);
+    this.dashboardDestroyer.destroy(dashboardToDelete);
   }
 
   @action
   addWidget(columnIndex, widget) {
+    // TODO: rework
     this.activeDashboard.addWidget(
       {
         type: widget.type,
@@ -82,22 +96,16 @@ export default class PageDashboard extends Component {
   }
 
   @action
+  // TODO: rework
   updateWidget(columnIndex, widgetIndex, widget) {
     this.activeDashboard.updateWidget(columnIndex, widgetIndex, widget);
     this.dashboardPersister.persist(this.activeDashboard);
   }
 
   @action
+  // TODO: rework
   deleteWidget(columnIndex, widgetIndex) {
     this.activeDashboard.removeWidget(columnIndex, widgetIndex);
     this.dashboardPersister.persist(this.activeDashboard);
-  }
-
-  _refreshDashboards() {
-    this.set('dashboards', this.dashboardFetcher.fetchAll());
-  }
-
-  _selectFirstDashboard() {
-    this.set('activeDashboard', this.dashboards[0] || null);
   }
 }

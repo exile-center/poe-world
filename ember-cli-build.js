@@ -77,6 +77,7 @@ module.exports = function(defaults) {
   app.import('node_modules/panzoom/dist/panzoom.js');
   app.import('node_modules/popper.js/dist/umd/popper.js');
   app.import('node_modules/bootstrap/dist/js/bootstrap.js');
+  app.import('node_modules/dexie/dist/dexie.js');
 
   return app.toTree();
 };

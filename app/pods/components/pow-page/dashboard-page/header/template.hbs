@@ -9,8 +9,8 @@
           class="nav-link {{if (eq dashboard.id @activeDashboard.id) "active"}}"
           {{action @onDashboardSelect dashboard}}
         >
-          {{#if dashboard.label}}
-            {{dashboard.label}}
+          {{#if dashboard.name}}
+            {{dashboard.name}}
           {{else}}
             {{t "components.page.dashboard_page.header.untitled"}} #{{index}}
           {{/if}}
@@ -48,9 +48,9 @@
       {{pow-input-field
         class="form-group"
         placeholder=(t "components.page.dashboard_page.header.untitled")
-        value=this.stagedValues.label
+        value=this.stagedValues.name
         label=(t "components.page.dashboard_page.header.name_label")
-        onChange=(action (mut this.stagedValues.label))
+        onChange=(action (mut this.stagedValues.name))
       }}
 
       <div class="d-flex justify-content-end">

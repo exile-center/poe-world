@@ -7,7 +7,6 @@ import {optional, type, arrayOf} from '@ember-decorators/argument/type';
 
 export default class PageDashboardHeader extends Component {
   @argument
-  @type(arrayOf('object'))
   dashboards;
 
   @argument
@@ -48,7 +47,7 @@ export default class PageDashboardHeader extends Component {
   openSettings() {
     this.setProperties({
       isSettingsModalOpened: true,
-      stagedValues: this.activeDashboard.getProperties('label')
+      stagedValues: this.activeDashboard.getProperties('name')
     });
   }
 

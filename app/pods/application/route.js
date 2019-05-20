@@ -6,6 +6,9 @@ export default class Application extends Route {
   @service('intl')
   intl;
 
+  @service('dexie')
+  dexie;
+
   @service('leagues/fetcher')
   leaguesFetcher;
 
@@ -17,6 +20,7 @@ export default class Application extends Route {
 
   beforeModel() {
     this.intl.setLocale('en');
+    this.dexie.setup();
   }
 
   model() {
