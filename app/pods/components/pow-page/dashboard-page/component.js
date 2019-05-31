@@ -43,10 +43,8 @@ export default class PageDashboard extends Component {
     const dashboards = yield this.dashboardFetcher.fetchAll();
     const activeDashboard = dashboards.firstObject;
 
-    this.setProperties({
-      dashboards,
-      activeDashboard
-    });
+    this.set('dashboards', dashboards);
+    this._changeActiveDashboard(activeDashboard);
 
     yield this.get('refreshWidgetsTask').perform();
 
@@ -67,8 +65,7 @@ export default class PageDashboard extends Component {
 
   @action
   selectDashboard(dashboard) {
-    this.set('activeDashboard', dashboard);
-    this.get('refreshWidgetsTask').perform();
+    this._changeActiveDashboard(dashboard);
   }
 
   @action
@@ -79,8 +76,9 @@ export default class PageDashboard extends Component {
   @action
   async createDashboard() {
     const newDashboard = await this.dashboardPersister.persist(Dashboard.create());
+
     this.dashboards.addObject(newDashboard);
-    this.set('activeDashboard', newDashboard);
+    this._changeActiveDashboard(newDashboard);
   }
 
   @action
@@ -125,5 +123,10 @@ export default class PageDashboard extends Component {
   async deleteWidget(widget) {
     this.activeDashboardWidgets.removeObject(widget);
     await this.dashboardWidgetsDestroyer.destroy(widget);
+  }
+
+  _changeActiveDashboard(dashboard) {
+    this.set('activeDashboard', dashboard);
+    this.get('refreshWidgetsTask').perform();
   }
 }
