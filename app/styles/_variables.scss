@@ -180,3 +180,12 @@ $list-group-item-padding-x: 0.65rem;
 //
 $modal-content-bg: $dark;
 $modal-header-border-color: rgba($gray-200, 0.25);
+
+//
+// Dropdowns
+//
+$dropdown-color: $white;
+$dropdown-link-color: $dropdown-color;
+$dropdown-link-hover-color: $dropdown-color;
+$dropdown-link-hover-bg: lighten($primary, 15%);
+$dropdown-bg: $darker;

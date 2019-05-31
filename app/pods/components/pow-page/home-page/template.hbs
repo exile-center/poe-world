@@ -86,32 +86,6 @@
           {{/pow-external-link}}
         </li>
       </ul>
-
-      <h3 class="mt-3">
-        {{t "components.page.home_page.useful_links"}}
-      </h3>
-
-      <ul class="list-unstyled">
-        {{#each this.externalLinks as |link|}}
-          <li class="mb-2">
-            {{#pow-external-link url=link.url class="btn btn-primary btn-block text-left"}}
-              {{#if link.icon}}
-                {{fa-icon link.icon.id prefix=link.icon.prefix class="mr-1"}}
-              {{else}}
-                {{fa-icon "link" class="mr-1"}}
-              {{/if}}
-
-              {{link.name}}
-
-              {{#if link.description}}
-                <em class="d-block small mt-1">
-                  {{link.description}}
-                </em>
-              {{/if}}
-            {{/pow-external-link}}
-          </li>
-        {{/each}}
-      </ul>
     </div>
   </div>
 </div>

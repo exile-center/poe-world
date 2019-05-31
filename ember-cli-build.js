@@ -29,6 +29,7 @@ module.exports = function(defaults) {
           'sync',
           'copy',
           'caret-right',
+          'caret-down',
           'minus',
           'plus',
           'square',

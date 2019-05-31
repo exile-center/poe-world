@@ -34,6 +34,8 @@ Router.map(function() {
 
   this.route('challenges');
 
+  this.route('external-site');
+
   this.route('settings', function() {
     this.route('global', {path: '/'});
     this.route('stash-tabs');

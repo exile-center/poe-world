@@ -36,6 +36,27 @@
         {{t "components.navigation.challenges"}}
       {{/pow-link}}
     </li>
+
+    <li class="nav-item dropdown ml-2">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+        {{t "components.navigation.external_sites"}}
+        {{fa-icon "caret-down" class="dropdown-caret"}}
+      </a>
+
+      <div class="dropdown-menu">
+        {{#each this.externalSites as |externalSite|}}
+          {{#link-to "external-site" (query-params url=externalSite.url) class="dropdown-item"}}
+            {{externalSite.name}}
+
+            {{#if externalSite.description}}
+              <small class="d-block muted pl-2">
+                {{externalSite.description}}
+              </small>
+            {{/if}}
+          {{/link-to}}
+        {{/each}}
+      </div>
+    </li>
   </ul>
 
   <ul class="navbar-nav mr-2">

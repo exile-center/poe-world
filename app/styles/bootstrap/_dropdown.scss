@@ -1,0 +1,16 @@
+.dropdown {
+  .dropdown-toggle::after {
+    display: none;
+  }
+
+  .dropdown-caret {
+    margin-left: 0.2rem;
+    transition: transform ease-in-out 250ms;
+  }
+
+  &.show {
+    .dropdown-caret {
+      transform: rotate(180deg);
+    }
+  }
+}

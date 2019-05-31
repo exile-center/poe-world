@@ -222,13 +222,6 @@
   }
 }
 
-.dropdown-menu {
-  margin-top: 0;
-  @include shadow();
-  border-top-width: 1px;
-  @include box-shadow(none);
-}
-
 .breadcrumb {
   border-color: darken($breadcrumb-bg, 5%);
   @include shadow();

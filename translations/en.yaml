@@ -58,6 +58,7 @@ components:
     stash: Stash
     trade: Trade
     challenges: Challenges
+    external_sites: External sites
     settings: Settings
     authenticated: Authenticated
     not_authenticated: Not authenticated
@@ -133,7 +134,6 @@ components:
         github: GitHub
         issue: Report an issue
         releases: See previous releases
-      useful_links: Useful links
     map_page:
       tier: Tier
       area_level: Area Level {level}
