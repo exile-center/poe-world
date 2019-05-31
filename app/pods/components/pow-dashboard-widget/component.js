@@ -12,13 +12,6 @@ import DASHBOARD_WIDGETS from 'poe-world/constants/dashboard-widgets';
 @tagName('')
 export default class DashboardWidget extends Component {
   @argument
-  @type(
-    shapeOf({
-      type: 'string',
-      state: optional('object'),
-      settings: optional('object')
-    })
-  )
   widget;
 
   @argument
@@ -58,18 +51,23 @@ export default class DashboardWidget extends Component {
 
   @action
   updateState(newState) {
-    this.onUpdate({
-      ...this.widget,
-      state: newState
-    });
+    this.onUpdate(
+      this.widget,
+      {state: newState}
+    );
   }
 
   @action
   updateSettings(newSettings) {
-    this.onUpdate({
-      ...this.widget,
-      settings: newSettings
-    });
+    this.onUpdate(
+      this.widget,
+      {settings: newSettings}
+    );
+  }
+
+  @action
+  deleteWidget() {
+    this.onDelete(this.widget);
   }
 
   @action

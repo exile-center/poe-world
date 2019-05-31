@@ -4,7 +4,7 @@
     {{t "components.page.dashboard_page.widget_board.add_dropdown.label"}}
   </button>
   <div class="dropdown-menu">
-    {{#each @availableWidgets as |widget|}}
+    {{#each this.dashboardWidgets as |widget|}}
       <button class="dropdown-item" {{action @onWidgetAdd widget}}>
         {{widget.label}}
       </button>

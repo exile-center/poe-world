@@ -1,32 +1,28 @@
 <div class="d-flex">
-  {{#each @activeDashboard.widgets as |widgets columnIndex|}}
+  {{#each this.widgetsGrid as |columnWidgets columnIndex|}}
     <div local-class="column" class="px-1">
-      {{#each widgets as |widget widgetIndex|}}
+      {{#each columnWidgets as |widget|}}
         {{pow-dashboard-widget
           widget=widget
           isLocked=@widgetsAreLocked
-          onUpdate=(action @updateWidget columnIndex widgetIndex)
-          onDelete=(action @deleteWidget columnIndex widgetIndex)
+          onUpdate=(action @updateWidget)
+          onDelete=(action @deleteWidget)
         }}
       {{/each}}
 
       {{#unless @widgetsAreLocked}}
         {{pow-page/dashboard-page/widget-board/add-dropdown
-          availableWidgets=this.availableWidgets
-          onWidgetAdd=(action @addWidget columnIndex)
+          onWidgetAdd=(action @addWidget columnIndex columnWidgets.length)
         }}
       {{/unless}}
     </div>
   {{/each}}
 
   {{#unless @widgetsAreLocked}}
-    {{#if @activeDashboard.hasWidgets}}
-      <div local-class="column" class="mx-1">
-        {{pow-page/dashboard-page/widget-board/add-dropdown
-          availableWidgets=this.availableWidgets
-          onWidgetAdd=(action this.addWidget @activeDashboard.widgets.length)
-        }}
-      </div>
-    {{/if}}
+    <div local-class="column" class="mx-1">
+      {{pow-page/dashboard-page/widget-board/add-dropdown
+        onWidgetAdd=(action @addWidget this.widgetsGrid.length 0)
+      }}
+    </div>
   {{/unless}}
 </div>

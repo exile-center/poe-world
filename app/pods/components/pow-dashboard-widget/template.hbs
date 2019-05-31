@@ -10,7 +10,7 @@
 
   <div local-class="toolbar {{unless @isLocked "visible"}}">
     {{#pow-tooltip placement="left" title=(t "components.dashboard_widget.delete")}}
-      <button class="btn btn-sm btn-danger" {{action @onDelete}}>
+      <button class="btn btn-sm btn-danger" {{action this.deleteWidget}}>
         {{fa-icon "trash" fixedWidth=true}}
       </button>
     {{/pow-tooltip}}

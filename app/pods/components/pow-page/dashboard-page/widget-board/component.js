@@ -1,19 +1,13 @@
 // Vendor
 import Component from '@ember/component';
-import {service} from '@ember-decorators/service';
 import {argument} from '@ember-decorators/argument';
 import {type} from '@ember-decorators/argument/type';
-
-// Constants
-import DASHBOARD_WIDGETS from 'poe-world/constants/dashboard-widgets';
+import {computed} from '@ember-decorators/object';
+import {A as emberArray} from '@ember/array';
 
 export default class PageDashboardWidgetBoard extends Component {
-  @service('dashboard/persister')
-  dashboardPersister;
-
   @argument
-  @type('object')
-  activeDashboard;
+  widgets;
 
   @argument
   @type('boolean')
@@ -31,5 +25,26 @@ export default class PageDashboardWidgetBoard extends Component {
   @type(Function)
   deleteWidget;
 
-  availableWidgets = Object.values(DASHBOARD_WIDGETS);
+  @computed('widgets.[]')
+  get widgetsGrid() {
+    if (!this.widgets || !this.widgets.length) return emberArray([]);
+
+    return this
+      ._sortWidgets(this.widgets)
+      .reduce((columns, widget) => {
+        if (!columns.objectAt(widget.column)) columns.addObject(emberArray([]));
+        columns.objectAt(widget.column).addObject(widget);
+
+        return columns;
+      }, emberArray([]));
+  }
+
+  _sortWidgets(widgets) {
+    return widgets
+      .toArray()
+      .sort((widgetA, widgetB) => {
+        if (widgetA.column === widgetB.column) return widgetA.row - widgetB.row;
+        return widgetA.column - widgetB.column;
+      });
+  }
 }

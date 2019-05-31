@@ -11,12 +11,14 @@
     onWidgetsLockToggle=(action this.toggleWidgetsLock)
   }}
 
-  {{!--pow-page/dashboard-page/widget-board
-    class="flex-grow-1 pt-2"
-    activeDashboard=this.activeDashboard
-    widgetsAreLocked=this.widgetsAreLocked
-    updateWidget=(action this.updateWidget)
-    deleteWidget=(action this.deleteWidget)
-    addWidget=(action this.addWidget)
-  --}}
+  {{#if this.activeDashboardWidgetsAreLoaded}}
+    {{pow-page/dashboard-page/widget-board
+      class="flex-grow-1 pt-2"
+      widgets=this.activeDashboardWidgets
+      widgetsAreLocked=this.widgetsAreLocked
+      updateWidget=(action this.updateWidget)
+      deleteWidget=(action this.deleteWidget)
+      addWidget=(action this.addWidget)
+    }}
+  {{/if}}
 </div>

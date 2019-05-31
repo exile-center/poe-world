@@ -1,12 +1,13 @@
 // Vendor
 import Component from '@ember/component';
-import {action} from '@ember-decorators/object';
+import {action, computed} from '@ember-decorators/object';
 import {service} from '@ember-decorators/service';
 import {tagName} from '@ember-decorators/component';
 import {task} from 'ember-concurrency';
 
 // Models
 import Dashboard from 'poe-world/models/dexie/dashboard';
+import DashboardWidget from 'poe-world/models/dexie/dashboard-widget';
 
 @tagName('')
 export default class PageDashboard extends Component {
@@ -19,21 +20,45 @@ export default class PageDashboard extends Component {
   @service('dashboard/fetcher')
   dashboardFetcher;
 
-  dashboards = [];
+  @service('dashboard-widgets/persister')
+  dashboardWidgetsPersister;
+
+  @service('dashboard-widgets/destroyer')
+  dashboardWidgetsDestroyer;
+
+  @service('dashboard-widgets/fetcher')
+  dashboardWidgetsFetcher;
+
+  dashboards = null;
   activeDashboard = null;
+  activeDashboardWidgets = null;
   widgetsAreLocked = true;
+
+  @computed('activeDashboardWidgets')
+  get activeDashboardWidgetsAreLoaded() {
+    return this.activeDashboardWidgets !== null;
+  }
 
   initialLoadDashboardsTask = task(function*() {
     const dashboards = yield this.dashboardFetcher.fetchAll();
     const activeDashboard = dashboards.firstObject;
 
-    const hasWidget = true;
-
     this.setProperties({
       dashboards,
-      activeDashboard,
-      widgetsAreLocked: !!activeDashboard && hasWidget
+      activeDashboard
     });
+
+    yield this.get('refreshWidgetsTask').perform();
+
+    const hasWidget = !!(this.activeDashboardWidgets && this.activeDashboardWidgets.length);
+    this.set('widgetsAreLocked', !!activeDashboard && hasWidget);
+  }).drop();
+
+  refreshWidgetsTask = task(function*() {
+    if (!this.activeDashboard) return;
+
+    const activeDashboardWidgets = yield this.dashboardWidgetsFetcher.fetchFor(this.activeDashboard);
+    this.set('activeDashboardWidgets', activeDashboardWidgets);
   }).drop();
 
   willInsertElement() {
@@ -42,14 +67,8 @@ export default class PageDashboard extends Component {
 
   @action
   selectDashboard(dashboard) {
-    this.setProperties({
-      activeDashboard: dashboard
-    });
-  }
-
-  @action
-  updateDashboards(dashboards) {
-    this.set('dashboards', dashboards);
+    this.set('activeDashboard', dashboard);
+    this.get('refreshWidgetsTask').perform();
   }
 
   @action
@@ -81,31 +100,30 @@ export default class PageDashboard extends Component {
   }
 
   @action
-  addWidget(columnIndex, widget) {
-    // TODO: rework
-    this.activeDashboard.addWidget(
-      {
-        type: widget.type,
-        state: widget.state,
-        settings: widget.settings
-      },
-      columnIndex
-    );
+  async addWidget(column, row, widget) {
+    const widgetProperties = {
+      dashboardId: this.activeDashboard.id,
+      type: widget.type,
+      state: widget.state,
+      params: widget.params,
+      settings: widget.settings,
+      column,
+      row
+    };
 
-    this.dashboardPersister.persist(this.activeDashboard);
+    const newWidget = await this.dashboardWidgetsPersister.persist(DashboardWidget.create(widgetProperties));
+    this.activeDashboardWidgets.addObject(newWidget);
   }
 
   @action
-  // TODO: rework
-  updateWidget(columnIndex, widgetIndex, widget) {
-    this.activeDashboard.updateWidget(columnIndex, widgetIndex, widget);
-    this.dashboardPersister.persist(this.activeDashboard);
+  updateWidget(widget, newProperties) {
+    widget.setProperties(newProperties);
+    this.dashboardWidgetsPersister.persist(widget);
   }
 
   @action
-  // TODO: rework
-  deleteWidget(columnIndex, widgetIndex) {
-    this.activeDashboard.removeWidget(columnIndex, widgetIndex);
-    this.dashboardPersister.persist(this.activeDashboard);
+  async deleteWidget(widget) {
+    this.activeDashboardWidgets.removeObject(widget);
+    await this.dashboardWidgetsDestroyer.destroy(widget);
   }
 }

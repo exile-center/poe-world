@@ -53,7 +53,7 @@ export default class PageChallenges extends Component {
     });
   }
 
-  @computed('selectedChallengeSlug', 'challenges.@each')
+  @computed('selectedChallengeSlug', 'challenges.[]')
   get selectedChallenge() {
     if (!this.selectedChallengeSlug) return null;
 
