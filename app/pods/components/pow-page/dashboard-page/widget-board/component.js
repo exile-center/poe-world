@@ -29,22 +29,18 @@ export default class PageDashboardWidgetBoard extends Component {
   get widgetsGrid() {
     if (!this.widgets || !this.widgets.length) return emberArray([]);
 
-    return this
-      ._sortWidgets(this.widgets)
-      .reduce((columns, widget) => {
-        if (!columns.objectAt(widget.column)) columns.addObject(emberArray([]));
-        columns.objectAt(widget.column).addObject(widget);
+    return this._sortWidgets(this.widgets).reduce((columns, widget) => {
+      if (!columns.objectAt(widget.column)) columns.addObject(emberArray([]));
+      columns.objectAt(widget.column).addObject(widget);
 
-        return columns;
-      }, emberArray([]));
+      return columns;
+    }, emberArray([]));
   }
 
   _sortWidgets(widgets) {
-    return widgets
-      .toArray()
-      .sort((widgetA, widgetB) => {
-        if (widgetA.column === widgetB.column) return widgetA.row - widgetB.row;
-        return widgetA.column - widgetB.column;
-      });
+    return widgets.toArray().sort((widgetA, widgetB) => {
+      if (widgetA.column === widgetB.column) return widgetA.row - widgetB.row;
+      return widgetA.column - widgetB.column;
+    });
   }
 }

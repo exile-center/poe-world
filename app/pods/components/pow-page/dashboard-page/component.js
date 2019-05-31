@@ -78,7 +78,7 @@ export default class PageDashboard extends Component {
 
   @action
   async createDashboard() {
-    const newDashboard =  await this.dashboardPersister.persist(Dashboard.create());
+    const newDashboard = await this.dashboardPersister.persist(Dashboard.create());
     this.dashboards.addObject(newDashboard);
     this.set('activeDashboard', newDashboard);
   }

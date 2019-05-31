@@ -12,7 +12,7 @@ export default class BaseModel extends EmberObject {
 
   asJson() {
     const payload = this.getProperties(...this.serializableFields);
-    if (!!this.id) payload['id'] = this.id;
+    if (!!this.id) payload.id = this.id;
 
     return payload;
   }

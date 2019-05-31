@@ -3,7 +3,7 @@ import Component from '@ember/component';
 import {action} from '@ember-decorators/object';
 import {bool} from '@ember-decorators/object/computed';
 import {argument} from '@ember-decorators/argument';
-import {optional, type, arrayOf} from '@ember-decorators/argument/type';
+import {optional, type} from '@ember-decorators/argument/type';
 
 export default class PageDashboardHeader extends Component {
   @argument

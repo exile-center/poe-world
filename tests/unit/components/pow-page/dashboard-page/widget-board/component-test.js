@@ -14,32 +14,32 @@ describe('Unit | Components | pow-page/dashboard-page/widget-board', () => {
   let component;
 
   beforeEach(function() {
-    component = this.owner
-      .factoryFor('component:pow-page/dashboard-page/widget-board')
-      .create({
-        widgets: null,
-        widgetsAreLocked: false,
-        addWidget: sinon.spy(),
-        updateWidget: sinon.spy(),
-        deleteWidget: sinon.spy()
-      });
+    component = this.owner.factoryFor('component:pow-page/dashboard-page/widget-board').create({
+      widgets: null,
+      widgetsAreLocked: false,
+      addWidget: sinon.spy(),
+      updateWidget: sinon.spy(),
+      deleteWidget: sinon.spy()
+    });
   });
 
   describe('computed properties', () => {
     describe('widgetsGrid', () => {
       describe('with widgets', () => {
         beforeEach(() => {
-          component.set('widgets', emberArray([
-            createDashboardWidget({column:1, row: 1}),
-            createDashboardWidget({column:1, row: 0}),
-            createDashboardWidget({column:0, row: 0}),
-            createDashboardWidget({column:0, row: 1})
-          ]));
+          component.set(
+            'widgets',
+            emberArray([
+              createDashboardWidget({column: 1, row: 1}),
+              createDashboardWidget({column: 1, row: 0}),
+              createDashboardWidget({column: 0, row: 0}),
+              createDashboardWidget({column: 0, row: 1})
+            ])
+          );
         });
 
         it('should return the properly sorted grid', () => {
           const widgetsGrid = component.widgetsGrid;
-          console.log(widgetsGrid);
 
           // First column
           expect(widgetsGrid.firstObject.firstObject.column).to.equal(0);
@@ -64,7 +64,7 @@ describe('Unit | Components | pow-page/dashboard-page/widget-board', () => {
           const widgetsGrid = component.widgetsGrid;
 
           expect(widgetsGrid.length).to.equal(1, 'It should have one column');
-          expect(widgetsGrid.firstObject.length).to.be.equal(0 , 'The first column should be empty');
+          expect(widgetsGrid.firstObject.length).to.be.equal(0, 'The first column should be empty');
         });
       });
     });

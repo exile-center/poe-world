@@ -1,7 +1,7 @@
 // Vendor
 import Component from '@ember/component';
 import {argument} from '@ember-decorators/argument';
-import {type, shapeOf, optional} from '@ember-decorators/argument/type';
+import {type} from '@ember-decorators/argument/type';
 import {action, computed} from '@ember-decorators/object';
 import {and} from '@ember-decorators/object/computed';
 import {tagName} from '@ember-decorators/component';
@@ -51,18 +51,12 @@ export default class DashboardWidget extends Component {
 
   @action
   updateState(newState) {
-    this.onUpdate(
-      this.widget,
-      {state: newState}
-    );
+    this.onUpdate(this.widget, {state: newState});
   }
 
   @action
   updateSettings(newSettings) {
-    this.onUpdate(
-      this.widget,
-      {settings: newSettings}
-    );
+    this.onUpdate(this.widget, {settings: newSettings});
   }
 
   @action
