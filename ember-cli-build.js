@@ -48,7 +48,6 @@ module.exports = function(defaults) {
           'user-check',
           'user-slash',
           'cog',
-          'exclamation-circle',
           'arrow-right',
           'question-circle',
           'bookmark',

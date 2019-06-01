@@ -6,6 +6,7 @@ import {reads} from '@ember-decorators/object/computed';
 
 // Constants
 import EXTERNAL_SITES from 'poe-world/constants/external-sites';
+const BRAND_TITLE = 'PoeWorld';
 
 @tagName('')
 export default class Navigation extends Component {
@@ -16,6 +17,7 @@ export default class Navigation extends Component {
   globalState;
 
   externalSites = EXTERNAL_SITES;
+  brandTitle = BRAND_TITLE;
 
   @reads('activeLeagueSetting.league.name')
   leagueName;

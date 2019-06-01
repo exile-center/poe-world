@@ -9,11 +9,11 @@ const {
   APP: {VERSION: CURRENT_VERSION}
 } = ENV;
 
-export default class ReleaseBanner extends Component {
+export default class ReleaseAlert extends Component {
   @service('releases/fetcher')
   releasesFetcher;
 
-  isOutdated = null;
+  isOutdated = false;
   latestRelease = null;
 
   fetchLatestReleaseTask = task(function*() {
@@ -24,7 +24,7 @@ export default class ReleaseBanner extends Component {
       currentVersion: CURRENT_VERSION,
       isOutdated: CURRENT_VERSION < latestRelease.version
     });
-  }).restartable();
+  }).drop();
 
   willInsertElement() {
     this.get('fetchLatestReleaseTask').perform();

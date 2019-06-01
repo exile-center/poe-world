@@ -1,0 +1,15 @@
+{{#if this.isOutdated}}
+  {{#pow-tooltip
+    placement="left"
+    title=(t "components.release_alert.download_button_tooltip" latestVersion=this.latestRelease.version)
+  }}
+    {{#pow-external-link
+      url=this.latestRelease.githubReleaseUrl
+      class="btn btn-light ml-2"
+      local-class="button-wiggle"
+    }}
+      {{fa-icon "github" prefix="fab" class="mr-1"}}
+      {{t "components.release_alert.download_button"}}
+    {{/pow-external-link}}
+  {{/pow-tooltip}}
+{{/if}}

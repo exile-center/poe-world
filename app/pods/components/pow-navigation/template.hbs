@@ -1,9 +1,7 @@
-{{! template-lint-disable no-bare-strings no-implicit-this }}
-
 <nav class="navbar fixed-top navbar-dark navbar-expand bg-dark">
   {{#pow-link "dashboards" local-class="custom-brand" class="navbar-brand d-flex align-items-center"}}
     <img src="assets/images/logo-small.png" class="mr-2" alt="">
-    PoeWorld
+    {{this.brandTitle}}
   {{/pow-link}}
 
   <ul class="navbar-nav mr-auto">
@@ -53,9 +51,7 @@
         {{/each}}
       </div>
     </li>
-  </ul>
 
-  <ul class="navbar-nav mr-2">
     <li class="nav-item">
       {{#pow-link "settings" class="nav-link px-1"}}
         {{t "components.navigation.settings"}}
@@ -64,28 +60,32 @@
   </ul>
 
   <div class="navbar-text">
-    <div local-class="badge-league" class="badge badge-darker badge-league px-2 py-1">
-      {{leagueName}}
-    </div>
+    {{pow-release-alert}}
   </div>
 
-  <div class="navbar-text ml-2 px-1">
-    {{#if isAuthenticated}}
-      {{#pow-tooltip
-        class="d-inline text-success"
-        placement="left"
-        title=(t "components.navigation.authenticated")
-      }}
-        {{fa-icon "user-check"}}
-      {{/pow-tooltip}}
-    {{else}}
-      {{#pow-tooltip
-        class="d-inline text-danger"
-        placement="left"
-        title=(t "components.navigation.not_authenticated")
-      }}
-        {{fa-icon "user-slash"}}
-      {{/pow-tooltip}}
-    {{/if}}
+  <div class="navbar-text ml-2">
+    <div local-class="badge-league" class="badge badge-darker badge-league px-2 py-1">
+      {{this.leagueName}}
+
+      <span class="ml-1">
+        {{#if this.isAuthenticated}}
+          {{#pow-tooltip
+            class="d-inline text-success"
+            placement="left"
+            title=(t "components.navigation.authenticated")
+          }}
+            {{fa-icon "user-check"}}
+          {{/pow-tooltip}}
+        {{else}}
+          {{#pow-tooltip
+            class="d-inline text-danger"
+            placement="left"
+            title=(t "components.navigation.not_authenticated")
+          }}
+            {{fa-icon "user-slash"}}
+          {{/pow-tooltip}}
+        {{/if}}
+      </span>
+    </div>
   </div>
 </nav>
