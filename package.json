@@ -11,18 +11,20 @@
     "test": "tests"
   },
   "scripts": {
-    "build-web": "ember build",
-    "start-web": "ember serve",
-    "test-web": "ember test",
-    "build-electron": "ember electron:make",
-    "start-electron": "ember electron",
-    "test-electron": "ember electron:test",
-    "lint-scripts": "./node_modules/.bin/eslint ember-cli-build.js testem.js app/ tests/ config/",
-    "lint-styles": "./node_modules/.bin/stylelint './app/**/*.scss'",
-    "lint-styles-fix": "./node_modules/.bin/stylelint './app/**/*.scss' --fix",
-    "lint-templates": "./node_modules/.bin/ember-template-lint './app/**/*.hbs'",
-    "prettier": "prettier --write ember-cli-build.js testem.js '{app,tests,config}/**/*.{js,scss}'",
-    "prettier-check": "prettier -l ember-cli-build.js testem.js '{app,tests,config}/**/*.{js,scss}'"
+    "build-web": "npx ember build",
+    "start-web": "npx ember serve",
+    "test-web": "npx ember test",
+    "build-electron": "npx ember electron:make",
+    "start-electron": "npx ember electron",
+    "test-electron": "npx ember electron:test",
+    "format": "npm run prettier && npm run lint-styles-fix",
+    "lint": "npm run prettier-check && npm run lint-scripts && npm run lint-templates && npm run lint-styles",
+    "lint-scripts": "npx eslint ember-cli-build.js testem.js app/ tests/ config/",
+    "lint-styles": "npx stylelint './app/**/*.scss'",
+    "lint-styles-fix": "npx stylelint './app/**/*.scss' --fix",
+    "lint-templates": "npx ember-template-lint './app/**/*.hbs'",
+    "prettier": "npx prettier --write ember-cli-build.js testem.js '{app,tests,config}/**/*.{js,scss}'",
+    "prettier-check": "npx prettier -l ember-cli-build.js testem.js '{app,tests,config}/**/*.{js,scss}'"
   },
   "devDependencies": {
     "@ember-decorators/argument": "0.8.21",

@@ -13,6 +13,7 @@ import KEY_CODES from 'poe-world/constants/key-codes';
 
 // Constants
 const TEXTAREA_TYPE = 'textarea';
+const DEFAULT_TEXTAREA_ROWS = 5;
 
 export default class InputField extends Component {
   @argument
@@ -37,7 +38,7 @@ export default class InputField extends Component {
 
   @argument
   @type(optional('number'))
-  rows = 5;
+  rows = DEFAULT_TEXTAREA_ROWS;
 
   @argument
   @type(Function)

@@ -1,5 +1,5 @@
 export default {
-  'markdown': {
+  markdown: {
     type: 'markdown',
     label: 'Markdown content',
     component: 'markdown',
