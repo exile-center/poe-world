@@ -34,6 +34,8 @@ components:
       title: Chaos recipes
       rate_limited_error: Encountered a rate limiting error.
       rate_limited_error_description: It means there's too much widgets that load too many stash tabs.
+    markdown:
+      empty_warning: There's currently no markdown content in this widget.
     delete: Remove
     settings: Configure
     settings_title: Widget settings

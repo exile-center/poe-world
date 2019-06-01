@@ -1,0 +1,7 @@
+{{#if @settings.content}}
+  {{markdown-to-html @settings.content local-class="markdown"}}
+{{else}}
+  <div class="alert alert-warning my-1">
+    {{t "components.dashboard_widget.markdown.empty_warning"}}
+  </div>
+{{/if}}

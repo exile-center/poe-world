@@ -189,3 +189,10 @@ $dropdown-link-color: $dropdown-color;
 $dropdown-link-hover-color: $dropdown-color;
 $dropdown-link-hover-bg: lighten($primary, 15%);
 $dropdown-bg: $darker;
+
+//
+// Codes
+//
+$code-font-size: 90%;
+$code-color: lighten($light, 20%);
+$pre-color: $code-color;

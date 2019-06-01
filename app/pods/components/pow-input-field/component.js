@@ -36,6 +36,10 @@ export default class InputField extends Component {
   value = null;
 
   @argument
+  @type(optional('number'))
+  rows = 5;
+
+  @argument
   @type(Function)
   onChange;
 
@@ -60,15 +64,9 @@ export default class InputField extends Component {
     this.set('id', uuid());
   }
 
-  didInsertElement() {
-    this._adjustTextareaHeight();
-  }
-
   @action
   inputChange({target: {value}}) {
     this.onChange(value);
-
-    this._adjustTextareaHeight();
   }
 
   @action
@@ -90,12 +88,5 @@ export default class InputField extends Component {
     if (!this.onBlur) return;
 
     this.onBlur();
-  }
-
-  _adjustTextareaHeight() {
-    if (!this.isTextarea) return;
-
-    const $textarea = this.$('textarea');
-    $textarea.height(0).height($textarea[0].scrollHeight);
   }
 }

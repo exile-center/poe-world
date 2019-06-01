@@ -1,4 +1,14 @@
 export default {
+  'markdown': {
+    type: 'markdown',
+    label: 'Markdown content',
+    component: 'markdown',
+    state: null,
+    params: null,
+    settings: {
+      content: ''
+    }
+  },
   'vendor-chaos-recipe': {
     type: 'vendor-chaos-recipe',
     label: 'Chaos recipe',
