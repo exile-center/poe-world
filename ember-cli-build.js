@@ -58,7 +58,7 @@ module.exports = function(defaults) {
           'lock',
           'unlock'
         ],
-        'free-brands-svg-icons': ['github', 'discord', 'reddit']
+        'free-brands-svg-icons': ['github']
       }
     },
 

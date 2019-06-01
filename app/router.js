@@ -11,9 +11,7 @@ class Router extends EmberRouter {
 
 /* eslint-disable max-nested-callbacks */
 Router.map(function() {
-  this.route('home', {path: '/'});
-
-  this.route('dashboard');
+  this.route('dashboard', {path: '/'});
 
   this.route('atlas', function() {
     this.route('map', {path: '/:slug'}, function() {

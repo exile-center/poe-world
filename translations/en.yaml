@@ -55,7 +55,6 @@ components:
     copy: Copy to clipboard
     copied: Copied
   navigation:
-    dashboard: Dashboard
     atlas: Atlas
     stash: Stash
     trade: Trade
@@ -123,19 +122,6 @@ components:
       widget_board:
         add_dropdown:
           label: Add a widget
-    home_page:
-      tiles:
-        atlas: Atlas
-        challenges: Challenges
-        stash: Stash
-        trade: Trade
-      poe_world_on:
-        title: PoeWorld on…
-        web: The web
-        discord: Discord
-        github: GitHub
-        issue: Report an issue
-        releases: See previous releases
     map_page:
       tier: Tier
       area_level: Area Level {level}
