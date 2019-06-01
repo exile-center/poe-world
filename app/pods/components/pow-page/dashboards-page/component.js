@@ -10,7 +10,7 @@ import Dashboard from 'poe-world/models/dexie/dashboard';
 import DashboardWidget from 'poe-world/models/dexie/dashboard-widget';
 
 @tagName('')
-export default class PageDashboard extends Component {
+export default class PageDashboards extends Component {
   @service('dashboard/persister')
   dashboardPersister;
 

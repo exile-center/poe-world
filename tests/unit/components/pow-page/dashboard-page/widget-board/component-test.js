@@ -8,13 +8,13 @@ import {A as emberArray} from '@ember/array';
 // Factories
 import createDashboardWidget from 'poe-world/tests/utilities/factories/dashboard-widget';
 
-describe('Unit | Components | pow-page/dashboard-page/widget-board', () => {
+describe('Unit | Components | pow-page/dashboards-page/widget-board', () => {
   setupTest();
 
   let component;
 
   beforeEach(function() {
-    component = this.owner.factoryFor('component:pow-page/dashboard-page/widget-board').create({
+    component = this.owner.factoryFor('component:pow-page/dashboards-page/widget-board').create({
       widgets: null,
       widgetsAreLocked: false,
       addWidget: sinon.spy(),

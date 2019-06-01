@@ -11,7 +11,7 @@ class Router extends EmberRouter {
 
 /* eslint-disable max-nested-callbacks */
 Router.map(function() {
-  this.route('dashboard', {path: '/'});
+  this.route('dashboards', {path: '/'});
 
   this.route('atlas', function() {
     this.route('map', {path: '/:slug'}, function() {
@@ -23,12 +23,12 @@ Router.map(function() {
     });
   });
 
-  this.route('stash', function() {
+  this.route('stashes', function() {
     this.route('vendor-recipe', {path: '/'});
     this.route('divination-summary');
   });
 
-  this.route('trade');
+  this.route('trades');
 
   this.route('challenges');
 

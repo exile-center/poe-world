@@ -6,7 +6,7 @@ import {type} from '@ember-decorators/argument/type';
 // Constants
 import DASHBOARD_WIDGETS from 'poe-world/constants/dashboard-widgets';
 
-export default class PageDashboardWidgetBoardAddDropdown extends Component {
+export default class PageDashboardsWidgetBoardAddDropdown extends Component {
   @argument
   @type(Function)
   onWidgetAdd;

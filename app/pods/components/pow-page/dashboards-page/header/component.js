@@ -5,7 +5,7 @@ import {bool} from '@ember-decorators/object/computed';
 import {argument} from '@ember-decorators/argument';
 import {optional, type} from '@ember-decorators/argument/type';
 
-export default class PageDashboardHeader extends Component {
+export default class PageDashboardsHeader extends Component {
   @argument
   dashboards;
 

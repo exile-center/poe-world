@@ -35,14 +35,14 @@
 
   <div local-class="side-panel" class="h-100 overflow-auto py-1 px-2">
     {{#if this.currentTrade}}
-      {{pow-page/trade-page/details
+      {{pow-page/trades-page/details
         currentTradeSlug=this.currentTradeSlug
         trade=this.currentTrade
         onClose=(action this.clearCurrentTrade)
         onSlugReset=(action this.resetCurrentSlug)
       }}
     {{else}}
-      {{pow-page/trade-page/list
+      {{pow-page/trades-page/list
         onSelect=(action this.select)
       }}
     {{/if}}

@@ -11,7 +11,7 @@
       {{/each}}
 
       {{#unless @widgetsAreLocked}}
-        {{pow-page/dashboard-page/widget-board/add-dropdown
+        {{pow-page/dashboards-page/widget-board/add-dropdown
           onWidgetAdd=(action @addWidget columnIndex columnWidgets.length)
         }}
       {{/unless}}
@@ -20,7 +20,7 @@
 
   {{#unless @widgetsAreLocked}}
     <div local-class="column" class="mx-1">
-      {{pow-page/dashboard-page/widget-board/add-dropdown
+      {{pow-page/dashboards-page/widget-board/add-dropdown
         onWidgetAdd=(action @addWidget this.widgetsGrid.length 0)
       }}
     </div>

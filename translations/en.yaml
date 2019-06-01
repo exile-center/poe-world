@@ -56,8 +56,8 @@ components:
     copied: Copied
   navigation:
     atlas: Atlas
-    stash: Stash
-    trade: Trade
+    stashes: Stashes
+    trades: Trades
     challenges: Challenges
     external_sites: External sites
     settings: Settings

@@ -14,7 +14,7 @@ import TRADE from 'poe-world/constants/trade';
 const DOUBLE_LOAD_DELAY = 1500; // The site always redirect twice
 
 @tagName('')
-export default class PageTrade extends Component {
+export default class PageTrades extends Component {
   @service('intl')
   intl;
 

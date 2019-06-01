@@ -5,7 +5,7 @@ import {argument} from '@ember-decorators/argument';
 import {type} from '@ember-decorators/argument/type';
 import {computed} from '@ember-decorators/object';
 
-export default class TradeList extends Component {
+export default class TradesList extends Component {
   @service('trade/fetcher')
   tradeFetcher;
 

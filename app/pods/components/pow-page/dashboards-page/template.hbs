@@ -1,5 +1,5 @@
 <div class="d-flex flex-column h-100">
-  {{pow-page/dashboard-page/header
+  {{pow-page/dashboards-page/header
     class="bg-darker border-bottom"
     dashboards=this.dashboards
     activeDashboard=this.activeDashboard
@@ -12,7 +12,7 @@
   }}
 
   {{#if this.activeDashboardWidgetsAreLoaded}}
-    {{pow-page/dashboard-page/widget-board
+    {{pow-page/dashboards-page/widget-board
       class="flex-grow-1 pt-2"
       widgets=this.activeDashboardWidgets
       widgetsAreLocked=this.widgetsAreLocked

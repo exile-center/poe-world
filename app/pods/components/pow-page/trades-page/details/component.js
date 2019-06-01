@@ -7,7 +7,7 @@ import {bool, not} from '@ember-decorators/object/computed';
 import {type, optional} from '@ember-decorators/argument/type';
 import {action} from '@ember-decorators/object';
 
-export default class TradeDetails extends Component {
+export default class TradesDetails extends Component {
   @service('trade/persister')
   tradePersister;
 

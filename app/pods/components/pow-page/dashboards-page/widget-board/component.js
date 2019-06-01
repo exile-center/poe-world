@@ -5,7 +5,7 @@ import {type} from '@ember-decorators/argument/type';
 import {computed} from '@ember-decorators/object';
 import {A as emberArray} from '@ember/array';
 
-export default class PageDashboardWidgetBoard extends Component {
+export default class PageDashboardsWidgetBoard extends Component {
   @argument
   widgets;
 
