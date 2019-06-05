@@ -9,6 +9,9 @@ import {task} from 'ember-concurrency';
 import Dashboard from 'poe-world/models/dexie/dashboard';
 import DashboardWidget from 'poe-world/models/dexie/dashboard-widget';
 
+// Constants
+import DASHBOARD_PRESETS from 'poe-world/constants/dashboard-presets';
+
 @tagName('')
 export default class PageDashboards extends Component {
   @service('dashboard/persister')
@@ -48,7 +51,7 @@ export default class PageDashboards extends Component {
     if (activeDashboard) {
       this._changeActiveDashboard(activeDashboard);
     } else {
-      yield this._createNewDashboard();
+      yield this._createWelcomeDashboard();
     }
 
     yield this.get('refreshWidgetsTask').perform();
@@ -80,7 +83,7 @@ export default class PageDashboards extends Component {
 
   @action
   async createDashboard() {
-    await this._createNewDashboard();
+    await this._createDashboard({});
   }
 
   @action
@@ -90,29 +93,31 @@ export default class PageDashboards extends Component {
   }
 
   @action
-  deleteActiveDashboard() {
+  async deleteActiveDashboard() {
     const dashboardToDelete = this.activeDashboard;
-
-    this.set('activeDashboard', this.dashboards.firstObject);
+    const widgetIdsToDelete = this.activeDashboardWidgets.mapBy('id');
 
     this.dashboards.removeObject(dashboardToDelete);
-    this.dashboardDestroyer.destroy(dashboardToDelete);
+    this.setProperties({
+      activeDashboard: this.dashboards.firstObject,
+      activeDashboardWidgets: null
+    });
+
+    await this.get('refreshWidgetsTask').perform();
+    await this.dashboardWidgetsDestroyer.destroyWidgetIds(widgetIdsToDelete);
+    await this.dashboardDestroyer.destroy(dashboardToDelete);
   }
 
   @action
   async addWidget(column, row, widget) {
-    const widgetProperties = {
-      dashboardId: this.activeDashboard.id,
+    this._addWidgetToActiveDashboard({
       type: widget.type,
       state: widget.state,
       params: widget.params,
       settings: widget.settings,
       column,
       row
-    };
-
-    const newWidget = await this.dashboardWidgetsPersister.persist(DashboardWidget.create(widgetProperties));
-    this.activeDashboardWidgets.addObject(newWidget);
+    });
   }
 
   @action
@@ -127,15 +132,38 @@ export default class PageDashboards extends Component {
     await this.dashboardWidgetsDestroyer.destroy(widget);
   }
 
-  async _createNewDashboard() {
-    const newDashboard = await this.dashboardPersister.persist(Dashboard.create());
+  async _createDashboard(properties) {
+    const newDashboard = await this.dashboardPersister.persist(Dashboard.create(properties));
 
     this.dashboards.addObject(newDashboard);
     this._changeActiveDashboard(newDashboard);
+
+    return newDashboard;
+  }
+
+  async _createWelcomeDashboard() {
+    const welcomePreset = DASHBOARD_PRESETS[0];
+
+    await this._createDashboard({
+      name: welcomePreset.name
+    });
+
+    welcomePreset.widgets.forEach(widget => this._addWidgetToActiveDashboard(widget));
   }
 
   _changeActiveDashboard(dashboard) {
     this.set('activeDashboard', dashboard);
     this.get('refreshWidgetsTask').perform();
+  }
+
+  async _addWidgetToActiveDashboard(widgetProperties) {
+    const newWidget = await this.dashboardWidgetsPersister.persist(
+      DashboardWidget.create({
+        ...widgetProperties,
+        dashboardId: this.activeDashboard.id
+      })
+    );
+
+    this.activeDashboardWidgets.addObject(newWidget);
   }
 }

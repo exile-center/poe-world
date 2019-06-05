@@ -11,4 +11,8 @@ export default class Destroyer extends Service {
 
     return this.dexie.getTable('dashboardWidgets').delete(widget.id);
   }
+
+  async destroyWidgetIds(widgetIds) {
+    return this.dexie.getTable('dashboardWidgets').bulkDelete(widgetIds);
+  }
 }
